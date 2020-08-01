@@ -277,8 +277,8 @@ const createFilmPopap = () => {
         </div>
       </form>
     </section>`
-  )
-}
+  );
+};
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -325,4 +325,4 @@ const footerStatistics = footer.querySelector(`.footer__statistics`);
 
 render(footerStatistics, createFooterStatistic(), `beforeend`);
 
-// render(footer, createFilmPopap(), `beforeend`);
+render(footer, createFilmPopap(), `beforeend`);
