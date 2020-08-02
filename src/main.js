@@ -325,4 +325,4 @@ const footerStatistics = footer.querySelector(`.footer__statistics`);
 
 render(footerStatistics, createFooterStatistic(), `beforeend`);
 
-render(footer, createFilmPopap(), `beforeend`);
+// render(footer, createFilmPopap(), `beforeend`);
