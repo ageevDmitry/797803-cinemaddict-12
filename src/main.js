@@ -7,7 +7,7 @@ import {createButtonShowMore} from "./view/button-show-more.js";
 import {createFilmsListTopRated} from "./view/films-list-top-rated.js";
 import {createFilmsListMostCommented} from "./view/films-list-most-comment.js";
 import {createFooterStatistic} from "./view/footer-statistic.js";
-import {createFilmPopap} from "./view/film-popap.js";
+// import {createFilmPopap} from "./view/film-popap.js";
 
 const CARD_FILMS_LIST_COUNT = 5;
 const CARD_FILMS_EXTRA_COUNT = 2;
