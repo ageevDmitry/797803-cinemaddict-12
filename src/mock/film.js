@@ -56,6 +56,21 @@ const randomIndex = getRandomInteger(0, filmPosters.length - 1);
 return filmPosters[randomIndex];
 };
 
+const generateFilmGenre = () => {
+  const filmGenres = [
+    `Drama`,
+    `Mystery`,
+    `Comedy`,
+    `Western`,
+    `Musical`,
+    `Cartoon`
+  ];
+
+const randomIndex = getRandomInteger(0, filmGenres.length - 1);
+
+return filmGenres[randomIndex];
+};
+
 const generateFilmDescription = () => {
   const filmDescriptionSentences = [
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
@@ -84,6 +99,7 @@ export const generateFilm = () => {
   return {
     title: generateFilmTitile(),
     poster: generateFilmPoster(),
-    description: generateFilmDescription()
+    description: generateFilmDescription(),
+    genre: generateFilmGenre()
   }
 };

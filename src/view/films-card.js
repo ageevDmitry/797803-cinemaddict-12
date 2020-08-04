@@ -1,5 +1,5 @@
 export const createFilmCard = (filmsList) => {
-  const {title, poster, description} = filmsList;
+  const {title, poster, description, genre} = filmsList;
 
   return (
     `<article class="film-card">
@@ -8,7 +8,7 @@ export const createFilmCard = (filmsList) => {
         <p class="film-card__info">
           <span class="film-card__year">1929</span>
           <span class="film-card__duration">1h 55m</span>
-          <span class="film-card__genre">Musical</span>
+          <span class="film-card__genre">${genre}</span>
         </p>
         <img src="./images/posters/${poster}" alt="" class="film-card__poster">
         <p class="film-card__description">${description}</p>
