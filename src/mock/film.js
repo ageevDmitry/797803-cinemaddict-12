@@ -1,4 +1,10 @@
 const DESCRIPTION_SENTENCES_COUNT = 5;
+const FILM_YEAR_MIN = 1900;
+const FILM_YEAR_MAX = 2020;
+const FILM_HOUR_MIN = 0;
+const FILM_HOUR_MAX = 3;
+const FILM_MINUTES_MIN = 1;
+const FILM_MINUTES_MAX = 59;
 
 const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -71,6 +77,23 @@ const randomIndex = getRandomInteger(0, filmGenres.length - 1);
 return filmGenres[randomIndex];
 };
 
+const generateFilmYear = () => {
+
+const filmYear = getRandomInteger(FILM_YEAR_MIN, FILM_YEAR_MAX);
+
+return filmYear;
+};
+
+const generateFilmDuration = () => {
+
+  const hour = getRandomInteger(FILM_HOUR_MIN, FILM_HOUR_MAX);
+  const min = getRandomInteger(FILM_MINUTES_MIN, FILM_MINUTES_MAX);
+
+  const filmDuration = hour + `h` + ` ` + min + `min`;
+  return filmDuration;
+};
+
+
 const generateFilmDescription = () => {
   const filmDescriptionSentences = [
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
@@ -100,6 +123,8 @@ export const generateFilm = () => {
     title: generateFilmTitile(),
     poster: generateFilmPoster(),
     description: generateFilmDescription(),
-    genre: generateFilmGenre()
+    genre: generateFilmGenre(),
+    year: generateFilmYear(),
+    duration: generateFilmDuration()
   }
 };
