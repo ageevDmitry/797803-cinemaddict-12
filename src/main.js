@@ -15,7 +15,6 @@ const CARD_FILMS_EXTRA_COUNT = 2;
 
 const filmsArray = new Array(CARD_FILMS_LIST_COUNT).fill().map(generateFilm);
 
-
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
 };

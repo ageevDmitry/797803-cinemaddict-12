@@ -1,5 +1,5 @@
 export const createFilmCard = (filmsList) => {
-  const {title, poster} = filmsList;
+  const {title, poster, description} = filmsList;
 
   return (
     `<article class="film-card">
@@ -11,7 +11,7 @@ export const createFilmCard = (filmsList) => {
           <span class="film-card__genre">Musical</span>
         </p>
         <img src="./images/posters/${poster}" alt="" class="film-card__poster">
-        <p class="film-card__description">Burlesque comic Ralph "Skid" Johnson (Skelly), and specialty dancer Bonny Lee King (Carroll), end up together on a cold, rainy night at a tr…</p>
+        <p class="film-card__description">${description}</p>
         <a class="film-card__comments">5 comments</a>
         <form class="film-card__controls">
           <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">Add to watchlist</button>

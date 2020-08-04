@@ -1,10 +1,24 @@
-// Функция из интернета по генерации случайного числа из диапазона
-// Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
+const DESCRIPTION_SENTENCES_COUNT = 5;
+
 const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
 
   return Math.floor(lower + Math.random() * (upper - lower + 1));
+};
+
+const getRandomArray = function (arr) {
+  const newArr = [];
+  const cloneArr = arr.slice(0);
+  const randomArrLength = getRandomInteger(1, DESCRIPTION_SENTENCES_COUNT);
+
+  for (let i = 0; i < randomArrLength; i++) {
+    const randomIndex = getRandomInteger(0, cloneArr.length - 1);
+    newArr.push(cloneArr[randomIndex]);
+    cloneArr.splice(randomIndex, 1);
+  }
+
+  return newArr;
 };
 
 const generateFilmTitile = () => {
@@ -42,9 +56,34 @@ const randomIndex = getRandomInteger(0, filmPosters.length - 1);
 return filmPosters[randomIndex];
 };
 
+const generateFilmDescription = () => {
+  const filmDescriptionSentences = [
+    `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+    `Cras aliquet varius magna, non porta ligula feugiat eget.`,
+    `Fusce tristique felis at fermentum pharetra.`,
+    `Aliquam id orci ut lectus varius viverra.`,
+    `Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.`,
+    `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.`,
+    `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.`,
+    `Sed sed nisi sed augue convallis suscipit in sed felis.`,
+    `Aliquam erat volutpat.`,
+    `Nunc fermentum tortor ac porta dapibus.`,
+    `In rutrum ac purus sit amet tempus.`
+  ];
+
+  const newArray = getRandomArray(filmDescriptionSentences);
+
+  const total = newArray.reduce(function (sum, current) {
+    return sum + ` ` + current;
+  });
+
+return total;
+};
+
 export const generateFilm = () => {
   return {
     title: generateFilmTitile(),
     poster: generateFilmPoster(),
+    description: generateFilmDescription()
   }
 };
