@@ -5,6 +5,9 @@ const FILM_HOUR_MIN = 0;
 const FILM_HOUR_MAX = 3;
 const FILM_MINUTES_MIN = 1;
 const FILM_MINUTES_MAX = 59;
+const FILM_RATING_MIN = 0;
+const FILM_RATING_MAX = 100;
+const FiLM_RATING_FRACTION = 10;
 
 const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -93,6 +96,12 @@ const generateFilmDuration = () => {
   return filmDuration;
 };
 
+const generateFilmRating = () => {
+
+  const filmRating = getRandomInteger(FILM_RATING_MIN, FILM_RATING_MAX)/FiLM_RATING_FRACTION;
+  return filmRating;
+};
+
 
 const generateFilmDescription = () => {
   const filmDescriptionSentences = [
@@ -125,6 +134,7 @@ export const generateFilm = () => {
     description: generateFilmDescription(),
     genre: generateFilmGenre(),
     year: generateFilmYear(),
-    duration: generateFilmDuration()
+    duration: generateFilmDuration(),
+    rating: generateFilmRating(),
   }
 };
