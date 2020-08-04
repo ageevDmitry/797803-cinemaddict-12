@@ -14,7 +14,11 @@ const generateFilmTitile = () => {
     `ДМБ`,
     `Star Wars`,
     `Карты, деньги, два ствола`,
-    `Игра престолов`
+    `Игра престолов`,
+    `Аватар`,
+    `Миллионер из трущоб`,
+    `Бриллиантовая рука`,
+    `Операция Ы`
   ];
 
 const randomIndex = getRandomInteger(0, filmTitles.length - 1);
@@ -22,8 +26,25 @@ const randomIndex = getRandomInteger(0, filmTitles.length - 1);
 return filmTitles[randomIndex];
 };
 
+const generateFilmPoster = () => {
+  const filmPosters = [
+    `made-for-each-other.png`,
+    `popeye-meets-sinbad.png`,
+    `sagebrush-trail.jpg`,
+    `santa-claus-conquers-the-martians.jpg`,
+    `the-dance-of-life.jpg`,
+    `the-great-flamarion.jpg`,
+    `the-man-with-the-golden-arm.jpg`
+  ];
+
+const randomIndex = getRandomInteger(0, filmPosters.length - 1);
+
+return filmPosters[randomIndex];
+};
+
 export const generateFilm = () => {
   return {
     title: generateFilmTitile(),
+    poster: generateFilmPoster(),
   }
 };
