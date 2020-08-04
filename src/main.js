@@ -8,9 +8,13 @@ import {createFilmsListTopRated} from "./view/films-list-top-rated.js";
 import {createFilmsListMostCommented} from "./view/films-list-most-comment.js";
 import {createFooterStatistic} from "./view/footer-statistic.js";
 // import {createFilmPopap} from "./view/film-popap.js";
+import {generateFilm} from "./mock/film.js";
 
 const CARD_FILMS_LIST_COUNT = 5;
 const CARD_FILMS_EXTRA_COUNT = 2;
+
+const filmsArray = new Array(CARD_FILMS_LIST_COUNT).fill().map(generateFilm);
+console.log(filmsArray);
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -29,7 +33,7 @@ const filmsList = films.querySelector(`.films-list`);
 const filmsListContainer = filmsList.querySelector(`.films-list__container`);
 
 for (let i = 0; i < CARD_FILMS_LIST_COUNT; i++) {
-  render(filmsListContainer, createFilmCard(), `beforeend`);
+  render(filmsListContainer, createFilmCard(filmsArray[i]), `beforeend`);
 }
 
 render(filmsList, createButtonShowMore(), `beforeend`);
