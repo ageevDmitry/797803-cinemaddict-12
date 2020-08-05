@@ -136,5 +136,8 @@ export const generateFilm = () => {
     year: generateFilmYear(),
     duration: generateFilmDuration(),
     rating: generateFilmRating(),
+    isWachlist: Boolean(getRandomInteger(0, 1)),
+    isWached: Boolean(getRandomInteger(0, 1)),
+    isFavorite: Boolean(getRandomInteger(0, 1))
   }
 };

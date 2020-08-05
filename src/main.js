@@ -8,9 +8,11 @@ import {createFooterStatistic} from "./view/footer-statistic.js";
 // import {createFilmPopap} from "./view/film-popap.js";
 import {generateFilm} from "./mock/film.js";
 
-const CARD_FILMS_LIST_COUNT = 20;
+const CARD_FILMS_LIST_COUNT = 5;
 
 const filmsArray = new Array(CARD_FILMS_LIST_COUNT).fill().map(generateFilm);
+
+console.log(filmsArray);
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
