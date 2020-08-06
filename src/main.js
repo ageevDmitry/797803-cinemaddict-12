@@ -7,12 +7,15 @@ import {createButtonShowMore} from "./view/button-show-more.js";
 import {createFooterStatistic} from "./view/footer-statistic.js";
 // import {createFilmPopap} from "./view/film-popap.js";
 import {generateFilm} from "./mock/film.js";
+import {generateFilter} from "./mock/filter.js";
 
 const CARD_FILMS_LIST_COUNT = 5;
 
 const filmsArray = new Array(CARD_FILMS_LIST_COUNT).fill().map(generateFilm);
+const filters = generateFilter(filmsArray);
 
 console.log(filmsArray);
+console.log(filters);
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -22,7 +25,7 @@ const siteHeader = document.querySelector(`.header`);
 const siteMain = document.querySelector(`.main`);
 
 render(siteHeader, createUserRankTemplate(), `beforeend`);
-render(siteMain, createMenuSite(), `beforeend`);
+render(siteMain, createMenuSite(filters), `beforeend`);
 render(siteMain, createSortFilms(), `beforeend`);
 render(siteMain, createFilmsList(), `beforeend`);
 
