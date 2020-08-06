@@ -1,5 +1,17 @@
 export const createFilmCard = (filmsList) => {
-  const {title, poster, description, genre, year, duration, rating} = filmsList;
+  const {title, poster, description, genre, year, duration, rating, isWachlist, isWached, isFavorite} = filmsList;
+
+  const isWachlistClassName = isWachlist
+  ? `film-card__controls-item--active`
+  : ``;
+
+  const isWachedClassName = isWached
+  ? `film-card__controls-item--active`
+  : ``;
+
+  const isFavoriteClassName = isFavorite
+  ? `film-card__controls-item--active`
+  : ``;
 
   return (
     `<article class="film-card">
@@ -14,9 +26,9 @@ export const createFilmCard = (filmsList) => {
         <p class="film-card__description">${description}</p>
         <a class="film-card__comments">5 comments</a>
         <form class="film-card__controls">
-          <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">Add to watchlist</button>
-          <button class="film-card__controls-item button film-card__controls-item--mark-as-watched">Mark as watched</button>
-          <button class="film-card__controls-item button film-card__controls-item--favorite">Mark as favorite</button>
+          <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${isWachlistClassName}">Add to watchlist</button>
+          <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${isWachedClassName}">Mark as watched</button>
+          <button class="film-card__controls-item button film-card__controls-item--favorite ${isFavoriteClassName}">Mark as favorite</button>
         </form>
     </article>`
   );
