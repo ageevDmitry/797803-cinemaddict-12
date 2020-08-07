@@ -8,12 +8,14 @@ import {createFooterStatistic} from "./view/footer-statistic.js";
 // import {createFilmPopap} from "./view/film-popap.js";
 import {generateFilm} from "./mock/film.js";
 import {generateFilter} from "./mock/filter.js";
+import {generateStatistic} from "./mock/film.js";
 
 const CARD_FILMS_COUNT = 20;
 const CARD_FILMS_COUNT_PER_STEP = 5;
 
 const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
 const filters = generateFilter(filmsArray);
+const filmStatistic = generateStatistic();
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -60,7 +62,7 @@ if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
 const footer = document.querySelector(`.footer`);
 const footerStatistics = footer.querySelector(`.footer__statistics`);
 
-render(footerStatistics, createFooterStatistic(), `beforeend`);
+render(footerStatistics, createFooterStatistic(filmStatistic), `beforeend`);
 
 // Пока попап фильма не отрисовываем;
 // render(footer, createFilmPopap(), `beforeend`);

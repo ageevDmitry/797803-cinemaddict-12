@@ -8,6 +8,8 @@ const FILM_MINUTES_MAX = 59;
 const FILM_RATING_MIN = 0;
 const FILM_RATING_MAX = 100;
 const FiLM_RATING_FRACTION = 10;
+const FiLM_STATISTIC_MIN = 100000;
+const FiLM_STATISTIC_MAX = 200000;
 
 const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -102,7 +104,6 @@ const generateFilmRating = () => {
   return filmRating;
 };
 
-
 const generateFilmDescription = () => {
   const filmDescriptionSentences = [
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
@@ -141,3 +142,7 @@ export const generateFilm = () => {
     isFavorite: Boolean(getRandomInteger(0, 1))
   }
 };
+
+export const generateStatistic = () => {
+  return getRandomInteger(FiLM_STATISTIC_MIN, FiLM_STATISTIC_MAX)
+}
