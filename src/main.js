@@ -9,9 +9,10 @@ import {createFooterStatistic} from "./view/footer-statistic.js";
 import {generateFilm} from "./mock/film.js";
 import {generateFilter} from "./mock/filter.js";
 
-const CARD_FILMS_LIST_COUNT = 5;
+const CARD_FILMS_COUNT = 20;
+const CARD_FILMS_COUNT_PER_STEP = 5;
 
-const filmsArray = new Array(CARD_FILMS_LIST_COUNT).fill().map(generateFilm);
+const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
 const filters = generateFilter(filmsArray);
 
 const render = (container, template, place) => {
@@ -30,11 +31,31 @@ const films = siteMain.querySelector(`.films`);
 const filmsList = films.querySelector(`.films-list`);
 const filmsListContainer = filmsList.querySelector(`.films-list__container`);
 
-for (let i = 0; i < CARD_FILMS_LIST_COUNT; i++) {
+for (let i = 1; i <= CARD_FILMS_COUNT_PER_STEP; i++) {
   render(filmsListContainer, createFilmCard(filmsArray[i]), `beforeend`);
 }
 
-render(filmsList, createButtonShowMore(), `beforeend`);
+if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
+
+  let renderedFilmCount = CARD_FILMS_COUNT_PER_STEP;
+
+  render(filmsList, createButtonShowMore(), `beforeend`);
+
+  const loadMoreButton = filmsList.querySelector(`.films-list__show-more`);
+
+  loadMoreButton.addEventListener(`click`, (evt) => {
+    evt.preventDefault();
+    filmsArray
+      .slice(renderedFilmCount, renderedFilmCount + CARD_FILMS_COUNT_PER_STEP)
+      .forEach((filmsArray) => render(filmsListContainer, createFilmCard(filmsArray), `beforeend`));
+
+      renderedFilmCount += CARD_FILMS_COUNT_PER_STEP;
+
+    if (renderedFilmCount >= filmsArray.length) {
+      loadMoreButton.remove();
+    }
+  });
+}
 
 const footer = document.querySelector(`.footer`);
 const footerStatistics = footer.querySelector(`.footer__statistics`);
