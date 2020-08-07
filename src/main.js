@@ -14,9 +14,6 @@ const CARD_FILMS_LIST_COUNT = 5;
 const filmsArray = new Array(CARD_FILMS_LIST_COUNT).fill().map(generateFilm);
 const filters = generateFilter(filmsArray);
 
-console.log(filmsArray);
-console.log(filters);
-
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
 };
