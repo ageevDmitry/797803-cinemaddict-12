@@ -32,7 +32,7 @@ const getRandomArray = function (arr) {
   return newArr;
 };
 
-const generateFilmTitile = () => {
+const generateFilmTittle = () => {
   const filmTitles = [
     `Где деньги, Лебовски?`,
     `Generation P`,
@@ -105,32 +105,57 @@ const generateFilmRating = () => {
 };
 
 const generateFilmDescription = () => {
-  const filmDescriptionSentences = [
-    `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-    `Cras aliquet varius magna, non porta ligula feugiat eget.`,
-    `Fusce tristique felis at fermentum pharetra.`,
-    `Aliquam id orci ut lectus varius viverra.`,
-    `Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.`,
-    `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.`,
-    `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.`,
-    `Sed sed nisi sed augue convallis suscipit in sed felis.`,
-    `Aliquam erat volutpat.`,
-    `Nunc fermentum tortor ac porta dapibus.`,
-    `In rutrum ac purus sit amet tempus.`
-  ];
 
-  const newArray = getRandomArray(filmDescriptionSentences);
+  const defaultText =
+  `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`
 
-  const total = newArray.reduce(function (sum, current) {
+  let defaultArray2 = [];
+
+  const defaultArray = defaultText.split('. ');
+
+  const randomArray = getRandomArray(defaultArray);
+
+  randomArray.forEach(function (item) {
+    const a = item.split(``)
+    if (a[0] === ` `) {
+      a.shift();
+    } else if (a[a.length - 1] !== `.`)
+      a.push(`.`)
+
+    const total = a.reduce(function (sum, current) {
+        return sum + `` + current;
+      });
+
+    defaultArray2.push(total)
+  });
+
+  const defaultArray3 = defaultArray2.reduce(function (sum, current) {
     return sum + ` ` + current;
   });
 
-return total;
+  const newFilmDescriptionArray = defaultArray3.split(``);
+
+  let total;
+
+  if (newFilmDescriptionArray.length > 140) {
+    const array2 = newFilmDescriptionArray.slice(0, 139);
+    array2.push(`...`);
+    total = array2.reduce(function (sum, current) {
+      return sum + `` + current;
+    });
+  } else {
+    total = newFilmDescriptionArray.reduce(function (sum, current) {
+      return sum + `` + current;
+    });
+  }
+
+  return total;
 };
+
 
 export const generateFilm = () => {
   return {
-    title: generateFilmTitile(),
+    title: generateFilmTittle(),
     poster: generateFilmPoster(),
     description: generateFilmDescription(),
     genre: generateFilmGenre(),
@@ -146,3 +171,4 @@ export const generateFilm = () => {
 export const generateStatistic = () => {
   return getRandomInteger(FiLM_STATISTIC_MIN, FiLM_STATISTIC_MAX)
 }
+
