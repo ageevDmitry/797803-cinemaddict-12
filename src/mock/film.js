@@ -10,6 +10,9 @@ const FILM_RATING_MAX = 100;
 const FiLM_RATING_FRACTION = 10;
 const FiLM_STATISTIC_MIN = 100000;
 const FiLM_STATISTIC_MAX = 200000;
+const USER_RANK_MIN = 0;
+const USER_RANK_MAX = 30;
+
 
 const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -152,7 +155,6 @@ const generateFilmDescription = () => {
   return total;
 };
 
-
 export const generateFilm = () => {
   return {
     title: generateFilmTittle(),
@@ -172,3 +174,31 @@ export const generateStatistic = () => {
   return getRandomInteger(FiLM_STATISTIC_MIN, FiLM_STATISTIC_MAX)
 }
 
+export const generateUserRank = () => {
+  const userRankArray = [
+    `Novice`,
+    `Fan`,
+    `Movie Buff`
+  ];
+
+  const userRank1 = getRandomInteger(USER_RANK_MIN, USER_RANK_MAX);
+
+  let userRank2
+
+  switch (true) {
+    case userRank1 === USER_RANK_MIN:
+      userRank2 = '';
+      break;
+    case userRank1 > USER_RANK_MIN && userRank1 < 10:
+      userRank2 = userRankArray[0];
+      break;
+    case userRank1 > 10 && userRank1 <= 20:
+      userRank2 = userRankArray[1];
+      break;
+    case userRank1 > 20:
+      userRank2 = userRankArray[2];
+      break;
+  }
+
+  return userRank2;
+}

@@ -9,6 +9,7 @@ import {createFooterStatistic} from "./view/footer-statistic.js";
 import {generateFilm} from "./mock/film.js";
 import {generateFilter} from "./mock/filter.js";
 import {generateStatistic} from "./mock/film.js";
+import {generateUserRank} from "./mock/film.js";
 
 const CARD_FILMS_COUNT = 20;
 const CARD_FILMS_COUNT_PER_STEP = 5;
@@ -16,6 +17,7 @@ const CARD_FILMS_COUNT_PER_STEP = 5;
 const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
 const filters = generateFilter(filmsArray);
 const filmStatistic = generateStatistic();
+const userRank = generateUserRank();
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -24,7 +26,7 @@ const render = (container, template, place) => {
 const siteHeader = document.querySelector(`.header`);
 const siteMain = document.querySelector(`.main`);
 
-render(siteHeader, createUserRankTemplate(), `beforeend`);
+render(siteHeader, createUserRankTemplate(userRank), `beforeend`);
 render(siteMain, createMenuSite(filters), `beforeend`);
 render(siteMain, createSortFilms(), `beforeend`);
 render(siteMain, createFilmsList(), `beforeend`);
