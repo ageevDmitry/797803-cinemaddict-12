@@ -17,15 +17,12 @@ import {FILM_MINUTES_MAX} from "../const.js";
 import {FILM_RATING_MIN} from "../const.js";
 import {FILM_RATING_MAX} from "../const.js";
 
-const FiLM_STATISTIC_MIN = 100000;
-const FiLM_STATISTIC_MAX = 200000;
-
-const generateFilmDuration = () => {
+const generateFilmRuntime = () => {
 
   const hour = getRandomInteger(FILM_HOUR_MIN, FILM_HOUR_MAX);
   const min = getRandomInteger(FILM_MINUTES_MIN, FILM_MINUTES_MAX);
-
   const filmDuration = hour + `h` + ` ` + min + `min`;
+
   return filmDuration;
 };
 
@@ -41,20 +38,21 @@ const generateFilmDescription = (description) => {
 
 export const generateFilm = () => {
   return {
-    title: getRandomItem(FILM_TITLES),
     poster: getRandomItem(FILM_POSTERS),
-    description: generateFilmDescription(FILM_DESCRIPTION),
-    genre: getRandomArray(FILM_GENRES),
-    year: getRandomInteger(FILM_YEAR_MIN, FILM_YEAR_MAX),
-    duration: generateFilmDuration(),
+    title: getRandomItem(FILM_TITLES),
+    originalTitle : getRandomItem(FILM_TITLES),
     rating: getRandomFractionInteger(FILM_RATING_MIN, FILM_RATING_MAX),
+    director: ``,
+    writers: ``,
+    actors: ``,
+    reliseDate: getRandomInteger(FILM_YEAR_MIN, FILM_YEAR_MAX),
+    runtime: generateFilmRuntime(),
+    country: ``,
+    genre: getRandomArray(FILM_GENRES),
+    description: generateFilmDescription(FILM_DESCRIPTION),
+    ageLimit: ``,
     isWachlist: Boolean(getRandomInteger()),
     isWatched: Boolean(getRandomInteger()),
     isFavorite: Boolean(getRandomInteger())
   }
 };
-
-export const generateStatistic = () => {
-  return getRandomInteger(FiLM_STATISTIC_MIN, FiLM_STATISTIC_MAX)
-}
-

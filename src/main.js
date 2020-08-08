@@ -5,7 +5,7 @@ import {createFilmsList} from "./view/films-list.js";
 import {createFilmCard} from "./view/films-card.js";
 import {createButtonShowMore} from "./view/button-show-more.js";
 import {createFooterStatistic} from "./view/footer-statistic.js";
-// import {createFilmPopap} from "./view/film-popap.js";
+import {createFilmPopap} from "./view/film-popap.js";
 import {generateFilm} from "./mock/film.js";
 import {generateFilter} from "./mock/filter.js";
 import {generateStatistic} from "./mock/statistics.js";
@@ -66,5 +66,5 @@ const footerStatistics = footer.querySelector(`.footer__statistics`);
 
 render(footerStatistics, createFooterStatistic(filmStatistic), `beforeend`);
 
-// Пока попап фильма не отрисовываем;
-// render(footer, createFilmPopap(), `beforeend`);
+// // Пока попап фильма не отрисовываем;
+render(footer, createFilmPopap(filmsArray[0]), `beforeend`);
