@@ -1,4 +1,19 @@
 export const FILM_DESCRIPTION_LENGTH = 140;
+export const FILM_YEAR_MIN = 1900;
+export const FILM_YEAR_MAX = 2020;
+export const FILM_HOUR_MIN = 0;
+export const FILM_HOUR_MAX = 3;
+export const FILM_MINUTES_MIN = 1;
+export const FILM_MINUTES_MAX = 59;
+export const FILM_RATING_MIN = 0;
+export const FILM_RATING_MAX = 10;
+export const USER_RANK_MIN = 0;
+export const USER_RANK_MAX = 30;
+export const USER_RANK_NOVICE = 1;
+export const USER_RANK_FAN = 10;
+export const USER_RANK_MOVIE_BUFF = 20;
+export const FILM_STATISTIC_MIN = 100000;
+export const FILM_STATISTIC_MAX = 200000;
 
 export const FILM_TITLES = [
   `The Shawshank Redemption`,
@@ -44,3 +59,8 @@ export const FILM_GENRES = [
   `Cartoon`
 ];
 
+export const USER_RANKS = [
+  `Novice`,
+  `Fan`,
+  `Movie Buff`
+];

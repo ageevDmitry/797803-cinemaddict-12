@@ -7,6 +7,13 @@ export const getRandomInteger = (a = 0, b = 1) => {
   return Math.floor(lower + Math.random() * (upper - lower + 1));
 };
 
+export const getRandomFractionInteger = (a = 0, b = 1) => {
+  const randomInteger = Math.random() * (b - a) + a;
+  const randomFractionInteger = Math.floor(randomInteger * 10) / 10;
+
+  return randomFractionInteger;
+}
+
 export const getRandomArray = (array) => {
   const newArray = [];
   const cloneArray = array.slice(0);

@@ -5,17 +5,14 @@ export const createFilmCard = (filmsList) => {
 
   const limitDescription = checkStringLength(description);
 
-  const isWachlistClassName = isWachlist
-  ? `film-card__controls-item--active`
-  : ``;
+  const isFilmFlag = (flag) => {
+    return (flag) ? `film-card__controls-item--active` : ``
+  }
 
-  const isWachedClassName = isWached
-  ? `film-card__controls-item--active`
-  : ``;
+  const isWachlistClassName = isFilmFlag(isWachlist);
+  const isWachedClassName = isFilmFlag(isWached);
+  const isFavoriteClassName = isFilmFlag(isFavorite);
 
-  const isFavoriteClassName = isFavorite
-  ? `film-card__controls-item--active`
-  : ``;
 
   return (
     `<article class="film-card">

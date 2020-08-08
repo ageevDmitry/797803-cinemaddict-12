@@ -8,16 +8,16 @@ import {createFooterStatistic} from "./view/footer-statistic.js";
 // import {createFilmPopap} from "./view/film-popap.js";
 import {generateFilm} from "./mock/film.js";
 import {generateFilter} from "./mock/filter.js";
-import {generateStatistic} from "./mock/film.js";
-import {generateUserRank} from "./mock/film.js";
+import {generateStatistic} from "./mock/statistics.js";
+import {generateUserRank} from "./mock/user-rank.js";
 
 const CARD_FILMS_COUNT = 20;
 const CARD_FILMS_COUNT_PER_STEP = 5;
 
+const userRank = generateUserRank();
 const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
 const filters = generateFilter(filmsArray);
 const filmStatistic = generateStatistic();
-const userRank = generateUserRank();
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
