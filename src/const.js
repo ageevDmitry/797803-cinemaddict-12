@@ -15,6 +15,16 @@ export const USER_RANK_MOVIE_BUFF = 20;
 export const FILM_STATISTIC_MIN = 100000;
 export const FILM_STATISTIC_MAX = 200000;
 
+export const FILM_POSTERS = [
+  `made-for-each-other.png`,
+  `popeye-meets-sinbad.png`,
+  `sagebrush-trail.jpg`,
+  `santa-claus-conquers-the-martians.jpg`,
+  `the-dance-of-life.jpg`,
+  `the-great-flamarion.jpg`,
+  `the-man-with-the-golden-arm.jpg`
+];
+
 export const FILM_TITLES = [
   `The Shawshank Redemption`,
   `The Godfather`,
@@ -36,16 +46,74 @@ export const FILM_TITLES = [
   `One Flew Over the Cuckoo's Nest`,
   `Shichinin no samurai`,
   `Se7en`
-]
+];
 
-export const FILM_POSTERS = [
-  `made-for-each-other.png`,
-  `popeye-meets-sinbad.png`,
-  `sagebrush-trail.jpg`,
-  `santa-claus-conquers-the-martians.jpg`,
-  `the-dance-of-life.jpg`,
-  `the-great-flamarion.jpg`,
-  `the-man-with-the-golden-arm.jpg`
+export const FILM_DIRECTORS = [
+  `Michael Mann`,
+  `James Cameron`,
+  `Steven Spielberg`,
+  `Spike Lee`,
+  `Tony Scott`,
+  `John Singleton`,
+  `Richard Donner`,
+  `Quentin Tarantino`,
+  `George Lucas`,
+  `Martin Scorsese`,
+  `Jerry Bruckheimer`,
+  `Jim Henson`
+];
+
+export const FILM_WRITERS = [
+  `David Lynch`,
+  `Joel and Ethan Coen`,
+  `Terrence Malick`,
+  `Abbas Kiarostami`,
+  `Errol Morris`,
+  `Hayao Miyazaki`,
+  `David Cronenberg`,
+  `Terence Davies`,
+  `Lukas Moodysson`,
+  `Lynne Ramsay`,
+  `Bela Tarr`,
+  `Wong Kar-wai`
+];
+
+export const FILM_ACTORS = [
+  `Jack Nicholson`,
+  `Marlon Brando`,
+  `Robert De Niro`,
+  `Al Pacino`,
+  `Daniel Day-Lewis`,
+  `Dustin Hoffman`,
+  `Tom Hanks`,
+  `Anthony Hopkins`,
+  `Paul Newman`,
+  `Denzel Washington`,
+  `Spencer Tracy`,
+  `Laurence Olivieri`
+];
+
+export const COUNTRIES = [
+  `USA`,
+  `Great Britain`,
+  `Germany`,
+  `France`,
+  `Canada`,
+  `Russia`,
+  `China`,
+  `Sweden`,
+  `Ukraine`,
+  `Brazil`,
+  `Poland`,
+  `Zanzibar`
+];
+
+export const AGE_LIMITS = [
+  `0+`,
+  `6+`,
+  `12+`,
+  `16+`,
+  `18+`
 ];
 
 export const FILM_DESCRIPTION = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`;

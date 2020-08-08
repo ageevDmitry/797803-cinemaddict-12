@@ -32,9 +32,9 @@ export const getRandomItem = (array) => {
   return array[getRandomInteger(0, array.length - 1)];
 };
 
-export const getStringFromArray = (array) => {
+export const getStringFromArray = (array, separ = ` `) => {
   const string = array.reduce(function (sum, current) {
-    return sum + ` ` + current;
+    return sum + separ + current;
   });
   return string;
 }

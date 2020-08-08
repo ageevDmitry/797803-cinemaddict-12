@@ -4,8 +4,13 @@ import {getRandomArray} from "../utils.js";
 import {getRandomItem} from "../utils.js";
 import {getStringFromArray} from "../utils.js";
 import {checkArrayPunctuation} from "../utils.js";
-import {FILM_TITLES} from "../const.js";
 import {FILM_POSTERS} from "../const.js";
+import {FILM_TITLES} from "../const.js";
+import {FILM_DIRECTORS} from "../const.js";
+import {FILM_WRITERS} from "../const.js";
+import {FILM_ACTORS} from "../const.js";
+import {COUNTRIES} from "../const.js";
+import {AGE_LIMITS} from "../const.js";
 import {FILM_DESCRIPTION} from "../const.js";
 import {FILM_YEAR_MIN} from "../const.js";
 import {FILM_YEAR_MAX} from "../const.js";
@@ -42,15 +47,15 @@ export const generateFilm = () => {
     title: getRandomItem(FILM_TITLES),
     originalTitle : getRandomItem(FILM_TITLES),
     rating: getRandomFractionInteger(FILM_RATING_MIN, FILM_RATING_MAX),
-    director: ``,
-    writers: ``,
-    actors: ``,
+    director: getRandomItem(FILM_DIRECTORS),
+    writers: getRandomArray(FILM_WRITERS),
+    actors: getRandomArray(FILM_ACTORS),
     reliseDate: getRandomInteger(FILM_YEAR_MIN, FILM_YEAR_MAX),
     runtime: generateFilmRuntime(),
-    country: ``,
+    country: getRandomItem(COUNTRIES),
     genre: getRandomArray(FILM_GENRES),
     description: generateFilmDescription(FILM_DESCRIPTION),
-    ageLimit: ``,
+    ageLimit: getRandomItem(AGE_LIMITS),
     isWachlist: Boolean(getRandomInteger()),
     isWatched: Boolean(getRandomInteger()),
     isFavorite: Boolean(getRandomInteger())
