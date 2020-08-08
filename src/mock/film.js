@@ -1,4 +1,16 @@
-const DESCRIPTION_SENTENCES_COUNT = 5;
+import {getRandomInteger} from "../utils.js";
+import {getRandomArray} from "../utils.js";
+import {getRandomItem} from "../utils.js";
+import {getStringFromArray} from "../utils.js";
+import {checkArrayPunctuation} from "../utils.js";
+import {checkStringLength} from "../utils.js";
+
+
+import {FILM_TITLES} from "../const.js";
+import {FILM_POSTERS} from "../const.js";
+import {FILM_DESCRIPTION} from "../const.js";
+import {FILM_GENRES} from "../const.js";
+
 const FILM_YEAR_MIN = 1900;
 const FILM_YEAR_MAX = 2020;
 const FILM_HOUR_MIN = 0;
@@ -12,63 +24,6 @@ const FiLM_STATISTIC_MIN = 100000;
 const FiLM_STATISTIC_MAX = 200000;
 const USER_RANK_MIN = 0;
 const USER_RANK_MAX = 30;
-
-
-const getRandomInteger = (a = 0, b = 1) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-
-  return Math.floor(lower + Math.random() * (upper - lower + 1));
-};
-
-const getRandomArray = function (arr) {
-  const newArr = [];
-  const cloneArr = arr.slice(0);
-  const randomArrLength = getRandomInteger(1, DESCRIPTION_SENTENCES_COUNT);
-
-  for (let i = 0; i < randomArrLength; i++) {
-    const randomIndex = getRandomInteger(0, cloneArr.length - 1);
-    newArr.push(cloneArr[randomIndex]);
-    cloneArr.splice(randomIndex, 1);
-  }
-
-  return newArr;
-};
-
-const generateFilmTittle = () => {
-  const filmTitles = [
-    `Где деньги, Лебовски?`,
-    `Generation P`,
-    `ДМБ`,
-    `Star Wars`,
-    `Карты, деньги, два ствола`,
-    `Игра престолов`,
-    `Аватар`,
-    `Миллионер из трущоб`,
-    `Бриллиантовая рука`,
-    `Операция Ы`
-  ];
-
-const randomIndex = getRandomInteger(0, filmTitles.length - 1);
-
-return filmTitles[randomIndex];
-};
-
-const generateFilmPoster = () => {
-  const filmPosters = [
-    `made-for-each-other.png`,
-    `popeye-meets-sinbad.png`,
-    `sagebrush-trail.jpg`,
-    `santa-claus-conquers-the-martians.jpg`,
-    `the-dance-of-life.jpg`,
-    `the-great-flamarion.jpg`,
-    `the-man-with-the-golden-arm.jpg`
-  ];
-
-const randomIndex = getRandomInteger(0, filmPosters.length - 1);
-
-return filmPosters[randomIndex];
-};
 
 const generateFilmGenre = () => {
   const filmGenres = [
@@ -107,60 +62,23 @@ const generateFilmRating = () => {
   return filmRating;
 };
 
-const generateFilmDescription = () => {
+const generateFilmDescription = (FILM_DESCRIPTION) => {
 
-  const defaultText =
-  `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.`
+  const descriptionArray = FILM_DESCRIPTION.split('. ');
+  const checkedDescriptionArray = checkArrayPunctuation(descriptionArray);
+  const newDescriptionArray = getRandomArray(checkedDescriptionArray);
+  const newDescription = getStringFromArray(newDescriptionArray);
+  // const checkedNewDescription = checkStringLength(newDescription);
 
-  let defaultArray2 = [];
-
-  const defaultArray = defaultText.split('. ');
-
-  const randomArray = getRandomArray(defaultArray);
-
-  randomArray.forEach(function (item) {
-    const a = item.split(``)
-    if (a[0] === ` `) {
-      a.shift();
-    } else if (a[a.length - 1] !== `.`)
-      a.push(`.`)
-
-    const total = a.reduce(function (sum, current) {
-        return sum + `` + current;
-      });
-
-    defaultArray2.push(total)
-  });
-
-  const defaultArray3 = defaultArray2.reduce(function (sum, current) {
-    return sum + ` ` + current;
-  });
-
-  const newFilmDescriptionArray = defaultArray3.split(``);
-
-  let total;
-
-  if (newFilmDescriptionArray.length > 140) {
-    const array2 = newFilmDescriptionArray.slice(0, 139);
-    array2.push(`...`);
-    total = array2.reduce(function (sum, current) {
-      return sum + `` + current;
-    });
-  } else {
-    total = newFilmDescriptionArray.reduce(function (sum, current) {
-      return sum + `` + current;
-    });
-  }
-
-  return total;
+  return newDescription;
 };
 
 export const generateFilm = () => {
   return {
-    title: generateFilmTittle(),
-    poster: generateFilmPoster(),
-    description: generateFilmDescription(),
-    genre: generateFilmGenre(),
+    title: getRandomItem(FILM_TITLES),
+    poster: getRandomItem(FILM_POSTERS),
+    description: generateFilmDescription(FILM_DESCRIPTION),
+    genre: getRandomArray(FILM_GENRES),
     year: generateFilmYear(),
     duration: generateFilmDuration(),
     rating: generateFilmRating(),

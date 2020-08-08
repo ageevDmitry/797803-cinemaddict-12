@@ -1,5 +1,9 @@
+import {checkStringLength} from "../utils.js";
+
 export const createFilmCard = (filmsList) => {
   const {title, poster, description, genre, year, duration, rating, isWachlist, isWached, isFavorite} = filmsList;
+
+  const limitDescription = checkStringLength(description);
 
   const isWachlistClassName = isWachlist
   ? `film-card__controls-item--active`
@@ -20,10 +24,10 @@ export const createFilmCard = (filmsList) => {
         <p class="film-card__info">
           <span class="film-card__year">${year}</span>
           <span class="film-card__duration">${duration}</span>
-          <span class="film-card__genre">${genre}</span>
+          <span class="film-card__genre">${genre[0]}</span>
         </p>
         <img src="./images/posters/${poster}" alt="" class="film-card__poster">
-        <p class="film-card__description">${description}</p>
+        <p class="film-card__description">${limitDescription}</p>
         <a class="film-card__comments">5 comments</a>
         <form class="film-card__controls">
           <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${isWachlistClassName}">Add to watchlist</button>
