@@ -75,3 +75,13 @@ export const checkStringLength = (string) => {
 export const isFilmFlag = (flag) => {
   return (flag) ? `film-card__controls-item--active` : ``
 }
+
+export const getRandomDate = (yearMin, yearMax) => {
+  const year = getRandomInteger(yearMin, yearMax);
+  const month = getRandomInteger(0, 12);
+  const hour = getRandomInteger(0, 24);
+  const minute = getRandomInteger(0, 60);
+
+  const date = new Date(year, month, hour, minute);
+  return date;
+}

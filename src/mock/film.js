@@ -5,6 +5,7 @@ import {getRandomItem} from "../utils.js";
 import {getStringFromArray} from "../utils.js";
 import {checkArrayPunctuation} from "../utils.js";
 import {generateComments} from "../mock/comment.js";
+import {getRandomDate} from "../utils.js";
 import {FILM_POSTERS} from "../const.js";
 import {FILM_TITLES} from "../const.js";
 import {FILM_DIRECTORS} from "../const.js";
@@ -51,7 +52,7 @@ export const generateFilm = () => {
     director: getRandomItem(FILM_DIRECTORS),
     writers: getRandomArray(FILM_WRITERS),
     actors: getRandomArray(FILM_ACTORS),
-    reliseDate: getRandomInteger(FILM_YEAR_MIN, FILM_YEAR_MAX),
+    reliseDate: getRandomDate(FILM_YEAR_MIN, FILM_YEAR_MAX),
     runtime: generateFilmRuntime(),
     country: getRandomItem(COUNTRIES),
     genre: getRandomArray(FILM_GENRES),

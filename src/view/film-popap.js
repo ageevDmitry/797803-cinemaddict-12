@@ -32,6 +32,7 @@ export const createFilmPopap = (film) => {
   const genreString = filmGenres(genre);
   const filmCommentsString = generateFilmCommentsString(comments);
   const filmCommentsCount = comments.length;
+  const filmPopapReliseDate = reliseDate.toLocaleString(`en-GB`, {year: `numeric`, month: `long`, day: `numeric`});
 
   return (
     `<section class="film-details">
@@ -74,7 +75,7 @@ export const createFilmPopap = (film) => {
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Release Date</td>
-                  <td class="film-details__cell">${reliseDate}</td>
+                  <td class="film-details__cell">${filmPopapReliseDate}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Runtime</td>
