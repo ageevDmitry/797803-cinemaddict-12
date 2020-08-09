@@ -1,15 +1,11 @@
 import {checkStringLength} from "../utils.js";
+import {isFilmFlag} from "../utils.js";
 
 export const createFilmCard = (film) => {
 
   const {poster, title, rating, reliseDate, runtime, genre, description, isWachlist, isWached, isFavorite} = film;
 
   const limitDescription = checkStringLength(description);
-
-  const isFilmFlag = (flag) => {
-    return (flag) ? `film-card__controls-item--active` : ``
-  }
-
   const isWachlistClassName = isFilmFlag(isWachlist);
   const isWachedClassName = isFilmFlag(isWached);
   const isFavoriteClassName = isFilmFlag(isFavorite);

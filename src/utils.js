@@ -78,3 +78,7 @@ export const checkStringLength = (string) => {
   }
   return cloneString;
 }
+
+export const isFilmFlag = (flag) => {
+  return (flag) ? `film-card__controls-item--active` : ``
+}

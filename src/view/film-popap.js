@@ -14,13 +14,21 @@ export const createFilmPopap = (film) => {
         country,
         genre,
         description,
-        ageLimit,
-        isWachlist,
-        isWatched,
-        isFavorite} = film;
+        ageLimit
+        } = film;
+
+  const filmGenres = (genre) => {
+    let total = ``
+    genre.forEach((item) => {
+      total = total + `<span class="film-details__genre">${item}</span>`
+    })
+    return total
+  }
 
   const writersString = getStringFromArray(writers, `, `);
   const actorsString = getStringFromArray(actors, `, `);
+  const genreTittle = genre.length > 1 ? `Genres` : `Genre`;
+  const genresString = filmGenres(genre);
 
   return (
     `<section class="film-details">
@@ -74,11 +82,9 @@ export const createFilmPopap = (film) => {
                   <td class="film-details__cell">${country}</td>
                 </tr>
                 <tr class="film-details__row">
-                  <td class="film-details__term">Genres</td>
+                  <td class="film-details__term">${genreTittle}</td>
                   <td class="film-details__cell">
-                    <span class="film-details__genre">Drama</span>
-                    <span class="film-details__genre">Film-Noir</span>
-                    <span class="film-details__genre">Mystery</span></td>
+                    ${genresString}</td>
                 </tr>
               </table>
 
