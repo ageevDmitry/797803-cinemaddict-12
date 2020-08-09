@@ -39,13 +39,6 @@ export const getStringFromArray = (array, separ = ` `) => {
   return string;
 }
 
-export const getStringFromSymbol = (array) => {
-  const string = array.reduce(function (sum, current) {
-    return sum + `` + current;
-  });
-  return string;
-}
-
 export const checkArrayPunctuation = (array) => {
   let cloneArray = [];
 
@@ -56,7 +49,7 @@ export const checkArrayPunctuation = (array) => {
   } else if (arraySymbol[arraySymbol.length - 1] !== `.`) {
     arraySymbol.push(`.`)
   }
-  const total = getStringFromSymbol(arraySymbol);
+  const total = getStringFromArray(arraySymbol, ``);
 
   cloneArray.push(total);
   });
@@ -72,9 +65,9 @@ export const checkStringLength = (string) => {
   if (stringArray.length > FILM_DESCRIPTION_LENGTH) {
     const limitString = stringArray.slice(0, FILM_DESCRIPTION_LENGTH - 1);
     limitString.push(`...`);
-    cloneString = getStringFromSymbol(limitString);
+    cloneString = getStringFromArray(limitString, ``);
   } else {
-    cloneString = getStringFromSymbol(stringArray);
+    cloneString = getStringFromArray(stringArray, ``);
   }
   return cloneString;
 }
