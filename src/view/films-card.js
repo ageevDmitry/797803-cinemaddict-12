@@ -3,12 +3,23 @@ import {isFilmFlag} from "../utils.js";
 
 export const createFilmCard = (film) => {
 
-  const {poster, title, rating, reliseDate, runtime, genre, description, isWachlist, isWached, isFavorite} = film;
+  const {poster,
+        title,
+        rating,
+        reliseDate,
+        runtime,
+        genre,
+        description,
+        isWachlist,
+        isWached,
+        isFavorite,
+        comments} = film;
 
   const limitDescription = checkStringLength(description);
   const isWachlistClassName = isFilmFlag(isWachlist);
   const isWachedClassName = isFilmFlag(isWached);
   const isFavoriteClassName = isFilmFlag(isFavorite);
+  const filmCommentsCount = comments.length;
 
   return (
     `<article class="film-card">
@@ -21,7 +32,7 @@ export const createFilmCard = (film) => {
         </p>
         <img src="./images/posters/${poster}" alt="" class="film-card__poster">
         <p class="film-card__description">${limitDescription}</p>
-        <a class="film-card__comments">5 comments</a>
+        <a class="film-card__comments">${filmCommentsCount} comments</a>
         <form class="film-card__controls">
           <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${isWachlistClassName}">Add to watchlist</button>
           <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${isWachedClassName}">Mark as watched</button>

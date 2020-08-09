@@ -14,6 +14,8 @@ export const USER_RANK_FAN = 10;
 export const USER_RANK_MOVIE_BUFF = 20;
 export const FILM_STATISTIC_MIN = 100000;
 export const FILM_STATISTIC_MAX = 200000;
+export const FILM_COMMENTS_MIN = 0;
+export const FILM_COMMENTS_MAX = 5;
 
 export const FILM_POSTERS = [
   `made-for-each-other.png`,
@@ -131,4 +133,25 @@ export const USER_RANKS = [
   `Novice`,
   `Fan`,
   `Movie Buff`
+];
+
+export const COMMENT_EMOJIS = [
+  `smile.png`,
+  `sleeping.png`,
+  `puke.png`,
+  `angry.png`
+];
+
+export const COMMENT_TEXTS = [
+  `Interesting setting and a good cast`,
+  `Booooooooooring`,
+  `Very very old. Meh`,
+  `Almost two hours? Seriously?`
+];
+
+export const COMMENT_AUTHORS = [
+  `Tim Macoveev`,
+  `John Doe`,
+  `Alina Green`,
+  `Peter Snow`
 ];
