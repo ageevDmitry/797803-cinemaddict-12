@@ -66,5 +66,4 @@ const footerStatistics = footer.querySelector(`.footer__statistics`);
 
 render(footerStatistics, createFooterStatistic(filmStatistic), `beforeend`);
 
-// // Пока попап фильма не отрисовываем;
 render(footer, createFilmPopap(filmsArray[0]), `beforeend`);

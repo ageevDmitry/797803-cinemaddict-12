@@ -16,8 +16,7 @@ export const createFilmPopap = (film) => {
         genre,
         description,
         ageLimit,
-        comments
-        } = film;
+        comments} = film;
 
   const filmGenres = (genre) => {
     let total = ``
