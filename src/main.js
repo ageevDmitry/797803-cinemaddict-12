@@ -9,7 +9,7 @@ import {createFilmPopap} from "./view/film-popap.js";
 import {generateFilm} from "./mock/film.js";
 import {generateFilter} from "./mock/filter.js";
 import {generateStatistic} from "./mock/statistics.js";
-import {generateUserRank} from "./mock/user-rank.js";
+import {generateUserRank} from "./mock/user-rank-status.js";
 
 const CARD_FILMS_COUNT = 20;
 const CARD_FILMS_COUNT_PER_STEP = 5;
@@ -51,9 +51,9 @@ if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
     evt.preventDefault();
     filmsArray
       .slice(renderedFilmCount, renderedFilmCount + CARD_FILMS_COUNT_PER_STEP)
-      .forEach((filmsArray) => render(filmsListContainer, createFilmCard(filmsArray), `beforeend`));
+      .forEach((array) => render(filmsListContainer, createFilmCard(array), `beforeend`));
 
-      renderedFilmCount += CARD_FILMS_COUNT_PER_STEP;
+    renderedFilmCount += CARD_FILMS_COUNT_PER_STEP;
 
     if (renderedFilmCount >= filmsArray.length) {
       loadMoreButton.remove();

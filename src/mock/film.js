@@ -35,7 +35,7 @@ const generateFilmRuntime = () => {
 
 const generateFilmDescription = (description) => {
 
-  const descriptionArray = description.split('. ');
+  const descriptionArray = description.split(`. `);
   const checkedDescriptionArray = checkArrayPunctuation(descriptionArray);
   const newDescriptionArray = getRandomArray(checkedDescriptionArray);
   const newDescription = getStringFromArray(newDescriptionArray);
@@ -47,7 +47,7 @@ export const generateFilm = () => {
   return {
     poster: getRandomItem(FILM_POSTERS),
     title: getRandomItem(FILM_TITLES),
-    originalTitle : getRandomItem(FILM_TITLES),
+    originalTitle: getRandomItem(FILM_TITLES),
     rating: getRandomFractionInteger(FILM_RATING_MIN, FILM_RATING_MAX),
     director: getRandomItem(FILM_DIRECTORS),
     writers: getRandomArray(FILM_WRITERS),
@@ -62,5 +62,5 @@ export const generateFilm = () => {
     isWatched: Boolean(getRandomInteger()),
     isFavorite: Boolean(getRandomInteger()),
     comments: generateComments(),
-  }
+  };
 };

@@ -3,18 +3,7 @@ import {isFilmFlag} from "../utils.js";
 
 export const createFilmCard = (film) => {
 
-  const {poster,
-        title,
-        rating,
-        reliseDate,
-        runtime,
-        genre,
-        description,
-        isWachlist,
-        isWached,
-        isFavorite,
-        comments} = film;
-
+  const {poster, title, rating, reliseDate, runtime, genre, description, isWachlist, isWached, isFavorite, comments} = film;
   const limitDescription = checkStringLength(description);
   const isWachlistClassName = isFilmFlag(isWachlist);
   const isWachedClassName = isFilmFlag(isWached);

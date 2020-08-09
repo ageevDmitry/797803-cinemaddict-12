@@ -3,28 +3,15 @@ import {generateFilmCommentsString} from "../view/comments-list.js";
 
 export const createFilmPopap = (film) => {
 
-  const {poster,
-        title,
-        originalTitle,
-        rating,
-        director,
-        writers,
-        actors,
-        reliseDate,
-        runtime,
-        country,
-        genre,
-        description,
-        ageLimit,
-        comments} = film;
+  const {poster, title, originalTitle, rating, director, writers, actors, reliseDate, runtime, country, genre, description, ageLimit, comments} = film;
 
-  const filmGenres = (genre) => {
-    let total = ``
-    genre.forEach((item) => {
-      total = total + `<span class="film-details__genre">${item}</span>`
-    })
+  const filmGenres = (genreArray) => {
+    let total = ``;
+    genreArray.forEach((item) => {
+      total = total + `<span class="film-details__genre">${item}</span>`;
+    });
     return total;
-  }
+  };
 
   const writersString = getStringFromArray(writers, `, `);
   const actorsString = getStringFromArray(actors, `, `);

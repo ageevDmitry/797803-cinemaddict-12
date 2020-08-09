@@ -12,7 +12,7 @@ export const getRandomFractionInteger = (a = 0, b = 1) => {
   const randomFractionInteger = Math.floor(randomInteger * 10) / 10;
 
   return randomFractionInteger;
-}
+};
 
 export const getRandomArray = (array) => {
   const newArray = [];
@@ -37,21 +37,21 @@ export const getStringFromArray = (array, separ = ` `) => {
     return sum + separ + current;
   });
   return string;
-}
+};
 
 export const checkArrayPunctuation = (array) => {
   let cloneArray = [];
 
   array.forEach(function (item) {
-  const arraySymbol = item.split(``)
-  if (arraySymbol[0] === ` `) {
-    arraySymbol.shift();
-  } else if (arraySymbol[arraySymbol.length - 1] !== `.`) {
-    arraySymbol.push(`.`)
-  }
-  const total = getStringFromArray(arraySymbol, ``);
+    const arraySymbol = item.split(``);
+    if (arraySymbol[0] === ` `) {
+      arraySymbol.shift();
+    } else if (arraySymbol[arraySymbol.length - 1] !== `.`) {
+      arraySymbol.push(`.`);
+    }
+    const total = getStringFromArray(arraySymbol, ``);
 
-  cloneArray.push(total);
+    cloneArray.push(total);
   });
 
   return cloneArray;
@@ -70,11 +70,11 @@ export const checkStringLength = (string) => {
     cloneString = getStringFromArray(stringArray, ``);
   }
   return cloneString;
-}
+};
 
 export const isFilmFlag = (flag) => {
-  return (flag) ? `film-card__controls-item--active` : ``
-}
+  return (flag) ? `film-card__controls-item--active` : ``;
+};
 
 export const getRandomDate = (yearMin, yearMax) => {
   const year = getRandomInteger(yearMin, yearMax);
@@ -84,4 +84,4 @@ export const getRandomDate = (yearMin, yearMax) => {
 
   const date = new Date(year, month, hour, minute);
   return date;
-}
+};

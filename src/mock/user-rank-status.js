@@ -13,7 +13,7 @@ export const generateUserRank = () => {
 
   switch (true) {
     case userRankInteger === USER_RANK_MIN:
-      userRank = '';
+      userRank = ``;
       break;
     case userRankInteger >= USER_RANK_NOVICE && userRankInteger < USER_RANK_FAN:
       userRank = USER_RANKS[0];
@@ -27,4 +27,4 @@ export const generateUserRank = () => {
   }
 
   return userRank;
-}
+};
