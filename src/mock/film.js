@@ -4,6 +4,7 @@ import {getRandomArray} from "../utils.js";
 import {getRandomItem} from "../utils.js";
 import {getStringFromArray} from "../utils.js";
 import {checkArrayPunctuation} from "../utils.js";
+import {generateComments} from "../mock/comment.js";
 import {FILM_POSTERS} from "../const.js";
 import {FILM_TITLES} from "../const.js";
 import {FILM_DIRECTORS} from "../const.js";
@@ -58,6 +59,7 @@ export const generateFilm = () => {
     ageLimit: getRandomItem(AGE_LIMITS),
     isWachlist: Boolean(getRandomInteger()),
     isWatched: Boolean(getRandomInteger()),
-    isFavorite: Boolean(getRandomInteger())
+    isFavorite: Boolean(getRandomInteger()),
+    comments: generateComments(),
   }
 };
