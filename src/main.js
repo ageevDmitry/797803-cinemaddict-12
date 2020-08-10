@@ -4,13 +4,20 @@ import {createSortFilms} from "./view/sort-films.js";
 import {createFilmsList} from "./view/films-list.js";
 import {createFilmCard} from "./view/films-card.js";
 import {createButtonShowMore} from "./view/button-show-more.js";
-import {createFilmsListTopRated} from "./view/films-list-top-rated.js";
-import {createFilmsListMostCommented} from "./view/films-list-most-comment.js";
 import {createFooterStatistic} from "./view/footer-statistic.js";
-// import {createFilmPopap} from "./view/film-popap.js";
+import {createFilmPopap} from "./view/film-popap.js";
+import {generateFilm} from "./mock/film.js";
+import {generateFilter} from "./mock/filter.js";
+import {generateStatistic} from "./mock/statistics.js";
+import {generateUserRank} from "./mock/user-rank-status.js";
 
-const CARD_FILMS_LIST_COUNT = 5;
-const CARD_FILMS_EXTRA_COUNT = 2;
+const CARD_FILMS_COUNT = 20;
+const CARD_FILMS_COUNT_PER_STEP = 5;
+
+const userRank = generateUserRank();
+const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
+const filters = generateFilter(filmsArray);
+const filmStatistic = generateStatistic();
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -19,8 +26,8 @@ const render = (container, template, place) => {
 const siteHeader = document.querySelector(`.header`);
 const siteMain = document.querySelector(`.main`);
 
-render(siteHeader, createUserRankTemplate(), `beforeend`);
-render(siteMain, createMenuSite(), `beforeend`);
+render(siteHeader, createUserRankTemplate(userRank), `beforeend`);
+render(siteMain, createMenuSite(filters), `beforeend`);
 render(siteMain, createSortFilms(), `beforeend`);
 render(siteMain, createFilmsList(), `beforeend`);
 
@@ -28,34 +35,35 @@ const films = siteMain.querySelector(`.films`);
 const filmsList = films.querySelector(`.films-list`);
 const filmsListContainer = filmsList.querySelector(`.films-list__container`);
 
-for (let i = 0; i < CARD_FILMS_LIST_COUNT; i++) {
-  render(filmsListContainer, createFilmCard(), `beforeend`);
+for (let i = 1; i <= CARD_FILMS_COUNT_PER_STEP; i++) {
+  render(filmsListContainer, createFilmCard(filmsArray[i]), `beforeend`);
 }
 
-render(filmsList, createButtonShowMore(), `beforeend`);
+if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
 
-render(films, createFilmsListTopRated(), `beforeend`);
+  let renderedFilmCount = CARD_FILMS_COUNT_PER_STEP;
 
-const filmsListTopRated = siteMain.querySelector(`.films-list--top-rated`);
-const topRatedContainer = filmsListTopRated.querySelector(`.films-list__container`);
+  render(filmsList, createButtonShowMore(), `beforeend`);
 
-for (let i = 0; i < CARD_FILMS_EXTRA_COUNT; i++) {
-  render(topRatedContainer, createFilmCard(), `beforeend`);
-}
+  const loadMoreButton = filmsList.querySelector(`.films-list__show-more`);
 
-render(films, createFilmsListMostCommented(), `beforeend`);
+  loadMoreButton.addEventListener(`click`, (evt) => {
+    evt.preventDefault();
+    filmsArray
+      .slice(renderedFilmCount, renderedFilmCount + CARD_FILMS_COUNT_PER_STEP)
+      .forEach((array) => render(filmsListContainer, createFilmCard(array), `beforeend`));
 
-const filmsListMostComment = siteMain.querySelector(`.films-list--most-comment`);
-const mostCommentContainer = filmsListMostComment.querySelector(`.films-list__container`);
+    renderedFilmCount += CARD_FILMS_COUNT_PER_STEP;
 
-for (let i = 0; i < CARD_FILMS_EXTRA_COUNT; i++) {
-  render(mostCommentContainer, createFilmCard(), `beforeend`);
+    if (renderedFilmCount >= filmsArray.length) {
+      loadMoreButton.remove();
+    }
+  });
 }
 
 const footer = document.querySelector(`.footer`);
 const footerStatistics = footer.querySelector(`.footer__statistics`);
 
-render(footerStatistics, createFooterStatistic(), `beforeend`);
+render(footerStatistics, createFooterStatistic(filmStatistic), `beforeend`);
 
-// Пока попап фильма не отрисовываем;
-// render(footer, createFilmPopap(), `beforeend`);
+render(footer, createFilmPopap(filmsArray[0]), `beforeend`);
