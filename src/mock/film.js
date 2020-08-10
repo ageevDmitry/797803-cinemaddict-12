@@ -1,28 +1,6 @@
-import {getRandomInteger} from "../utils.js";
-import {getRandomFractionInteger} from "../utils.js";
-import {getRandomArray} from "../utils.js";
-import {getRandomItem} from "../utils.js";
-import {getStringFromArray} from "../utils.js";
-import {checkArrayPunctuation} from "../utils.js";
+import {getRandomInteger, getRandomFractionInteger, getRandomArray, getRandomItem, getStringFromArray, checkArrayPunctuation, getRandomDate} from "../utils.js";
 import {generateComments} from "../mock/comment.js";
-import {getRandomDate} from "../utils.js";
-import {FILM_POSTERS} from "../const.js";
-import {FILM_TITLES} from "../const.js";
-import {FILM_DIRECTORS} from "../const.js";
-import {FILM_WRITERS} from "../const.js";
-import {FILM_ACTORS} from "../const.js";
-import {COUNTRIES} from "../const.js";
-import {AGE_LIMITS} from "../const.js";
-import {FILM_DESCRIPTION} from "../const.js";
-import {FILM_YEAR_MIN} from "../const.js";
-import {FILM_YEAR_MAX} from "../const.js";
-import {FILM_GENRES} from "../const.js";
-import {FILM_HOUR_MIN} from "../const.js";
-import {FILM_HOUR_MAX} from "../const.js";
-import {FILM_MINUTES_MIN} from "../const.js";
-import {FILM_MINUTES_MAX} from "../const.js";
-import {FILM_RATING_MIN} from "../const.js";
-import {FILM_RATING_MAX} from "../const.js";
+import {FILM_POSTERS, FILM_TITLES, FILM_DIRECTORS, FILM_WRITERS, FILM_ACTORS, COUNTRIES, AGE_LIMITS, FILM_DESCRIPTION, FILM_YEAR_MIN, FILM_YEAR_MAX, FILM_GENRES, FILM_HOUR_MIN, FILM_HOUR_MAX, FILM_MINUTES_MIN, FILM_MINUTES_MAX, FILM_RATING_MIN, FILM_RATING_MAX} from "../const.js";
 
 const generateFilmRuntime = () => {
 

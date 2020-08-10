@@ -1,13 +1,5 @@
-import {getRandomInteger} from "../utils.js";
-import {getRandomItem} from "../utils.js";
-import {getRandomDate} from "../utils.js";
-import {FILM_COMMENTS_MIN} from "../const.js";
-import {FILM_COMMENTS_MAX} from "../const.js";
-import {COMMENT_EMOJIS} from "../const.js";
-import {COMMENT_TEXTS} from "../const.js";
-import {COMMENT_AUTHORS} from "../const.js";
-import {COMMENT_YEAR_MIN} from "../const.js";
-import {COMMENT_YEAR_MAX} from "../const.js";
+import {getRandomInteger, getRandomItem, getRandomDate} from "../utils.js";
+import {FILM_COMMENTS_MIN, FILM_COMMENTS_MAX, COMMENT_EMOJIS, COMMENT_TEXTS, COMMENT_AUTHORS, COMMENT_YEAR_MIN, COMMENT_YEAR_MAX} from "../const.js";
 
 export const generateComments = () => {
 

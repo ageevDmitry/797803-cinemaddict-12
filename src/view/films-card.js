@@ -1,5 +1,4 @@
-import {checkStringLength} from "../utils.js";
-import {isFilmFlag} from "../utils.js";
+import {checkStringLength, isFilmFlag} from "../utils.js";
 
 export const createFilmCard = (film) => {
 
