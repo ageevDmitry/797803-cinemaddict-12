@@ -1,6 +1,6 @@
 import {createElement} from "../utils.js";
 
-export const createFooterStatistic = (filmStatistic) => {
+const createFooterStatistic = (filmStatistic) => {
   return (
     `<p>${filmStatistic} movies inside</p>`
   );
