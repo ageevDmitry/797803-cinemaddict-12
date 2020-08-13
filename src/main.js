@@ -1,18 +1,18 @@
 import {renderTemplate, renderElement, RenderPosition} from "./utils.js";
-// import {createButtonShowMore} from "./view/button-show-more.js";
-// import {createFilmPopap} from "./view/film-popap.js";
+import {generateUserRank} from "./mock/user-rank-status.js";
 import {generateStatistic} from "./mock/statistics.js";
 import {generateFilm} from "./mock/film.js";
+import {generateComments} from "./mock/comment.js";
 import {generateFilter} from "./mock/filter.js";
 import UserRank from "./view/user-rank.js";
-import Statistic from "./view/footer-statistic.js";
 import FilmFiltration from "./view/film-filtration.js";
 import FilmSorting from "./view/film-sorting.js";
 import FilmList from "./view/film-list.js";
 import FilmCard from "./view/film-card.js";
 import ButtonShowMore from "./view/button-show-more.js";
-
-import {generateUserRank} from "./mock/user-rank-status.js";
+import Statistic from "./view/footer-statistic.js";
+import FilmPopap from "./view/film-popap.js";
+import Comments from "./view/comment-list.js";
 
 const CARD_FILMS_COUNT = 20;
 const CARD_FILMS_COUNT_PER_STEP = 5;
@@ -21,6 +21,7 @@ const userRank = generateUserRank();
 const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
 const filters = generateFilter(filmsArray);
 const filmStatistic = generateStatistic();
+export const commentsArray = generateComments();
 
 const siteHeader = document.querySelector(`.header`);
 const siteMain = document.querySelector(`.main`);
@@ -42,7 +43,6 @@ if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
 
   let renderedFilmCount = CARD_FILMS_COUNT_PER_STEP;
 
-  // renderTemplate(filmsList, createButtonShowMore(), `beforeend`);
   renderElement(filmsList, new ButtonShowMore().getElement(), RenderPosition.BEFOREEND);
 
   const loadMoreButton = filmsList.querySelector(`.films-list__show-more`);
@@ -65,4 +65,10 @@ const footerStatistics = footer.querySelector(`.footer__statistics`);
 
 renderElement(footerStatistics, new Statistic(filmStatistic).getElement(), RenderPosition.BEFOREEND);
 
-// renderTemplate(footer, createFilmPopap(filmsArray[0]), `beforeend`);
+renderElement(footer, new FilmPopap(filmsArray[0]).getElement(), RenderPosition.BEFOREEND);
+
+const filmDetails = document.querySelector(`.film-details__comments-list`);
+
+for (let i = 0; i < commentsArray.length; i++) {
+  renderElement(filmDetails, new Comments(commentsArray[i]).getElement(), RenderPosition.BEFOREEND);
+}

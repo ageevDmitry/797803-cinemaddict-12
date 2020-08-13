@@ -1,9 +1,10 @@
+import {createElement} from "../utils.js";
 import {getStringFromArray} from "../utils.js";
-import {generateFilmCommentsString} from "../view/comments-list.js";
+import {commentsArray} from "../main.js";
 
-export const createFilmPopap = (film) => {
+const createFilmPopap = (film) => {
 
-  const {poster, title, originalTitle, rating, director, writers, actors, reliseDate, runtime, country, genre, description, ageLimit, comments} = film;
+  const {poster, title, originalTitle, rating, director, writers, actors, reliseDate, runtime, country, genre, description, ageLimit} = film;
 
   const filmGenres = (genreArray) => {
     let total = ``;
@@ -17,8 +18,7 @@ export const createFilmPopap = (film) => {
   const actorsString = getStringFromArray(actors, `, `);
   const genreTittle = genre.length > 1 ? `Genres` : `Genre`;
   const genreString = filmGenres(genre);
-  const filmCommentsString = generateFilmCommentsString(comments);
-  const filmCommentsCount = comments.length;
+  const filmCommentsCount = commentsArray.length;
   const filmPopapReliseDate = reliseDate.toLocaleString(`en-GB`, {year: `numeric`, month: `long`, day: `numeric`});
 
   return (
@@ -102,7 +102,6 @@ export const createFilmPopap = (film) => {
             <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${filmCommentsCount}</span></h3>
 
             <ul class="film-details__comments-list">
-              ${filmCommentsString}
             </ul>
 
             <div class="film-details__new-comment">
@@ -139,4 +138,28 @@ export const createFilmPopap = (film) => {
       </form>
     </section>`
   );
+};
+
+export default class FilmPopap {
+  constructor(filmPopap) {
+    this._filmPopap = filmPopap;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilmPopap(this._filmPopap);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
 };

@@ -1,16 +1,12 @@
-export const generateFilmCommentsString = (comment) => {
+import {createElement} from "../utils.js";
 
-  let total = ``;
+const generateFilmCommentsString = (comment) => {
 
-  comment.forEach((item) =>{
-    const {emoji,
-      text,
-      author,
-      day} = item;
+    const {emoji, text, author, day} = comment;
 
     const commentDayLocale = day.toLocaleString(`en-ZA`, {year: `numeric`, month: `numeric`, day: `numeric`});
 
-    total = total +
+    return (
     `<li class="film-details__comment">
       <span class="film-details__comment-emoji">
         <img src="./images/emoji/${emoji}" width="55" height="55" alt="emoji-smile">
@@ -23,8 +19,30 @@ export const generateFilmCommentsString = (comment) => {
           <button class="film-details__comment-delete">Delete</button>
         </p>
         </div>
-    </li>`;
-  });
+    </li>`
+    );
+  };
 
-  return total;
+export default class Comments {
+  constructor(comment) {
+    this._comment = comment;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return generateFilmCommentsString(this._comment);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
 };

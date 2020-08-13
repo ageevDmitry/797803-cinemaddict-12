@@ -1,14 +1,15 @@
 import {createElement} from "../utils.js";
 import {checkStringLength, isFilmFlag} from "../utils.js";
+import {commentsArray} from "../main.js";
 
 const createFilmCard = (film) => {
 
-  const {poster, title, rating, reliseDate, runtime, genre, description, isWachlist, isWached, isFavorite, comments} = film;
+  const {poster, title, rating, reliseDate, runtime, genre, description, isWachlist, isWached, isFavorite} = film;
   const limitDescription = checkStringLength(description);
   const isWachlistClassName = isFilmFlag(isWachlist);
   const isWachedClassName = isFilmFlag(isWached);
   const isFavoriteClassName = isFilmFlag(isFavorite);
-  const filmCommentsCount = comments.length;
+  const filmCommentsCount = commentsArray.length;
   const filmCardReliseDate = reliseDate.toLocaleString(`en-ZA`, {year: `numeric`});
 
   return (
