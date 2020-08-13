@@ -1,6 +1,5 @@
 import {renderTemplate, renderElement, RenderPosition} from "./utils.js";
-import {createFilmCard} from "./view/film-card.js";
-import {createButtonShowMore} from "./view/button-show-more.js";
+// import {createButtonShowMore} from "./view/button-show-more.js";
 // import {createFilmPopap} from "./view/film-popap.js";
 import {generateStatistic} from "./mock/statistics.js";
 import {generateFilm} from "./mock/film.js";
@@ -11,6 +10,7 @@ import FilmFiltration from "./view/film-filtration.js";
 import FilmSorting from "./view/film-sorting.js";
 import FilmList from "./view/film-list.js";
 import FilmCard from "./view/film-card.js";
+import ButtonShowMore from "./view/button-show-more.js";
 
 import {generateUserRank} from "./mock/user-rank-status.js";
 
@@ -42,7 +42,8 @@ if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
 
   let renderedFilmCount = CARD_FILMS_COUNT_PER_STEP;
 
-  renderTemplate(filmsList, createButtonShowMore(), `beforeend`);
+  // renderTemplate(filmsList, createButtonShowMore(), `beforeend`);
+  renderElement(filmsList, new ButtonShowMore().getElement(), RenderPosition.BEFOREEND);
 
   const loadMoreButton = filmsList.querySelector(`.films-list__show-more`);
 
@@ -50,8 +51,7 @@ if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
     evt.preventDefault();
     filmsArray
       .slice(renderedFilmCount, renderedFilmCount + CARD_FILMS_COUNT_PER_STEP)
-      .forEach((array) => renderTemplate(filmsListContainer, createFilmCard(array), `beforeend`));
-
+      .forEach((array) => renderElement(filmsListContainer, new FilmCard(array).getElement(), RenderPosition.BEFOREEND));
     renderedFilmCount += CARD_FILMS_COUNT_PER_STEP;
 
     if (renderedFilmCount >= filmsArray.length) {
