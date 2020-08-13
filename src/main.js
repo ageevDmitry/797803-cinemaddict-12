@@ -1,15 +1,16 @@
-import {renderTemplate} from "./utils.js";
+import {renderTemplate, renderElement, RenderPosition} from "./utils.js";
 import {createUserRankTemplate} from "./view/user-rank.js";
 import {createMenuSite} from "./view/site-menu.js";
 import {createSortFilms} from "./view/sort-films.js";
 import {createFilmsList} from "./view/films-list.js";
 import {createFilmCard} from "./view/films-card.js";
 import {createButtonShowMore} from "./view/button-show-more.js";
-import {createFooterStatistic} from "./view/footer-statistic.js";
-import {createFilmPopap} from "./view/film-popap.js";
+// import {createFooterStatistic} from "./view/footer-statistic.js";
+// import {createFilmPopap} from "./view/film-popap.js";
+import {generateStatistic} from "./mock/statistics.js";
 import {generateFilm} from "./mock/film.js";
 import {generateFilter} from "./mock/filter.js";
-import {generateStatistic} from "./mock/statistics.js";
+import Statistic from "./view/footer-statistic.js";
 import {generateUserRank} from "./mock/user-rank-status.js";
 
 const CARD_FILMS_COUNT = 20;
@@ -19,10 +20,6 @@ const userRank = generateUserRank();
 const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
 const filters = generateFilter(filmsArray);
 const filmStatistic = generateStatistic();
-
-// const render = (container, template, place) => {
-//   container.insertAdjacentHTML(place, template);
-// };
 
 const siteHeader = document.querySelector(`.header`);
 const siteMain = document.querySelector(`.main`);
@@ -65,6 +62,6 @@ if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
 const footer = document.querySelector(`.footer`);
 const footerStatistics = footer.querySelector(`.footer__statistics`);
 
-renderTemplate(footerStatistics, createFooterStatistic(filmStatistic), `beforeend`);
+renderElement(footerStatistics, new Statistic(filmStatistic).getElement(), RenderPosition.BEFOREEND);
 
-renderTemplate(footer, createFilmPopap(filmsArray[0]), `beforeend`);
+// renderTemplate(footer, createFilmPopap(filmsArray[0]), `beforeend`);
