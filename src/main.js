@@ -5,11 +5,11 @@ import {createSortFilms} from "./view/sort-films.js";
 import {createFilmsList} from "./view/films-list.js";
 import {createFilmCard} from "./view/films-card.js";
 import {createButtonShowMore} from "./view/button-show-more.js";
-// import {createFooterStatistic} from "./view/footer-statistic.js";
 // import {createFilmPopap} from "./view/film-popap.js";
 import {generateStatistic} from "./mock/statistics.js";
 import {generateFilm} from "./mock/film.js";
 import {generateFilter} from "./mock/filter.js";
+import UserRank from "./view/user-rank.js";
 import Statistic from "./view/footer-statistic.js";
 import {generateUserRank} from "./mock/user-rank-status.js";
 
@@ -24,7 +24,9 @@ const filmStatistic = generateStatistic();
 const siteHeader = document.querySelector(`.header`);
 const siteMain = document.querySelector(`.main`);
 
-renderTemplate(siteHeader, createUserRankTemplate(userRank), `beforeend`);
+// renderTemplate(siteHeader, createUserRankTemplate(userRank), `beforeend`);
+renderElement(siteHeader, new UserRank(userRank).getElement(), RenderPosition.BEFOREEND);
+
 renderTemplate(siteMain, createMenuSite(filters), `beforeend`);
 renderTemplate(siteMain, createSortFilms(), `beforeend`);
 renderTemplate(siteMain, createFilmsList(), `beforeend`);
