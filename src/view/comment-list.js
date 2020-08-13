@@ -2,11 +2,11 @@ import {createElement} from "../utils.js";
 
 const generateFilmCommentsString = (comment) => {
 
-    const {emoji, text, author, day} = comment;
+  const {emoji, text, author, day} = comment;
 
-    const commentDayLocale = day.toLocaleString(`en-ZA`, {year: `numeric`, month: `numeric`, day: `numeric`});
+  const commentDayLocale = day.toLocaleString(`en-ZA`, {year: `numeric`, month: `numeric`, day: `numeric`});
 
-    return (
+  return (
     `<li class="film-details__comment">
       <span class="film-details__comment-emoji">
         <img src="./images/emoji/${emoji}" width="55" height="55" alt="emoji-smile">
@@ -20,8 +20,8 @@ const generateFilmCommentsString = (comment) => {
         </p>
         </div>
     </li>`
-    );
-  };
+  );
+};
 
 export default class Comments {
   constructor(comment) {
@@ -45,4 +45,4 @@ export default class Comments {
   removeElement() {
     this._element = null;
   }
-};
+}

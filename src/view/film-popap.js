@@ -162,4 +162,4 @@ export default class FilmPopap {
   removeElement() {
     this._element = null;
   }
-};
+}

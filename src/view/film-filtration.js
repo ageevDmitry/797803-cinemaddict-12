@@ -1,6 +1,6 @@
 import {createElement} from "../utils.js";
 
-const createFilmFilters = (filters) => {
+const createFilmFiltration = (filters) => {
 
   const [watchList, watched, favorites] = filters;
 
@@ -17,7 +17,7 @@ const createFilmFilters = (filters) => {
   );
 };
 
-export default class FilmFilters {
+export default class FilmFiltration {
   constructor(filters) {
     this._filters = filters;
 
@@ -25,7 +25,7 @@ export default class FilmFilters {
   }
 
   getTemplate() {
-    return createFilmFilters(this._filters);
+    return createFilmFiltration(this._filters);
   }
 
   getElement() {
