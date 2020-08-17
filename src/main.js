@@ -1,4 +1,4 @@
-import {renderElement, RenderPosition} from "./utils.js";
+import {render, RenderPosition} from "./utils.js";
 import {generateUserRank} from "./mock/user-rank-status.js";
 import {generateStatistic} from "./mock/statistics.js";
 import {generateFilm} from "./mock/film.js";
@@ -26,24 +26,24 @@ export const commentsArray = generateComments();
 const siteHeader = document.querySelector(`.header`);
 const siteMain = document.querySelector(`.main`);
 
-renderElement(siteHeader, new UserRank(userRank).getElement(), RenderPosition.BEFOREEND);
-renderElement(siteMain, new FilmFiltration(filters).getElement(), RenderPosition.BEFOREEND);
-renderElement(siteMain, new FilmSorting().getElement(), RenderPosition.BEFOREEND);
-renderElement(siteMain, new FilmList().getElement(), RenderPosition.BEFOREEND);
+render(siteHeader, new UserRank(userRank).getElement(), RenderPosition.BEFOREEND);
+render(siteMain, new FilmFiltration(filters).getElement(), RenderPosition.BEFOREEND);
+render(siteMain, new FilmSorting().getElement(), RenderPosition.BEFOREEND);
+render(siteMain, new FilmList().getElement(), RenderPosition.BEFOREEND);
 
 const films = siteMain.querySelector(`.films`);
 const filmsList = films.querySelector(`.films-list`);
 const filmsListContainer = filmsList.querySelector(`.films-list__container`);
 
 for (let i = 1; i <= CARD_FILMS_COUNT_PER_STEP; i++) {
-  renderElement(filmsListContainer, new FilmCard(filmsArray[i]).getElement(), RenderPosition.BEFOREEND);
+  render(filmsListContainer, new FilmCard(filmsArray[i]).getElement(), RenderPosition.BEFOREEND);
 }
 
 if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
 
   let renderedFilmCount = CARD_FILMS_COUNT_PER_STEP;
 
-  renderElement(filmsList, new ButtonShowMore().getElement(), RenderPosition.BEFOREEND);
+  render(filmsList, new ButtonShowMore().getElement(), RenderPosition.BEFOREEND);
 
   const loadMoreButton = filmsList.querySelector(`.films-list__show-more`);
 
@@ -63,12 +63,12 @@ if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
 const footer = document.querySelector(`.footer`);
 const footerStatistics = footer.querySelector(`.footer__statistics`);
 
-renderElement(footerStatistics, new Statistic(filmStatistic).getElement(), RenderPosition.BEFOREEND);
+render(footerStatistics, new Statistic(filmStatistic).getElement(), RenderPosition.BEFOREEND);
 
-renderElement(footer, new FilmPopap(filmsArray[0]).getElement(), RenderPosition.BEFOREEND);
+render(footer, new FilmPopap(filmsArray[0]).getElement(), RenderPosition.BEFOREEND);
 
 const filmDetails = document.querySelector(`.film-details__comments-list`);
 
 for (let i = 0; i < commentsArray.length; i++) {
-  renderElement(filmDetails, new Comments(commentsArray[i]).getElement(), RenderPosition.BEFOREEND);
+  render(filmDetails, new Comments(commentsArray[i]).getElement(), RenderPosition.BEFOREEND);
 }
