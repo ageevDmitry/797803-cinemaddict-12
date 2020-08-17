@@ -11,7 +11,6 @@ import FilmCard from "./view/film-card.js";
 import ButtonShowMore from "./view/button-show-more.js";
 import Statistic from "./view/footer-statistic.js";
 import FilmPopap from "./view/film-popap.js";
-import Comments from "./view/comment-list.js";
 
 const CARD_FILMS_COUNT = 20;
 const CARD_FILMS_COUNT_PER_STEP = 5;
@@ -19,6 +18,41 @@ const CARD_FILMS_COUNT_PER_STEP = 5;
 const renderFilm = (filmListContainer, film) => {
   const filmCard = new FilmCard(film);
   const filmPopap = new FilmPopap(film);
+
+  const replaceFilmToFilmPopap = () => {
+    filmListContainer.replaceChild(filmPopap.getElement(), filmCard.getElement());
+  };
+
+  const replaceFilmPopapToFilm = () => {
+    filmListContainer.replaceChild(filmCard.getElement(), filmPopap.getElement());
+  };
+
+  const onEscKeyDown = (evt) => {
+    if (evt.key === `Escape` || evt.key === `Esc`) {
+      evt.preventDefault();
+      replaceFilmPopapToFilm();
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    }
+  };
+
+  filmCard.getElement().querySelector(`.film-card__title`).addEventListener(`click`, () => {
+    replaceFilmToFilmPopap();
+    document.addEventListener(`keydown`, onEscKeyDown);
+  });
+
+  filmCard.getElement().querySelector(`.film-card__poster`).addEventListener(`click`, () => {
+    replaceFilmToFilmPopap();
+    document.addEventListener(`keydown`, onEscKeyDown);
+  });
+
+  filmCard.getElement().querySelector(`.film-card__comments`).addEventListener(`click`, () => {
+    replaceFilmToFilmPopap();
+    document.addEventListener(`keydown`, onEscKeyDown);
+  });
+
+  filmPopap.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, () => {
+    replaceFilmPopapToFilm();
+  });
 
   render(filmListContainer, filmCard.getElement(), RenderPosition.BEFOREEND);
 }
@@ -69,8 +103,4 @@ const footerStatistics = footer.querySelector(`.footer__statistics`);
 
 render(footerStatistics, new Statistic(filmStatistic).getElement(), RenderPosition.BEFOREEND);
 
-render(footer, new FilmPopap(filmsArray[0]).getElement(), RenderPosition.BEFOREEND);
-
-const filmDetails = document.querySelector(`.form-details__bottom-container`);
-
-render(filmDetails, new Comments(filmsArray[0].comments).getElement(), RenderPosition.BEFOREEND);
+// render(footer, new FilmPopap(filmsArray[0]).getElement(), RenderPosition.BEFOREEND);
