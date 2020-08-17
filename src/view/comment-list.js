@@ -1,6 +1,6 @@
 const generateComment = (comment) => {
 
-const {emoji, text, author, day} = comment;
+  const {emoji, text, author, day} = comment;
 
   const commentDayLocale = day.toLocaleString(`en-ZA`, {year: `numeric`, month: `numeric`, day: `numeric`});
 
@@ -19,7 +19,7 @@ const {emoji, text, author, day} = comment;
         </div>
     </li>`
   );
-}
+};
 
 export const generateFilmCommentsString = (comments) => {
 
@@ -30,5 +30,5 @@ export const generateFilmCommentsString = (comments) => {
     filmCommentsString = filmCommentsString + currentComment;
   }
 
-return filmCommentsString;
+  return filmCommentsString;
 };

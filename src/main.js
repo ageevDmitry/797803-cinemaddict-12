@@ -55,7 +55,7 @@ const renderFilm = (filmListContainer, film) => {
   });
 
   render(filmListContainer, filmCard.getElement(), RenderPosition.BEFOREEND);
-}
+};
 
 const userRank = generateUserRank();
 const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
@@ -102,5 +102,3 @@ const footer = document.querySelector(`.footer`);
 const footerStatistics = footer.querySelector(`.footer__statistics`);
 
 render(footerStatistics, new Statistic(filmStatistic).getElement(), RenderPosition.BEFOREEND);
-
-// render(footer, new FilmPopap(filmsArray[0]).getElement(), RenderPosition.BEFOREEND);
