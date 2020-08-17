@@ -16,6 +16,13 @@ import Comments from "./view/comment-list.js";
 const CARD_FILMS_COUNT = 20;
 const CARD_FILMS_COUNT_PER_STEP = 5;
 
+const renderFilm = (filmListContainer, film) => {
+  const filmCard = new FilmCard(film);
+  const filmPopap = new FilmPopap(film);
+
+  render(filmListContainer, filmCard.getElement(), RenderPosition.BEFOREEND);
+}
+
 const userRank = generateUserRank();
 const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
 const filters = generateFilter(filmsArray);
@@ -33,7 +40,7 @@ const filmsList = films.querySelector(`.films-list`);
 const filmsListContainer = filmsList.querySelector(`.films-list__container`);
 
 for (let i = 1; i <= CARD_FILMS_COUNT_PER_STEP; i++) {
-  render(filmsListContainer, new FilmCard(filmsArray[i]).getElement(), RenderPosition.BEFOREEND);
+  renderFilm(filmsListContainer, filmsArray[i]);
 }
 
 if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
@@ -48,7 +55,7 @@ if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
     evt.preventDefault();
     filmsArray
       .slice(renderedFilmCount, renderedFilmCount + CARD_FILMS_COUNT_PER_STEP)
-      .forEach((array) => render(filmsListContainer, new FilmCard(array).getElement(), RenderPosition.BEFOREEND));
+      .forEach((film) => renderFilm(filmsListContainer, film));
     renderedFilmCount += CARD_FILMS_COUNT_PER_STEP;
 
     if (renderedFilmCount >= filmsArray.length) {
