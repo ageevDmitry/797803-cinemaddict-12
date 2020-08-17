@@ -2,7 +2,6 @@ import {render, RenderPosition} from "./utils.js";
 import {generateUserRank} from "./mock/user-rank-status.js";
 import {generateStatistic} from "./mock/statistics.js";
 import {generateFilm} from "./mock/film.js";
-import {generateComments} from "./mock/comment.js";
 import {generateFilter} from "./mock/filter.js";
 import UserRank from "./view/user-rank.js";
 import FilmFiltration from "./view/film-filtration.js";
@@ -21,8 +20,6 @@ const userRank = generateUserRank();
 const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
 const filters = generateFilter(filmsArray);
 const filmStatistic = generateStatistic();
-export const commentsArray = generateComments();
-
 const siteHeader = document.querySelector(`.header`);
 const siteMain = document.querySelector(`.main`);
 
@@ -51,7 +48,7 @@ if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
     evt.preventDefault();
     filmsArray
       .slice(renderedFilmCount, renderedFilmCount + CARD_FILMS_COUNT_PER_STEP)
-      .forEach((array) => renderElement(filmsListContainer, new FilmCard(array).getElement(), RenderPosition.BEFOREEND));
+      .forEach((array) => render(filmsListContainer, new FilmCard(array).getElement(), RenderPosition.BEFOREEND));
     renderedFilmCount += CARD_FILMS_COUNT_PER_STEP;
 
     if (renderedFilmCount >= filmsArray.length) {
@@ -67,8 +64,6 @@ render(footerStatistics, new Statistic(filmStatistic).getElement(), RenderPositi
 
 render(footer, new FilmPopap(filmsArray[0]).getElement(), RenderPosition.BEFOREEND);
 
-const filmDetails = document.querySelector(`.film-details__comments-list`);
+const filmDetails = document.querySelector(`.form-details__bottom-container`);
 
-for (let i = 0; i < commentsArray.length; i++) {
-  render(filmDetails, new Comments(commentsArray[i]).getElement(), RenderPosition.BEFOREEND);
-}
+render(filmDetails, new Comments(filmsArray[0].comments).getElement(), RenderPosition.BEFOREEND);
