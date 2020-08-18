@@ -2,7 +2,9 @@ import {createElement} from "../utils.js";
 
 const createFooterStatistic = (filmStatistic) => {
   return (
-    `<p>${filmStatistic} movies inside</p>`
+    `<section class="footer__statistics">
+      <p>${filmStatistic} movies inside</p>
+    </section>`
   );
 };
 
