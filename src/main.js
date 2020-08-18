@@ -118,4 +118,4 @@ render(main, new FilmSorting().getElement(), RenderPosition.BEFOREEND);
 renderFilmList(main, filmsArray);
 render(footer, new Statistic(statistic).getElement(), RenderPosition.BEFOREEND);
 
-// "dfghdhgdhg"
+console.log(`!!!!`);
