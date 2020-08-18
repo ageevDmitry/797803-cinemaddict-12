@@ -11,6 +11,7 @@ import FilmCard from "./view/film-card.js";
 import ButtonShowMore from "./view/button-show-more.js";
 import Statistic from "./view/footer-statistic.js";
 import FilmPopap from "./view/film-popap.js";
+import NoFilms from "./view/no-films.js";
 
 const CARD_FILMS_COUNT = 20;
 const CARD_FILMS_COUNT_PER_STEP = 5;
@@ -75,6 +76,10 @@ const filmsListContainer = filmsList.querySelector(`.films-list__container`);
 
 for (let i = 1; i <= CARD_FILMS_COUNT_PER_STEP; i++) {
   renderFilm(filmsListContainer, filmsArray[i]);
+}
+
+if (filmsArray.length === 0) {
+  render(filmsListContainer, new NoFilms().getElement(), RenderPosition.BEFOREEND);
 }
 
 if (filmsArray.length > CARD_FILMS_COUNT_PER_STEP) {
