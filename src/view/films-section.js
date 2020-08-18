@@ -1,22 +1,19 @@
 import {createElement} from "../utils.js";
 
-const createFooterStatistic = (filmStatistic) => {
+const createFilmsSection = () => {
   return (
-    `<section class="footer__statistics">
-      <p>${filmStatistic} movies inside</p>
+    `<section class="films">
     </section>`
   );
 };
 
-export default class Statistic {
-  constructor(filmStatistic) {
-    this._filmStatistic = filmStatistic;
-
+export default class FilmsSection {
+  constructor() {
     this._element = null;
   }
 
   getTemplate() {
-    return createFooterStatistic(this._filmStatistic);
+    return createFilmsSection();
   }
 
   getElement() {

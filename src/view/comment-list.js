@@ -1,16 +1,10 @@
-export const generateFilmCommentsString = (comment) => {
+const generateComment = (comment) => {
 
-  let total = ``;
+  const {emoji, text, author, day} = comment;
 
-  comment.forEach((item) =>{
-    const {emoji,
-      text,
-      author,
-      day} = item;
+  const commentDayLocale = day.toLocaleString(`en-ZA`, {year: `numeric`, month: `numeric`, day: `numeric`});
 
-    const commentDayLocale = day.toLocaleString(`en-ZA`, {year: `numeric`, month: `numeric`, day: `numeric`});
-
-    total = total +
+  return (
     `<li class="film-details__comment">
       <span class="film-details__comment-emoji">
         <img src="./images/emoji/${emoji}" width="55" height="55" alt="emoji-smile">
@@ -23,8 +17,18 @@ export const generateFilmCommentsString = (comment) => {
           <button class="film-details__comment-delete">Delete</button>
         </p>
         </div>
-    </li>`;
-  });
+    </li>`
+  );
+};
 
-  return total;
+export const generateFilmCommentsString = (comments) => {
+
+  let filmCommentsString = ``;
+
+  for (let i = 0; i < comments.length; i++) {
+    const currentComment = generateComment(comments[i]);
+    filmCommentsString = filmCommentsString + currentComment;
+  }
+
+  return filmCommentsString;
 };

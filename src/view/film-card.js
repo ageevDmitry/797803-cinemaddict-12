@@ -1,6 +1,7 @@
+import {createElement} from "../utils.js";
 import {checkStringLength, isFilmFlag} from "../utils.js";
 
-export const createFilmCard = (film) => {
+const createFilmCard = (film) => {
 
   const {poster, title, rating, reliseDate, runtime, genre, description, isWachlist, isWached, isFavorite, comments} = film;
   const limitDescription = checkStringLength(description);
@@ -30,3 +31,27 @@ export const createFilmCard = (film) => {
     </article>`
   );
 };
+
+export default class FilmCard {
+  constructor(film) {
+    this._film = film;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilmCard(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
