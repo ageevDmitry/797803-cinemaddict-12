@@ -1,4 +1,4 @@
-import {render, RenderPosition} from "./utils/render.js";
+import {render, RenderPosition, replace, remove} from "./utils/render.js";
 import {generateUserRank} from "./mock/user-rank-status.js";
 import {generateStatistic} from "./mock/statistics.js";
 import {generateFilm} from "./mock/film.js";
@@ -31,12 +31,12 @@ const renderFilm = (filmListContainer, film) => {
   const filmCard = new FilmCard(film);
   const filmPopap = new FilmPopap(film);
 
-  const replaceFilmToFilmPopap = () => {
-    filmListContainer.replaceChild(filmPopap.getElement(), filmCard.getElement());
+  const replaceFilmCardToFilmPopap = () => {
+    replace(filmPopap, filmCard);
   };
 
-  const replaceFilmPopapToFilm = () => {
-    filmListContainer.replaceChild(filmCard.getElement(), filmPopap.getElement());
+  const replaceFilmPopapToFilmCard = () => {
+    replace(filmCard, filmPopap);
   };
 
   const onEscKeyDown = (evt) => {
@@ -48,28 +48,29 @@ const renderFilm = (filmListContainer, film) => {
   };
 
   filmCard.setClickHandler(() => {
-    replaceFilmToFilmPopap();
+    replaceFilmCardToFilmPopap();
     document.addEventListener(`keydown`, onEscKeyDown);
   });
 
   filmPopap.setClickHandler(() => {
-    replaceFilmPopapToFilm();
+    replaceFilmPopapToFilmCard();
   });
 
-  render(filmListContainer, filmCard.getElement(), RenderPosition.BEFOREEND);
+  render(filmListContainer, filmCard, RenderPosition.BEFOREEND);
 };
 
 const renderFilmList = (siteMain, films) => {
   const filmsSection = new FilmsSection();
   const filmsList = new FilmsList();
   const filmsContainer = new FilmsContainer();
+  const noFilms = new NoFilms();
 
-  render(siteMain, filmsSection.getElement(), RenderPosition.BEFOREEND);
-  render(filmsSection.getElement(), filmsList.getElement(), RenderPosition.BEFOREEND);
-  render(filmsList.getElement(), filmsContainer.getElement(), RenderPosition.BEFOREEND);
+  render(siteMain, filmsSection, RenderPosition.BEFOREEND);
+  render(filmsSection, filmsList, RenderPosition.BEFOREEND);
+  render(filmsList, filmsContainer, RenderPosition.BEFOREEND);
 
   if (films.length === 0) {
-    render(filmsList.getElement(), new NoFilms().getElement(), RenderPosition.BEFOREEND);
+    render(filmsList, noFilms, RenderPosition.BEFOREEND);
     return;
   }
 
@@ -84,7 +85,7 @@ const renderFilmList = (siteMain, films) => {
 
     const buttonShowMore = new ButtonShowMore();
 
-    render(filmsList.getElement(), buttonShowMore.getElement(), RenderPosition.BEFOREEND);
+    render(filmsList, buttonShowMore, RenderPosition.BEFOREEND);
 
     buttonShowMore.setClickHandler(() => {
       films
@@ -94,15 +95,14 @@ const renderFilmList = (siteMain, films) => {
       renderedFilmCount += CARD_FILMS_COUNT_PER_STEP;
 
       if (renderedFilmCount >= films.length) {
-        buttonShowMore.getElement().remove();
-        buttonShowMore.removeElement();
+        remove(buttonShowMore);
       }
     });
   }
 };
 
-render(header, new UserRank(userRank).getElement(), RenderPosition.BEFOREEND);
-render(main, new FilmFiltration(filters).getElement(), RenderPosition.BEFOREEND);
-render(main, new FilmSorting().getElement(), RenderPosition.BEFOREEND);
+render(header, new UserRank(userRank), RenderPosition.BEFOREEND);
+render(main, new FilmFiltration(filters), RenderPosition.BEFOREEND);
+render(main, new FilmSorting(), RenderPosition.BEFOREEND);
 renderFilmList(main, filmsArray);
-render(footer, new Statistic(statistic).getElement(), RenderPosition.BEFOREEND);
+render(footer, new Statistic(statistic), RenderPosition.BEFOREEND);
