@@ -183,7 +183,7 @@ export default class FilmPopap extends Abstract {
     return createFilmPopap(this._filmPopap);
   }
 
-  _clickHandler(evt) {
+  _clickHandler() {
     this._callback.click();
   }
 

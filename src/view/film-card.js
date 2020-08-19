@@ -43,7 +43,7 @@ export default class FilmCard extends Abstract {
     return createFilmCard(this._film);
   }
 
-  _clickHandler(evt) {
+  _clickHandler() {
     this._callback.click();
   }
 
