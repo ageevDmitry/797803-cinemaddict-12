@@ -1,4 +1,4 @@
-import {createElement} from "../utils.js";
+import Abstract from "./abstract.js";
 
 const createFilmSorting = () => {
   return (
@@ -10,24 +10,8 @@ const createFilmSorting = () => {
   );
 };
 
-export default class FilmSorting {
-  constructor() {
-    this._element = null;
-  }
-
+export default class FilmSorting extends Abstract {
   getTemplate() {
     return createFilmSorting();
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

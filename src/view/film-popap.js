@@ -1,6 +1,41 @@
-import {createElement} from "../utils.js";
+import Abstract from "./abstract.js";
 import {getStringFromArray} from "../utils.js";
-import {generateFilmCommentsString} from "../view/comment-list.js";
+// import {generateFilmCommentsString} from "../view/comment-list.js";
+
+const generateComment = (comment) => {
+
+  const {emoji, text, author, day} = comment;
+
+  const commentDayLocale = day.toLocaleString(`en-ZA`, {year: `numeric`, month: `numeric`, day: `numeric`});
+
+  return (
+    `<li class="film-details__comment">
+      <span class="film-details__comment-emoji">
+        <img src="./images/emoji/${emoji}" width="55" height="55" alt="emoji-smile">
+      </span>
+      <div>
+        <p class="film-details__comment-text">${text}</p>
+        <p class="film-details__comment-info">
+          <span class="film-details__comment-author">${author}</span>
+          <span class="film-details__comment-day">${commentDayLocale}</span>
+          <button class="film-details__comment-delete">Delete</button>
+        </p>
+        </div>
+    </li>`
+  );
+};
+
+const generateFilmCommentsString = (comments) => {
+
+  let filmCommentsString = ``;
+
+  for (let i = 0; i < comments.length; i++) {
+    const currentComment = generateComment(comments[i]);
+    filmCommentsString = filmCommentsString + currentComment;
+  }
+
+  return filmCommentsString;
+};
 
 const createFilmPopap = (film) => {
 
@@ -138,26 +173,13 @@ const createFilmPopap = (film) => {
   );
 };
 
-export default class FilmPopap {
+export default class FilmPopap extends Abstract {
   constructor(filmPopap) {
+    super();
     this._filmPopap = filmPopap;
-
-    this._element = null;
   }
 
   getTemplate() {
     return createFilmPopap(this._filmPopap);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

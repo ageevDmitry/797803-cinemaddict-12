@@ -1,4 +1,4 @@
-import {createElement} from "../utils.js";
+import Abstract from "./abstract.js";
 
 const createFooterStatistic = (filmStatistic) => {
   return (
@@ -8,26 +8,13 @@ const createFooterStatistic = (filmStatistic) => {
   );
 };
 
-export default class Statistic {
+export default class Statistic extends Abstract {
   constructor(filmStatistic) {
+    super();
     this._filmStatistic = filmStatistic;
-
-    this._element = null;
   }
 
   getTemplate() {
     return createFooterStatistic(this._filmStatistic);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
