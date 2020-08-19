@@ -1,6 +1,5 @@
 import Abstract from "./abstract.js";
 import {getStringFromArray} from "../utils.js";
-// import {generateFilmCommentsString} from "../view/comment-list.js";
 
 const generateComment = (comment) => {
 
@@ -177,9 +176,19 @@ export default class FilmPopap extends Abstract {
   constructor(filmPopap) {
     super();
     this._filmPopap = filmPopap;
+    this._clickHandler = this._clickHandler.bind(this);
   }
 
   getTemplate() {
     return createFilmPopap(this._filmPopap);
+  }
+
+  _clickHandler(evt) {
+    this._callback.click();
+  }
+
+  setClickHandler(callback) {
+    this._callback.click = callback;
+    this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, this._clickHandler);
   }
 }
