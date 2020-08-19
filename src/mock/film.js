@@ -1,4 +1,5 @@
-import {getRandomInteger, getRandomFractionInteger, getRandomArray, getRandomItem, getStringFromArray, checkArrayPunctuation, getRandomDate} from "../utils.js";
+import {getRandomInteger, getRandomFractionInteger, getRandomArray, getRandomItem} from "../utils/common.js";
+import {getStringFromArray, checkArrayPunctuation, getRandomDate} from "../utils/film-create.js";
 import {generateComments} from "../mock/comment.js";
 import {FILM_POSTERS, FILM_TITLES, FILM_DIRECTORS, FILM_WRITERS, FILM_ACTORS, COUNTRIES, AGE_LIMITS, FILM_DESCRIPTION, FILM_YEAR_MIN, FILM_YEAR_MAX, FILM_GENRES, FILM_HOUR_MIN, FILM_HOUR_MAX, FILM_MINUTES_MIN, FILM_MINUTES_MAX, FILM_RATING_MIN, FILM_RATING_MAX} from "../const.js";
 

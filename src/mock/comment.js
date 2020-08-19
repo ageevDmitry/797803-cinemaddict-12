@@ -1,4 +1,5 @@
-import {getRandomInteger, getRandomItem, getRandomDate} from "../utils.js";
+import {getRandomInteger, getRandomItem} from "../utils/common.js";
+import {getRandomDate} from "../utils/film-create.js";
 import {FILM_COMMENTS_MIN, FILM_COMMENTS_MAX, COMMENT_EMOJIS, COMMENT_TEXTS, COMMENT_AUTHORS, COMMENT_YEAR_MIN, COMMENT_YEAR_MAX} from "../const.js";
 
 export const generateComments = () => {
@@ -17,3 +18,4 @@ export const generateComments = () => {
 
   return comments;
 };
+

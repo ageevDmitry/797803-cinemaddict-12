@@ -1,5 +1,5 @@
 import Abstract from "./abstract.js";
-import {getStringFromArray} from "../utils.js";
+import {getStringFromArray} from "../utils/film-create.js";
 
 const generateComment = (comment) => {
 

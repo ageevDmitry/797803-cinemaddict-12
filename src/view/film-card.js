@@ -1,5 +1,5 @@
 import Abstract from "./abstract.js";
-import {checkStringLength, isFilmFlag} from "../utils.js";
+import {checkStringLength, isFilmFlag} from "../utils/film-create.js";
 
 const createFilmCard = (film) => {
 

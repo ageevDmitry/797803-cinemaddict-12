@@ -1,11 +1,11 @@
-import {render, RenderPosition} from "./utils.js";
+import {render, RenderPosition} from "./utils/render.js";
 import {generateUserRank} from "./mock/user-rank-status.js";
 import {generateStatistic} from "./mock/statistics.js";
 import {generateFilm} from "./mock/film.js";
 import {generateFilter} from "./mock/filter.js";
 import UserRank from "./view/user-rank.js";
-import FilmFiltration from "./view/film-filtration.js";
-import FilmSorting from "./view/film-sorting.js";
+import FilmFiltration from "./view/films-filtration.js";
+import FilmSorting from "./view/films-sorting.js";
 import FilmsSection from "./view/films-section.js";
 import FilmsList from "./view/films-list.js";
 import FilmsContainer from "./view/films-container.js";
