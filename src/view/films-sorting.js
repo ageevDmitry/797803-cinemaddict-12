@@ -1,6 +1,6 @@
 import Abstract from "./abstract.js";
 
-const createFilmSorting = () => {
+const createFilmsSorting = () => {
   return (
     `<ul class="sort">
       <li><a href="#" class="sort__button sort__button--active">Sort by default</a></li>
@@ -10,8 +10,8 @@ const createFilmSorting = () => {
   );
 };
 
-export default class FilmSorting extends Abstract {
+export default class FilmsSorting extends Abstract {
   getTemplate() {
-    return createFilmSorting();
+    return createFilmsSorting();
   }
 }

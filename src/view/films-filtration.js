@@ -1,6 +1,6 @@
 import Abstract from "./abstract.js";
 
-const createFilmFiltration = (filters) => {
+const createFilmsFiltration = (filters) => {
 
   const [watchList, watched, favorites] = filters;
 
@@ -17,7 +17,7 @@ const createFilmFiltration = (filters) => {
   );
 };
 
-export default class FilmFiltration extends Abstract {
+export default class FilmsFiltration extends Abstract {
   constructor(filters) {
     super();
     this._filters = filters;
@@ -25,6 +25,6 @@ export default class FilmFiltration extends Abstract {
   }
 
   getTemplate() {
-    return createFilmFiltration(this._filters);
+    return createFilmsFiltration(this._filters);
   }
 }
