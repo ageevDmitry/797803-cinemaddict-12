@@ -54,3 +54,39 @@ export const getRandomDate = (yearMin, yearMax) => {
   const date = new Date(year, month, hour, minute);
   return date;
 };
+
+const getWeightForNull = (dateA, dateB) => {
+  if (dateA === null && dateB === null) {
+    return 0;
+  }
+
+  if (dateA === null) {
+    return 1;
+  }
+
+  if (dateB === null) {
+    return -1;
+  }
+
+  return null;
+};
+
+export const sortFilmsDate = (filmA, filmB) => {
+  const weight = getWeightForNull(filmA.reliseDate, filmB.reliseDate);
+
+  if (weight !== null) {
+    return weight;
+  }
+
+  return filmB.reliseDate - filmA.reliseDate;
+};
+
+export const sortFilmsRating = (filmA, filmB) => {
+  const weight = getWeightForNull(filmA.rating, filmB.rating);
+
+  if (weight !== null) {
+    return weight;
+  }
+
+  return filmB.rating - filmA.rating;
+};

@@ -8,13 +8,16 @@ import ButtonShowMore from "../view/button-show-more.js";
 import FilmPopap from "../view/film-popap.js";
 import NoFilms from "../view/no-films.js";
 import {render, RenderPosition, replace, remove} from "../utils/render.js";
+import {sortFilmsDate, sortFilmsRating} from "../utils/film-create.js";
+import {SortType} from "../const.js";
 
 const CARD_FILMS_COUNT_PER_STEP = 5;
 
-export default class Board {
+export default class MovieList {
   constructor(boardContainer) {
     this._boardContainer = boardContainer;
     this._renderedFilmCount = CARD_FILMS_COUNT_PER_STEP;
+    this._currentSortType = SortType.DEFAULT;
 
     this._filmsSectionComponent = new FilmsSection();
     this._filmsListComponent = new FilmsList();
@@ -25,10 +28,12 @@ export default class Board {
     this._buttonShowMoreComponent = new ButtonShowMore();
 
     this._handleButtonShowMoreClick = this._handleButtonShowMoreClick.bind(this);
+    this._handleSortTypeChange = this._handleSortTypeChange.bind(this);
   }
 
   init(films) {
     this._films = films.slice();
+    this._sourcedFilms = films.slice();
 
     this._renderFilmsSorting();
 
@@ -39,8 +44,40 @@ export default class Board {
     this._renderBoard();
   }
 
+  _sortFilms(sortType) {
+
+    switch (sortType) {
+      case SortType.DATE_DOWN:
+        this._films.sort(sortFilmsDate);
+        break;
+      case SortType.RATING_DOWN:
+        this._films.sort(sortFilmsRating);
+        break;
+      default:
+        this._films = this._sourcedFilms.slice();
+    }
+
+    this._currentSortType = sortType;
+  }
+
+  _clearTaskList() {
+    this._filmsContainerComponent.getElement().innerHTML = ``;
+    this._renderedFilmCount = CARD_FILMS_COUNT_PER_STEP;
+  }
+
+  _handleSortTypeChange(sortType) {
+    if (this._currentSortType === sortType) {
+      return;
+    }
+
+    this._sortFilms(sortType);
+    this._clearTaskList();
+    this._renderFilmList();
+  }
+
   _renderFilmsSorting() {
     render(this._boardContainer, this._filmsSortingComponent, RenderPosition.BEFOREEND);
+    this._filmsSortingComponent.setSortTypeChangeHandler(this._handleSortTypeChange);
   }
 
   _renderFilm(film) {
