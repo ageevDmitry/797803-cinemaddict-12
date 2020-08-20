@@ -14,12 +14,17 @@ const CARD_FILMS_COUNT_PER_STEP = 5;
 export default class Board {
   constructor(boardContainer) {
     this._boardContainer = boardContainer;
+    this._renderedFilmCount = CARD_FILMS_COUNT_PER_STEP;
+
     this._filmsSectionComponent = new FilmsSection();
     this._filmsListComponent = new FilmsList();
     this._filmsContainerComponent = new FilmsContainer();
     this._filmsFiltrationComponent = new FilmsFiltration();
     this._filmsSortingComponent = new FilmsSorting();
     this._noFilmsComponent = new NoFilms();
+    this._buttonShowMoreComponent = new ButtonShowMore();
+
+    this._handleButtonShowMoreClick = this._handleButtonShowMoreClick.bind(this);
   }
 
   init(films) {
@@ -76,28 +81,19 @@ export default class Board {
       .forEach((film) => this._renderFilm(film));
   }
 
-  _renderButtonShowMore() {
-    let renderedFilmCount = CARD_FILMS_COUNT_PER_STEP;
+  _handleButtonShowMoreClick() {
+    this._renderFilms(this._renderedFilmCount, this._renderedFilmCount + CARD_FILMS_COUNT_PER_STEP);
+    this._renderedFilmCount += CARD_FILMS_COUNT_PER_STEP;
 
-    const buttonShowMoreComponent = new ButtonShowMore();
-
-    render(this._filmsListComponent, buttonShowMoreComponent, RenderPosition.BEFOREEND);
-
-    buttonShowMoreComponent.setClickHandler(() => {
-      this._films
-        .slice(renderedFilmCount, renderedFilmCount + CARD_FILMS_COUNT_PER_STEP)
-        .forEach((film) => this._renderFilm(film));
-
-      renderedFilmCount += CARD_FILMS_COUNT_PER_STEP;
-
-      if (renderedFilmCount >= this._films.length) {
-        remove(buttonShowMoreComponent);
-      }
-    });
+    if (this._renderedFilmCount >= this._films.length) {
+      remove(this._buttonShowMoreComponent);
+    }
   }
 
-  _renderNoFilms() {
-    render(this._filmsListComponent, this._noFilmsComponent, RenderPosition.BEFOREEND);
+  _renderButtonShowMore() {
+    render(this._filmsSectionComponent, this._buttonShowMoreComponent, RenderPosition.BEFOREEND);
+
+    this._buttonShowMoreComponent.setClickHandler(this._handleButtonShowMoreClick);
   }
 
   _renderFilmList() {
@@ -109,12 +105,15 @@ export default class Board {
   }
 
   _renderBoard() {
-
     if (this._films.length === 0) {
       this._renderNoFilms();
       return;
     }
 
     this._renderFilmList();
+  }
+
+  _renderNoFilms() {
+    render(this._filmsListComponent, this._noFilmsComponent, RenderPosition.BEFOREEND);
   }
 }
