@@ -157,3 +157,9 @@ export const COMMENT_AUTHORS = [
   `Alina Green`,
   `Peter Snow`
 ];
+
+export const SortType = {
+  DEFAULT: `default`,
+  DATE_DOWN: `date-down`,
+  RATING_DOWN: `rating-down`
+};
