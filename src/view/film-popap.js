@@ -57,6 +57,10 @@ const createFilmPopap = (film) => {
   const isWachlistChecked = isWachlist ? `checked` : ``;
   const isWatchedClassChecked = isWatched ? `checked` : ``;
   const isFavoriteClassChecked = isFavorite ? `checked` : ``;
+  const commentEmodji = `<div for="add-emoji" class="film-details__add-emoji-label">
+                          <img src="images/emoji/sleeping.png" width="55" height="55" alt="emoji-smile">
+                        </div>`
+
 
   return (
     `<section class="film-details">
@@ -141,7 +145,7 @@ const createFilmPopap = (film) => {
           ${commentsString}
         </ul>
         <div class="film-details__new-comment">
-          <div for="add-emoji" class="film-details__add-emoji-label"></div>
+          ${commentEmodji}
 
           <label class="film-details__comment-label">
             <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
