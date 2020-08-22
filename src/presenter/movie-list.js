@@ -6,6 +6,7 @@ import FilmsList from "../view/films-list.js";
 import FilmsContainer from "../view/films-container.js";
 import ButtonShowMore from "../view/button-show-more.js";
 import NoFilms from "../view/no-films.js";
+import {updateItem} from "../utils/common.js";
 import {render, RenderPosition, remove} from "../utils/render.js";
 import {sortFilmsDate, sortFilmsRating} from "../utils/film-create.js";
 import {SortType} from "../const.js";
@@ -27,8 +28,15 @@ export default class MovieList {
     this._noFilmsComponent = new NoFilms();
     this._buttonShowMoreComponent = new ButtonShowMore();
 
+    this._handleFilmChange = this._handleFilmChange.bind(this);
     this._handleButtonShowMoreClick = this._handleButtonShowMoreClick.bind(this);
     this._handleSortTypeChange = this._handleSortTypeChange.bind(this);
+  }
+
+  _handleFilmChange(updatedFilm) {
+    this._films = updateItem(this._films, updatedFilm);
+    this._sourcedFilms = updateItem(this._sourcedFilms, updatedFilm);
+    this._filmPresenter[updatedFilm.id].init(updatedFilm);
   }
 
   _sortFilms(sortType) {
@@ -90,7 +98,7 @@ export default class MovieList {
   }
 
   _renderFilm(film) {
-    const filmPresenter = new Film(this._filmsContainerComponent);
+    const filmPresenter = new Film(this._filmsContainerComponent, this._handleFilmChange);
     filmPresenter.init(film);
     this._filmPresenter[film.id] = filmPresenter;
   }

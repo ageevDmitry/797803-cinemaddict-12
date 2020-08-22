@@ -3,13 +3,17 @@ import FilmPopap from "../view/film-popap.js";
 import {render, RenderPosition, replace, remove} from "../utils/render.js";
 
 export default class Film {
-  constructor(filmsContainerComponent) {
+  constructor(filmsContainerComponent, changeData) {
     this._filmsContainerComponent = filmsContainerComponent;
+    this._changeData = changeData;
 
     this._filmCardComponent = null;
     this._filmPopapComponent = null;
 
     this._handleOpenFilmPopapClick = this._handleOpenFilmPopapClick.bind(this);
+    this._handleWachlistClick = this._handleWachlistClick.bind(this);
+    this._handleWachedClick = this._handleWachedClick.bind(this);
+    this._handleFavoriteClick = this._handleFavoriteClick.bind(this);
     this._handleCloseFilmPopapClick = this._handleCloseFilmPopapClick.bind(this);
     this._handleCloseFilmPopapKeyDown = this._handleCloseFilmPopapKeyDown.bind(this);
   }
@@ -40,6 +44,42 @@ export default class Film {
     }
   }
 
+  _handleWachlistClick() {
+    this._changeData(
+        Object.assign(
+            {},
+            this._film,
+            {
+              isWachlist: !this._film.isWachlist
+            }
+        )
+    );
+  }
+
+  _handleWachedClick() {
+    this._changeData(
+        Object.assign(
+            {},
+            this._film,
+            {
+              isWatched: !this._film.isWatched
+            }
+        )
+    );
+  }
+
+  _handleFavoriteClick() {
+    this._changeData(
+        Object.assign(
+            {},
+            this._film,
+            {
+              isFavorite: !this._film.isFavorite
+            }
+        )
+    );
+  }
+
   destroy() {
     remove(this._filmCardComponent);
     remove(this._filmPopapComponent);
@@ -55,6 +95,9 @@ export default class Film {
     this._filmPopapComponent = new FilmPopap(film);
 
     this._filmCardComponent.setClickHandler(this._handleOpenFilmPopapClick);
+    this._filmCardComponent.setWachlistClickHandler(this._handleWachlistClick);
+    this._filmCardComponent.setWachedClickHandler(this._handleWachedClick);
+    this._filmCardComponent.setFavoriteClickHandler(this._handleFavoriteClick);
     this._filmPopapComponent.setClickHandler(this._handleCloseFilmPopapClick);
 
     if (prevFilmCardComponent === null || prevFilmPopapComponent === null) {

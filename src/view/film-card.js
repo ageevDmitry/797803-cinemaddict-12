@@ -3,10 +3,10 @@ import {checkStringLength, isFilmFlag} from "../utils/film-create.js";
 
 const createFilmCard = (film) => {
 
-  const {poster, title, rating, reliseDate, runtime, genre, description, isWachlist, isWached, isFavorite, comments} = film;
+  const {poster, title, rating, reliseDate, runtime, genre, description, isWachlist, isWatched, isFavorite, comments} = film;
   const limitDescription = checkStringLength(description);
   const isWachlistClassName = isFilmFlag(isWachlist);
-  const isWachedClassName = isFilmFlag(isWached);
+  const isWachedClassName = isFilmFlag(isWatched);
   const isFavoriteClassName = isFilmFlag(isFavorite);
   const filmCommentsCount = comments.length;
   const filmCardReliseDate = reliseDate.toLocaleString(`en-ZA`, {year: `numeric`});
@@ -37,6 +37,9 @@ export default class FilmCard extends Abstract {
     super();
     this._film = film;
     this._clickHandler = this._clickHandler.bind(this);
+    this._wachlistClickHandler = this._wachlistClickHandler.bind(this);
+    this._wachedClickHandler = this._wachedClickHandler.bind(this);
+    this._favoriteClickHandler = this._favoriteClickHandler.bind(this);
   }
 
   getTemplate() {
@@ -47,10 +50,40 @@ export default class FilmCard extends Abstract {
     this._callback.click();
   }
 
+  _wachlistClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.wachlistClick();
+  }
+
+  _wachedClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.wachedClick();
+  }
+
+  _favoriteClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.favoriteClick();
+  }
+
   setClickHandler(callback) {
     this._callback.click = callback;
     this.getElement().querySelector(`.film-card__title`).addEventListener(`click`, this._clickHandler);
     this.getElement().querySelector(`.film-card__poster`).addEventListener(`click`, this._clickHandler);
     this.getElement().querySelector(`.film-card__comments`).addEventListener(`click`, this._clickHandler);
+  }
+
+  setWachlistClickHandler(callback) {
+    this._callback.wachlistClick = callback;
+    this.getElement().querySelector(`.film-card__controls-item--add-to-watchlist`).addEventListener(`click`,this._wachlistClickHandler);
+  }
+
+  setWachedClickHandler(callback) {
+    this._callback.wachedClick = callback;
+    this.getElement().querySelector(`.film-card__controls-item--mark-as-watched`).addEventListener(`click`,this._wachedClickHandler);
+  }
+
+  setFavoriteClickHandler(callback) {
+    this._callback.favoriteClick = callback;
+    this.getElement().querySelector(`.film-card__controls-item--favorite`).addEventListener(`click`,this._favoriteClickHandler);
   }
 }

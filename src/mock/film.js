@@ -41,7 +41,7 @@ export const generateFilm = () => {
     description: generateFilmDescription(FILM_DESCRIPTION),
     ageLimit: getRandomItem(AGE_LIMITS),
     isWachlist: Boolean(getRandomInteger()),
-    isWatched: Boolean(getRandomInteger()),
+    isWatched: true,
     isFavorite: Boolean(getRandomInteger()),
     comments: generateComments(),
   };
