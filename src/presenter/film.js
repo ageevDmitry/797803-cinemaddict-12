@@ -1,6 +1,6 @@
 import FilmCard from "../view/film-card.js";
 import FilmPopap from "../view/film-popap.js";
-import {render, RenderPosition, replace} from "../utils/render.js";
+import {render, RenderPosition, replace, remove} from "../utils/render.js";
 
 export default class Film {
   constructor(filmsContainerComponent) {
@@ -40,8 +40,16 @@ export default class Film {
     }
   }
 
+  destroy() {
+    remove(this._filmCardComponent);
+    remove(this._filmPopapComponent);
+  }
+
   init(film) {
     this._film = film;
+
+    const prevFilmCardComponent = this._filmCardComponent;
+    const prevFilmPopapComponent = this._filmPopapComponent;
 
     this._filmCardComponent = new FilmCard(film);
     this._filmPopapComponent = new FilmPopap(film);
@@ -49,8 +57,20 @@ export default class Film {
     this._filmCardComponent.setClickHandler(this._handleOpenFilmPopapClick);
     this._filmPopapComponent.setClickHandler(this._handleCloseFilmPopapClick);
 
-    render(this._filmsContainerComponent, this._filmCardComponent, RenderPosition.BEFOREEND);
+    if (prevFilmCardComponent === null || prevFilmPopapComponent === null) {
+      render(this._filmsContainerComponent, this._filmCardComponent, RenderPosition.BEFOREEND);
+      return;
+    }
+
+    if (this._filmsContainerComponent.getElement().contains(prevFilmCardComponent.getElement())) {
+      replace(this._filmCardComponent, prevFilmCardComponent);
+    }
+
+    if (this._filmsContainerComponent.getElement().contains(prevFilmPopapComponent.getElement())) {
+      replace(this._filmPopapComponent, prevFilmPopapComponent);
+    }
+
+    remove(prevFilmCardComponent);
+    remove(prevFilmPopapComponent);
   }
-
-
 }
