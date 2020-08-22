@@ -11,16 +11,17 @@ export default class Film {
 
     this._handleOpenFilmPopapClick = this._handleOpenFilmPopapClick.bind(this);
     this._handleCloseFilmPopapClick = this._handleCloseFilmPopapClick.bind(this);
+    this._handleCloseFilmPopapKeyDown = this._handleCloseFilmPopapKeyDown.bind(this);
   }
 
   _replaceFilmCardToFilmPopap() {
     replace(this._filmPopapComponent, this._filmCardComponent);
-    document.addEventListener(`keydown`, this._onEscKeyDownHandler);
+    document.addEventListener(`keydown`, this._handleCloseFilmPopapKeyDown);
   }
 
   _replaceFilmPopapToFilmCard() {
     replace(this._filmCardComponent, this._filmPopapComponent);
-    document.removeEventListener(`keydown`, this._onEscKeyDownHandler);
+    document.removeEventListener(`keydown`, this._handleCloseFilmPopapKeyDown);
   }
 
   _handleOpenFilmPopapClick() {
@@ -31,7 +32,7 @@ export default class Film {
     this._replaceFilmPopapToFilmCard();
   }
 
-  _onEscKeyDownHandler (evt) {
+  _handleCloseFilmPopapKeyDown (evt) {
     if (evt.key === `Escape` || evt.key === `Esc`) {
 
       evt.preventDefault();
