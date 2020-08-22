@@ -3,6 +3,8 @@ import {getStringFromArray, checkArrayPunctuation, getRandomDate} from "../utils
 import {generateComments} from "../mock/comment.js";
 import {FILM_POSTERS, FILM_TITLES, FILM_DIRECTORS, FILM_WRITERS, FILM_ACTORS, COUNTRIES, AGE_LIMITS, FILM_DESCRIPTION, FILM_YEAR_MIN, FILM_YEAR_MAX, FILM_GENRES, FILM_HOUR_MIN, FILM_HOUR_MAX, FILM_MINUTES_MIN, FILM_MINUTES_MAX, FILM_RATING_MIN, FILM_RATING_MAX} from "../const.js";
 
+const generateId = () => Date.now() + parseInt(Math.random() * 10000, 10);
+
 const generateFilmRuntime = () => {
 
   const hour = getRandomInteger(FILM_HOUR_MIN, FILM_HOUR_MAX);
@@ -24,6 +26,7 @@ const generateFilmDescription = (description) => {
 
 export const generateFilm = () => {
   return {
+    id: generateId(),
     poster: getRandomItem(FILM_POSTERS),
     title: getRandomItem(FILM_TITLES),
     originalTitle: getRandomItem(FILM_TITLES),
