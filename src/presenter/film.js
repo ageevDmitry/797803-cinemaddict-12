@@ -16,7 +16,7 @@ export default class Film {
     this._handleFavoriteClick = this._handleFavoriteClick.bind(this);
     this._handleCloseFilmPopapClick = this._handleCloseFilmPopapClick.bind(this);
     this._handleCloseFilmPopapKeyDown = this._handleCloseFilmPopapKeyDown.bind(this);
-    this._handleEmojiClick = this._handleEmojiClick.bind(this);
+    // this._handleEmojiClick = this._handleEmojiClick.bind(this);
   }
 
   _replaceFilmCardToFilmPopap() {
@@ -107,7 +107,7 @@ export default class Film {
     this._filmPopapComponent.setWatchlistClickHandler(this._handleWatchlistClick);
     this._filmPopapComponent.setWatchedClickHandler(this._handleWatchedClick);
     this._filmPopapComponent.setFavoriteClickHandler(this._handleFavoriteClick);
-    this._filmPopapComponent.setEmojiClickHandler(this._handleEmojiClick);
+    // this._filmPopapComponent.setEmojiClickHandler(this._handleEmojiClick);
 
     if (prevFilmCardComponent === null || prevFilmPopapComponent === null) {
       render(this._filmsContainerComponent, this._filmCardComponent, RenderPosition.BEFOREEND);
