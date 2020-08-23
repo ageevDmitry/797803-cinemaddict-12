@@ -40,7 +40,7 @@ export const generateFilm = () => {
     genre: getRandomArray(FILM_GENRES),
     description: generateFilmDescription(FILM_DESCRIPTION),
     ageLimit: getRandomItem(AGE_LIMITS),
-    isWachlist: Boolean(getRandomInteger()),
+    isWatchlist: Boolean(getRandomInteger()),
     isWatched: true,
     isFavorite: Boolean(getRandomInteger()),
     comments: generateComments(),

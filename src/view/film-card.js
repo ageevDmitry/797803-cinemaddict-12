@@ -3,9 +3,9 @@ import {checkStringLength, isFilmFlag} from "../utils/film-create.js";
 
 const createFilmCard = (film) => {
 
-  const {poster, title, rating, reliseDate, runtime, genre, description, isWachlist, isWatched, isFavorite, comments} = film;
+  const {poster, title, rating, reliseDate, runtime, genre, description, isWatchlist, isWatched, isFavorite, comments} = film;
   const limitDescription = checkStringLength(description);
-  const isWachlistClassName = isFilmFlag(isWachlist);
+  const isWatchlistClassName = isFilmFlag(isWatchlist);
   const isWachedClassName = isFilmFlag(isWatched);
   const isFavoriteClassName = isFilmFlag(isFavorite);
   const filmCommentsCount = comments.length;
@@ -24,7 +24,7 @@ const createFilmCard = (film) => {
         <p class="film-card__description">${limitDescription}</p>
         <a class="film-card__comments">${filmCommentsCount} comments</a>
         <form class="film-card__controls">
-          <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${isWachlistClassName}">Add to watchlist</button>
+          <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${isWatchlistClassName}">Add to watchlist</button>
           <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${isWachedClassName}">Mark as watched</button>
           <button class="film-card__controls-item button film-card__controls-item--favorite ${isFavoriteClassName}">Mark as favorite</button>
         </form>
@@ -37,8 +37,8 @@ export default class FilmCard extends Abstract {
     super();
     this._film = film;
     this._clickHandler = this._clickHandler.bind(this);
-    this._wachlistClickHandler = this._wachlistClickHandler.bind(this);
-    this._wachedClickHandler = this._wachedClickHandler.bind(this);
+    this._watchlistClickHandler = this._watchlistClickHandler.bind(this);
+    this._watchedClickHandler = this._watchedClickHandler.bind(this);
     this._favoriteClickHandler = this._favoriteClickHandler.bind(this);
   }
 
@@ -50,14 +50,14 @@ export default class FilmCard extends Abstract {
     this._callback.click();
   }
 
-  _wachlistClickHandler(evt) {
+  _watchlistClickHandler(evt) {
     evt.preventDefault();
-    this._callback.wachlistClick();
+    this._callback.watchlistClick();
   }
 
-  _wachedClickHandler(evt) {
+  _watchedClickHandler(evt) {
     evt.preventDefault();
-    this._callback.wachedClick();
+    this._callback.watchedClick();
   }
 
   _favoriteClickHandler(evt) {
@@ -72,14 +72,14 @@ export default class FilmCard extends Abstract {
     this.getElement().querySelector(`.film-card__comments`).addEventListener(`click`, this._clickHandler);
   }
 
-  setWachlistClickHandler(callback) {
-    this._callback.wachlistClick = callback;
-    this.getElement().querySelector(`.film-card__controls-item--add-to-watchlist`).addEventListener(`click`,this._wachlistClickHandler);
+  setWatchlistClickHandler(callback) {
+    this._callback.watchlistClick = callback;
+    this.getElement().querySelector(`.film-card__controls-item--add-to-watchlist`).addEventListener(`click`,this._watchlistClickHandler);
   }
 
-  setWachedClickHandler(callback) {
-    this._callback.wachedClick = callback;
-    this.getElement().querySelector(`.film-card__controls-item--mark-as-watched`).addEventListener(`click`,this._wachedClickHandler);
+  setWatchedClickHandler(callback) {
+    this._callback.watchedClick = callback;
+    this.getElement().querySelector(`.film-card__controls-item--mark-as-watched`).addEventListener(`click`,this._watchedClickHandler);
   }
 
   setFavoriteClickHandler(callback) {

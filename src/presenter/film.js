@@ -11,8 +11,8 @@ export default class Film {
     this._filmPopapComponent = null;
 
     this._handleOpenFilmPopapClick = this._handleOpenFilmPopapClick.bind(this);
-    this._handleWachlistClick = this._handleWachlistClick.bind(this);
-    this._handleWachedClick = this._handleWachedClick.bind(this);
+    this._handleWatchlistClick = this._handleWatchlistClick.bind(this);
+    this._handleWatchedClick = this._handleWatchedClick.bind(this);
     this._handleFavoriteClick = this._handleFavoriteClick.bind(this);
     this._handleCloseFilmPopapClick = this._handleCloseFilmPopapClick.bind(this);
     this._handleCloseFilmPopapKeyDown = this._handleCloseFilmPopapKeyDown.bind(this);
@@ -44,19 +44,19 @@ export default class Film {
     }
   }
 
-  _handleWachlistClick() {
+  _handleWatchlistClick() {
     this._changeData(
         Object.assign(
             {},
             this._film,
             {
-              isWachlist: !this._film.isWachlist
+              isWatchlist: !this._film.isWatchlist
             }
         )
     );
   }
 
-  _handleWachedClick() {
+  _handleWatchedClick() {
     this._changeData(
         Object.assign(
             {},
@@ -95,10 +95,11 @@ export default class Film {
     this._filmPopapComponent = new FilmPopap(film);
 
     this._filmCardComponent.setClickHandler(this._handleOpenFilmPopapClick);
-    this._filmCardComponent.setWachlistClickHandler(this._handleWachlistClick);
-    this._filmCardComponent.setWachedClickHandler(this._handleWachedClick);
+    this._filmCardComponent.setWatchlistClickHandler(this._handleWatchlistClick);
+    this._filmCardComponent.setWatchedClickHandler(this._handleWatchedClick);
     this._filmCardComponent.setFavoriteClickHandler(this._handleFavoriteClick);
     this._filmPopapComponent.setClickHandler(this._handleCloseFilmPopapClick);
+    this._filmPopapComponent.setWatchlistClickHandler(this._handleWatchlistClick);
 
     if (prevFilmCardComponent === null || prevFilmPopapComponent === null) {
       render(this._filmsContainerComponent, this._filmCardComponent, RenderPosition.BEFOREEND);

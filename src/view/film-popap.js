@@ -38,7 +38,7 @@ const generateFilmCommentsString = (comments) => {
 
 const createFilmPopap = (film) => {
 
-  const {poster, title, originalTitle, rating, director, writers, actors, reliseDate, runtime, country, genre, description, ageLimit, isWachlist, isWatched, isFavorite, comments} = film;
+  const {poster, title, originalTitle, rating, director, writers, actors, reliseDate, runtime, country, genre, description, ageLimit, isWatchlist, isWatched, isFavorite, comments} = film;
 
   const filmGenres = (genreArray) => {
     let total = ``;
@@ -54,7 +54,7 @@ const createFilmPopap = (film) => {
   const genreString = filmGenres(genre);
   const filmPopapReliseDate = reliseDate.toLocaleString(`en-GB`, {year: `numeric`, month: `long`, day: `numeric`});
   const commentsString = generateFilmCommentsString(comments);
-  const isWachlistChecked = isWachlist ? `checked` : ``;
+  const isWatchlistChecked = isWatchlist ? `checked` : ``;
   const isWatchedClassChecked = isWatched ? `checked` : ``;
   const isFavoriteClassChecked = isFavorite ? `checked` : ``;
   const commentEmodji = `<div for="add-emoji" class="film-details__add-emoji-label">
@@ -127,7 +127,7 @@ const createFilmPopap = (film) => {
           </div>
 
           <section class="film-details__controls">
-            <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist" ${isWachlistChecked}>
+            <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist" ${isWatchlistChecked}>
             <label for="watchlist" class="film-details__control-label film-details__control-label--watchlist">Add to watchlist</label>
 
             <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched" ${isWatchedClassChecked}>
@@ -184,6 +184,7 @@ export default class FilmPopap extends Abstract {
     super();
     this._filmPopap = filmPopap;
     this._clickHandler = this._clickHandler.bind(this);
+    this._watchlistClickHandler = this._watchlistClickHandler.bind(this);
   }
 
   getTemplate() {
@@ -194,8 +195,18 @@ export default class FilmPopap extends Abstract {
     this._callback.click();
   }
 
+  _watchlistClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.watchlistClick();
+  }
+
   setClickHandler(callback) {
     this._callback.click = callback;
     this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, this._clickHandler);
+  }
+
+  setWatchlistClickHandler(callback) {
+    this._callback.watchlistClick = callback;
+    this.getElement().querySelector(`.film-details__control-label--watchlist`).addEventListener(`click`,this._watchlistClickHandler);
   }
 }
