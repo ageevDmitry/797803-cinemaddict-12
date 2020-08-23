@@ -100,6 +100,8 @@ export default class Film {
     this._filmCardComponent.setFavoriteClickHandler(this._handleFavoriteClick);
     this._filmPopapComponent.setClickHandler(this._handleCloseFilmPopapClick);
     this._filmPopapComponent.setWatchlistClickHandler(this._handleWatchlistClick);
+    this._filmPopapComponent.setWatchedClickHandler(this._handleWatchedClick);
+    this._filmPopapComponent.setFavoriteClickHandler(this._handleFavoriteClick);
 
     if (prevFilmCardComponent === null || prevFilmPopapComponent === null) {
       render(this._filmsContainerComponent, this._filmCardComponent, RenderPosition.BEFOREEND);
