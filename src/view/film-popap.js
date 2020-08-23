@@ -187,6 +187,7 @@ export default class FilmPopap extends Abstract {
     this._watchlistClickHandler = this._watchlistClickHandler.bind(this);
     this._watchedClickHandler = this._watchedClickHandler.bind(this);
     this._favoriteClickHandler = this._favoriteClickHandler.bind(this);
+    this._emojiClickHandler = this._emojiClickHandler.bind(this);
   }
 
   getTemplate() {
@@ -212,6 +213,12 @@ export default class FilmPopap extends Abstract {
     this._callback.favoriteClick();
   }
 
+  _emojiClickHandler(evt) {
+    evt.preventDefault();
+    console.log(evt.target.value);
+    this._callback.emojiClick();
+  }
+
   setClickHandler(callback) {
     this._callback.click = callback;
     this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, this._clickHandler);
@@ -230,5 +237,10 @@ export default class FilmPopap extends Abstract {
   setFavoriteClickHandler(callback) {
     this._callback.favoriteClick = callback;
     this.getElement().querySelector(`.film-details__control-label--favorite`).addEventListener(`click`,this._favoriteClickHandler);
+  }
+
+  setEmojiClickHandler(callback) {
+    this._callback.emojiClick = callback;
+    this.getElement().querySelector(`.film-details__emoji-label`).addEventListener(`click`,this._emojiClickHandler);
   }
 }

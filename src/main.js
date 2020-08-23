@@ -17,8 +17,6 @@ const footer = document.querySelector(`.footer`);
 const userRank = generateUserRank();
 const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
 
-console.log(filmsArray);
-
 const filters = generateFilter(filmsArray);
 const statistic = generateStatistic();
 const MovieListPresenter = new MovieList(main);
