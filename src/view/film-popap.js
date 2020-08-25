@@ -1,5 +1,6 @@
 import Abstract from "./abstract.js";
 import {getStringFromArray} from "../utils/film-create.js";
+import {COMMENT_EMOJIS} from "../const.js";
 
 const renderFilmComment = (comment) => {
 
@@ -10,7 +11,7 @@ const renderFilmComment = (comment) => {
   return (
     `<li class="film-details__comment">
       <span class="film-details__comment-emoji">
-        <img src="./images/emoji/${emoji}" width="55" height="55" alt="emoji-smile">
+        <img src="./images/emoji/${emoji}.png" width="55" height="55" alt="emoji-${emoji}">
       </span>
       <div>
         <p class="film-details__comment-text">${text}</p>
@@ -41,37 +42,23 @@ const renderUserComment = (commentUserEmodji) => {
   const imgEmodji = commentUserEmodji ? `<img src="images/emoji/${commentUserEmodji}.png" width="55" height="55" alt="emoji-smile">` : ``;
 
   return (
-    `<div class="film-details__new-comment">
-      <div for="add-emoji" class="film-details__add-emoji-label">
+    `<div for="add-emoji" class="film-details__add-emoji-label">
         ${imgEmodji}
       </div>
       <label class="film-details__comment-label">
         <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
-      </label>
-
-      <div class="film-details__emoji-list">
-        <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-smile" value="smile">
-        <label class="film-details__emoji-label" for="emoji-smile">
-          <img src="./images/emoji/smile.png" width="30" height="30" alt="emoji">
-        </label>
-
-        <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-sleeping" value="sleeping">
-        <label class="film-details__emoji-label" for="emoji-sleeping">
-          <img src="./images/emoji/sleeping.png" width="30" height="30" alt="emoji">
-        </label>
-
-        <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-puke" value="puke">
-        <label class="film-details__emoji-label" for="emoji-puke">
-          <img src="./images/emoji/puke.png" width="30" height="30" alt="emoji">
-        </label>
-
-        <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-angry" value="angry">
-        <label class="film-details__emoji-label" for="emoji-angry">
-          <img src="./images/emoji/angry.png" width="30" height="30" alt="emoji">
-        </label>
-      </div>`
+      </label>`
     );
 }
+
+const renderEmodjiList = (commentUserEmodji) => {
+  return COMMENT_EMOJIS.map((emoji) =>
+    `<input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-${emoji}" value="${emoji}"
+    ${commentUserEmodji === emoji ? `checked` : ``}>
+      <label class="film-details__emoji-label" for="emoji-${emoji}">
+        <img src="./images/emoji/${emoji}.png" width="30" height="30" alt="emoji">
+      </label>`).join(``);
+};
 
 const createFilmPopap = (data) => {
 
@@ -95,6 +82,7 @@ const createFilmPopap = (data) => {
   const isFavoriteClassChecked = isFavorite ? `checked` : ``;
   const commentsFilmString = renderFilmComments(comments);
   const commentUserString = renderUserComment(commentUserEmodji);
+  const commentEmodjString = renderEmodjiList(commentUserEmodji);
 
   return (
     `<section class="film-details">
@@ -178,7 +166,13 @@ const createFilmPopap = (data) => {
         <ul class="film-details__comments-list">
           ${commentsFilmString}
         </ul>
-        ${commentUserString}
+
+        <div class="film-details__new-comment">
+          ${commentUserString}
+          <div class="film-details__emoji-list">
+            ${commentEmodjString}
+          </div>
+        </div>
       </section>
         </div>
       </form>
@@ -236,6 +230,15 @@ export default class FilmPopap extends Abstract {
     this.restoreHandlers();
   }
 
+  restoreHandlers() {
+    this._setInnerHandlers();
+    this.setClickHandler(this._callback.click);
+  }
+
+  _setInnerHandlers() {
+    this.getElement().querySelector(`.film-details__emoji-list`).addEventListener(`change`, this._choiceEmojiComment);
+  }
+
   _clickHandler() {
     this._callback.click();
   }
@@ -273,15 +276,6 @@ export default class FilmPopap extends Abstract {
   setFavoriteClickHandler(callback) {
     this._callback.favoriteClick = callback;
     this.getElement().querySelector(`.film-details__control-label--favorite`).addEventListener(`click`,this._favoriteClickHandler);
-  }
-
-  restoreHandlers() {
-    this._setInnerHandlers();
-    this.setClickHandler(this._callback.click);
-  }
-
-  _setInnerHandlers() {
-    this.getElement().querySelector(`.film-details__emoji-list`).addEventListener(`change`, this._choiceEmojiComment);
   }
 
   static parseFilmToData(film) {
