@@ -58,13 +58,13 @@ export const FILM_DIRECTORS = [
   `Steven Spielberg`,
   `Spike Lee`,
   `Tony Scott`,
-  `John Singleton`,
-  `Richard Donner`,
-  `Quentin Tarantino`,
-  `George Lucas`,
-  `Martin Scorsese`,
-  `Jerry Bruckheimer`,
-  `Jim Henson`
+  // `John Singleton`,
+  // `Richard Donner`,
+  // `Quentin Tarantino`,
+  // `George Lucas`,
+  // `Martin Scorsese`,
+  // `Jerry Bruckheimer`,
+  // `Jim Henson`
 ];
 
 export const FILM_WRITERS = [
@@ -73,13 +73,13 @@ export const FILM_WRITERS = [
   `Terrence Malick`,
   `Abbas Kiarostami`,
   `Errol Morris`,
-  `Hayao Miyazaki`,
-  `David Cronenberg`,
-  `Terence Davies`,
-  `Lukas Moodysson`,
-  `Lynne Ramsay`,
-  `Bela Tarr`,
-  `Wong Kar-wai`
+  // `Hayao Miyazaki`,
+  // `David Cronenberg`,
+  // `Terence Davies`,
+  // `Lukas Moodysson`,
+  // `Lynne Ramsay`,
+  // `Bela Tarr`,
+  // `Wong Kar-wai`
 ];
 
 export const FILM_ACTORS = [
@@ -88,13 +88,13 @@ export const FILM_ACTORS = [
   `Robert De Niro`,
   `Al Pacino`,
   `Daniel Day-Lewis`,
-  `Dustin Hoffman`,
-  `Tom Hanks`,
-  `Anthony Hopkins`,
-  `Paul Newman`,
-  `Denzel Washington`,
-  `Spencer Tracy`,
-  `Laurence Olivieri`
+  // `Dustin Hoffman`,
+  // `Tom Hanks`,
+  // `Anthony Hopkins`,
+  // `Paul Newman`,
+  // `Denzel Washington`,
+  // `Spencer Tracy`,
+  // `Laurence Olivieri`
 ];
 
 export const COUNTRIES = [
@@ -126,9 +126,9 @@ export const FILM_GENRES = [
   `Drama`,
   `Mystery`,
   `Comedy`,
-  `Western`,
-  `Musical`,
-  `Cartoon`
+  // `Western`,
+  // `Musical`,
+  // `Cartoon`
 ];
 
 export const USER_RANKS = [

@@ -1,7 +1,7 @@
 import Abstract from "./abstract.js";
 import {getStringFromArray} from "../utils/film-create.js";
 
-const generateComment = (comment) => {
+const renderFilmComment = (comment) => {
 
   const {emoji, text, author, day} = comment;
 
@@ -24,17 +24,55 @@ const generateComment = (comment) => {
   );
 };
 
-const generateFilmCommentsString = (comments) => {
+const renderFilmComments = (comments) => {
 
   let filmCommentsString = ``;
 
   for (let i = 0; i < comments.length; i++) {
-    const currentComment = generateComment(comments[i]);
+    const currentComment = renderFilmComment(comments[i]);
     filmCommentsString = filmCommentsString + currentComment;
   }
 
   return filmCommentsString;
 };
+
+const renderUserComment = (isEmodji) => {
+
+  const emodji = `sleeping`;
+  const imgEmodji = isEmodji ? `<img src="images/emoji/${emodji}.png" width="55" height="55" alt="emoji-smile">` : ``;
+
+  return (
+    `<div class="film-details__new-comment">
+      <div for="add-emoji" class="film-details__add-emoji-label">
+        ${imgEmodji}
+      </div>
+      <label class="film-details__comment-label">
+        <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
+      </label>
+
+      <div class="film-details__emoji-list">
+        <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-smile" value="smile">
+        <label class="film-details__emoji-label" for="emoji-smile">
+          <img src="./images/emoji/smile.png" width="30" height="30" alt="emoji">
+        </label>
+
+        <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-sleeping" value="sleeping">
+        <label class="film-details__emoji-label" for="emoji-sleeping">
+          <img src="./images/emoji/sleeping.png" width="30" height="30" alt="emoji">
+        </label>
+
+        <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-puke" value="puke">
+        <label class="film-details__emoji-label" for="emoji-puke">
+          <img src="./images/emoji/puke.png" width="30" height="30" alt="emoji">
+        </label>
+
+        <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-angry" value="angry">
+        <label class="film-details__emoji-label" for="emoji-angry">
+          <img src="./images/emoji/angry.png" width="30" height="30" alt="emoji">
+        </label>
+      </div>`
+    );
+}
 
 const createFilmPopap = (film) => {
 
@@ -48,19 +86,17 @@ const createFilmPopap = (film) => {
     return total;
   };
 
+  const emodji = false;
   const writersString = getStringFromArray(writers, `, `);
   const actorsString = getStringFromArray(actors, `, `);
   const genreTittle = genre.length > 1 ? `Genres` : `Genre`;
   const genreString = filmGenres(genre);
   const filmPopapReliseDate = reliseDate.toLocaleString(`en-GB`, {year: `numeric`, month: `long`, day: `numeric`});
-  const commentsString = generateFilmCommentsString(comments);
   const isWatchlistChecked = isWatchlist ? `checked` : ``;
   const isWatchedClassChecked = isWatched ? `checked` : ``;
   const isFavoriteClassChecked = isFavorite ? `checked` : ``;
-  const commentEmodji = `<div for="add-emoji" class="film-details__add-emoji-label">
-                          <img src="images/emoji/sleeping.png" width="55" height="55" alt="emoji-smile">
-                        </div>`
-
+  const commentsFilmString = renderFilmComments(comments);
+  const commentUserString = renderUserComment(emodji);
 
   return (
     `<section class="film-details">
@@ -142,36 +178,9 @@ const createFilmPopap = (film) => {
         <section class="film-details__comments-wrap">
         <h3 class="film-details__comments-title">Comments<span class="film-details__comments-count"> ${comments.length}</span></h3>
         <ul class="film-details__comments-list">
-          ${commentsString}
+          ${commentsFilmString}
         </ul>
-        <div class="film-details__new-comment">
-          ${commentEmodji}
-
-          <label class="film-details__comment-label">
-            <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
-          </label>
-
-        <div class="film-details__emoji-list">
-          <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-smile" value="smile">
-          <label class="film-details__emoji-label" for="emoji-smile">
-            <img src="./images/emoji/smile.png" width="30" height="30" alt="emoji">
-          </label>
-
-          <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-sleeping" value="sleeping">
-          <label class="film-details__emoji-label" for="emoji-sleeping">
-            <img src="./images/emoji/sleeping.png" width="30" height="30" alt="emoji">
-          </label>
-
-          <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-puke" value="puke">
-          <label class="film-details__emoji-label" for="emoji-puke">
-            <img src="./images/emoji/puke.png" width="30" height="30" alt="emoji">
-          </label>
-
-          <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-angry" value="angry">
-          <label class="film-details__emoji-label" for="emoji-angry">
-            <img src="./images/emoji/angry.png" width="30" height="30" alt="emoji">
-          </label>
-        </div>
+        ${commentUserString}
       </section>
         </div>
       </form>
@@ -189,14 +198,10 @@ export default class FilmPopap extends Abstract {
     this._favoriteClickHandler = this._favoriteClickHandler.bind(this);
 
     this._setInnerHandlers();
-    // this._emojiClickHandler = this._emojiClickHandler.bind(this);
-
   }
 
   _setInnerHandlers() {
-        this.getElement()
-      .querySelector(`.film-details__emoji-list`)
-      .addEventListener(`change`, this._colorChangeHandler);
+    this.getElement().querySelector(`.film-details__emoji-list`).addEventListener(`change`, this._colorChangeHandler);
   }
 
   _colorChangeHandler(evt) {
@@ -226,12 +231,6 @@ export default class FilmPopap extends Abstract {
     this._callback.favoriteClick();
   }
 
-  // _emojiClickHandler(evt) {
-  //   evt.preventDefault();
-  //   console.log(evt.target.value);
-  //   this._callback.emojiClick();
-  // }
-
   setClickHandler(callback) {
     this._callback.click = callback;
     this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, this._clickHandler);
@@ -251,9 +250,4 @@ export default class FilmPopap extends Abstract {
     this._callback.favoriteClick = callback;
     this.getElement().querySelector(`.film-details__control-label--favorite`).addEventListener(`click`,this._favoriteClickHandler);
   }
-
-  // setEmojiClickHandler(callback) {
-  //   this._callback.emojiClick = callback;
-  //   this.getElement().querySelector(`.film-details__emoji-label`).addEventListener(`click`,this._emojiClickHandler);
-  // }
 }

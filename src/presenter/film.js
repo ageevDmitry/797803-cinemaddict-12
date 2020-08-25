@@ -16,17 +16,19 @@ export default class Film {
     this._handleFavoriteClick = this._handleFavoriteClick.bind(this);
     this._handleCloseFilmPopapClick = this._handleCloseFilmPopapClick.bind(this);
     this._handleCloseFilmPopapKeyDown = this._handleCloseFilmPopapKeyDown.bind(this);
-    // this._handleEmojiClick = this._handleEmojiClick.bind(this);
+    this._handleSendUserCommentKeyDown = this._handleSendUserCommentKeyDown.bind(this);
   }
 
   _replaceFilmCardToFilmPopap() {
     replace(this._filmPopapComponent, this._filmCardComponent);
     document.addEventListener(`keydown`, this._handleCloseFilmPopapKeyDown);
+    document.addEventListener(`keydown`, this._handleSendUserCommentKeyDown);
   }
 
   _replaceFilmPopapToFilmCard() {
     replace(this._filmCardComponent, this._filmPopapComponent);
     document.removeEventListener(`keydown`, this._handleCloseFilmPopapKeyDown);
+    document.removeEventListener(`keydown`, this._handleSendUserCommentKeyDown);
   }
 
   _handleOpenFilmPopapClick() {
@@ -40,6 +42,13 @@ export default class Film {
   _handleCloseFilmPopapKeyDown (evt) {
     if (evt.key === `Escape` || evt.key === `Esc`) {
 
+      evt.preventDefault();
+      this._replaceFilmPopapToFilmCard();
+    }
+  }
+
+  _handleSendUserCommentKeyDown (evt) {
+    if (evt.key === `Enter`) {
       evt.preventDefault();
       this._replaceFilmPopapToFilmCard();
     }
@@ -81,10 +90,6 @@ export default class Film {
     );
   }
 
-  _handleEmojiClick() {
-    console.log(`ихаааа!`)
-  }
-
   destroy() {
     remove(this._filmCardComponent);
     remove(this._filmPopapComponent);
@@ -107,7 +112,6 @@ export default class Film {
     this._filmPopapComponent.setWatchlistClickHandler(this._handleWatchlistClick);
     this._filmPopapComponent.setWatchedClickHandler(this._handleWatchedClick);
     this._filmPopapComponent.setFavoriteClickHandler(this._handleFavoriteClick);
-    // this._filmPopapComponent.setEmojiClickHandler(this._handleEmojiClick);
 
     if (prevFilmCardComponent === null || prevFilmPopapComponent === null) {
       render(this._filmsContainerComponent, this._filmCardComponent, RenderPosition.BEFOREEND);
