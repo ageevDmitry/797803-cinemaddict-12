@@ -2,13 +2,21 @@ import FilmCard from "../view/film-card.js";
 import FilmPopap from "../view/film-popap.js";
 import {render, RenderPosition, replace, remove} from "../utils/render.js";
 
+const Mode = {
+  CARD: `CARD`,
+  POPAP: `POPAP`
+}
+
+
 export default class Film {
-  constructor(filmsContainerComponent, changeData) {
+  constructor(filmsContainerComponent, changeData, changeMode) {
     this._filmsContainerComponent = filmsContainerComponent;
     this._changeData = changeData;
+    this._changeMode = changeMode;
 
     this._filmCardComponent = null;
     this._filmPopapComponent = null;
+    this._mode = Mode.CARD;
 
     this._handleOpenFilmPopapClick = this._handleOpenFilmPopapClick.bind(this);
     this._handleWatchlistClick = this._handleWatchlistClick.bind(this);
@@ -23,12 +31,15 @@ export default class Film {
     replace(this._filmPopapComponent, this._filmCardComponent);
     document.addEventListener(`keydown`, this._handleCloseFilmPopapKeyDown);
     document.addEventListener(`keydown`, this._handleSendUserCommentKeyDown);
+    this._changeMode();
+    this._mode = Mode.POPAP;
   }
 
   _replaceFilmPopapToFilmCard() {
     replace(this._filmCardComponent, this._filmPopapComponent);
     document.removeEventListener(`keydown`, this._handleCloseFilmPopapKeyDown);
     document.removeEventListener(`keydown`, this._handleSendUserCommentKeyDown);
+    this._mode = Mode.CARD;
   }
 
   _handleOpenFilmPopapClick() {
@@ -43,6 +54,7 @@ export default class Film {
     if (evt.key === `Escape` || evt.key === `Esc`) {
 
       evt.preventDefault();
+      this._filmPopapComponent.reset(this._film);
       this._replaceFilmPopapToFilmCard();
     }
   }
@@ -90,6 +102,12 @@ export default class Film {
     );
   }
 
+  resetView() {
+    if (this._mode !== Mode.CARD) {
+      this._FilmPopapToFilmCard();
+    }
+  }
+
   destroy() {
     remove(this._filmCardComponent);
     remove(this._filmPopapComponent);
@@ -122,7 +140,7 @@ export default class Film {
       replace(this._filmCardComponent, prevFilmCardComponent);
     }
 
-    if (this._filmsContainerComponent.getElement().contains(prevFilmPopapComponent.getElement())) {
+    if (this._mode === Mode.POPAP) {
       replace(this._filmPopapComponent, prevFilmPopapComponent);
     }
 

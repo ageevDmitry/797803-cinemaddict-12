@@ -31,6 +31,13 @@ export default class MovieList {
     this._handleFilmChange = this._handleFilmChange.bind(this);
     this._handleButtonShowMoreClick = this._handleButtonShowMoreClick.bind(this);
     this._handleSortTypeChange = this._handleSortTypeChange.bind(this);
+    this._handleModeChange = this._handleModeChange.bind(this);
+  }
+
+  _handleModeChange() {
+    Object
+      .values(this._filmPresenter)
+      .forEach((presenter) => presenter.resetView());
   }
 
   _handleFilmChange(updatedFilm) {
@@ -98,7 +105,7 @@ export default class MovieList {
   }
 
   _renderFilm(film) {
-    const filmPresenter = new Film(this._filmsContainerComponent, this._handleFilmChange);
+    const filmPresenter = new Film(this._filmsContainerComponent, this._handleFilmChange, this._handleModeChange);
     filmPresenter.init(film);
     this._filmPresenter[film.id] = filmPresenter;
   }

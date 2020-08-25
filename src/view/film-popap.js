@@ -1,4 +1,4 @@
-import Abstract from "./abstract.js";
+import SmartView from "./smart.js";
 import {getStringFromArray} from "../utils/film-create.js";
 import {COMMENT_EMOJIS} from "../const.js";
 
@@ -180,7 +180,7 @@ const createFilmPopap = (data) => {
   );
 };
 
-export default class FilmPopap extends Abstract {
+export default class FilmPopap extends SmartView {
   constructor(filmPopap) {
     super();
     this._data = FilmPopap.parseFilmToData(filmPopap)
@@ -199,35 +199,14 @@ export default class FilmPopap extends Abstract {
     });
   }
 
+  reset(film) {
+    this.updateData(
+      FilmPopap.parseFilmToData(film)
+    );
+  }
+
   getTemplate() {
     return createFilmPopap(this._data);
-  }
-
-  updateData(update) {
-    if (!update) {
-      return;
-    }
-
-    this._data = Object.assign(
-        {},
-        this._data,
-        update
-    );
-
-    this.updateElement();
-  }
-
-  updateElement() {
-    let prevElement = this.getElement();
-    const parent = prevElement.parentElement;
-    this.removeElement();
-
-    const newElement = this.getElement();
-
-    parent.replaceChild(newElement, prevElement);
-    prevElement = null;
-
-    this.restoreHandlers();
   }
 
   restoreHandlers() {
