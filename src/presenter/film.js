@@ -5,7 +5,7 @@ import {render, RenderPosition, replace, remove} from "../utils/render.js";
 const Mode = {
   CARD: `CARD`,
   POPAP: `POPAP`
-}
+};
 
 
 export default class Film {
@@ -50,7 +50,7 @@ export default class Film {
     this._replaceFilmPopapToFilmCard();
   }
 
-  _handleCloseFilmPopapKeyDown (evt) {
+  _handleCloseFilmPopapKeyDown(evt) {
     if (evt.key === `Escape` || evt.key === `Esc`) {
 
       evt.preventDefault();
@@ -59,14 +59,14 @@ export default class Film {
     }
   }
 
-  _handleSendUserCommentKeyDown (evt) {
+  _handleSendUserCommentKeyDown(evt) {
     if (evt.key === `Enter`) {
       evt.preventDefault();
       this._replaceFilmPopapToFilmCard();
     }
   }
 
-  _handleWatchlistClick(evt) {
+  _handleWatchlistClick() {
     this._changeData(
         Object.assign(
             {},

@@ -48,8 +48,8 @@ const renderUserComment = (commentUserEmodji) => {
       <label class="film-details__comment-label">
         <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
       </label>`
-    );
-}
+  );
+};
 
 const renderEmodjiList = (commentUserEmodji) => {
   return COMMENT_EMOJIS.map((emoji) =>
@@ -183,7 +183,7 @@ const createFilmPopap = (data) => {
 export default class FilmPopap extends SmartView {
   constructor(filmPopap) {
     super();
-    this._data = FilmPopap.parseFilmToData(filmPopap)
+    this._data = FilmPopap.parseFilmToData(filmPopap);
     this._clickHandler = this._clickHandler.bind(this);
     this._watchlistClickHandler = this._watchlistClickHandler.bind(this);
     this._watchedClickHandler = this._watchedClickHandler.bind(this);
@@ -201,7 +201,7 @@ export default class FilmPopap extends SmartView {
 
   reset(film) {
     this.updateData(
-      FilmPopap.parseFilmToData(film)
+        FilmPopap.parseFilmToData(film)
     );
   }
 
@@ -244,17 +244,17 @@ export default class FilmPopap extends SmartView {
 
   setWatchlistClickHandler(callback) {
     this._callback.watchlistClick = callback;
-    this.getElement().querySelector(`.film-details__control-label--watchlist`).addEventListener(`click`,this._watchlistClickHandler);
+    this.getElement().querySelector(`.film-details__control-label--watchlist`).addEventListener(`click`, this._watchlistClickHandler);
   }
 
   setWatchedClickHandler(callback) {
     this._callback.watchedClick = callback;
-    this.getElement().querySelector(`.film-details__control-label--watched`).addEventListener(`click`,this._watchedClickHandler);
+    this.getElement().querySelector(`.film-details__control-label--watched`).addEventListener(`click`, this._watchedClickHandler);
   }
 
   setFavoriteClickHandler(callback) {
     this._callback.favoriteClick = callback;
-    this.getElement().querySelector(`.film-details__control-label--favorite`).addEventListener(`click`,this._favoriteClickHandler);
+    this.getElement().querySelector(`.film-details__control-label--favorite`).addEventListener(`click`, this._favoriteClickHandler);
   }
 
   static parseFilmToData(film) {

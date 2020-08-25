@@ -66,7 +66,7 @@ export default class MovieList {
     Object
       .values(this._filmPresenter)
       .forEach((presenter) => presenter.destroy());
-      this._filmPresenter = {};
+    this._filmPresenter = {};
     this._renderedFilmCount = CARD_FILMS_COUNT_PER_STEP;
   }
 
