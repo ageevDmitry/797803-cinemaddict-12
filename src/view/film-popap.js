@@ -36,10 +36,9 @@ const renderFilmComments = (comments) => {
   return filmCommentsString;
 };
 
-const renderUserComment = (isEmodji) => {
+const renderUserComment = (commentUserEmodji) => {
 
-  const emodji = `sleeping`;
-  const imgEmodji = isEmodji ? `<img src="images/emoji/${emodji}.png" width="55" height="55" alt="emoji-smile">` : ``;
+  const imgEmodji = commentUserEmodji ? `<img src="images/emoji/${commentUserEmodji}.png" width="55" height="55" alt="emoji-smile">` : ``;
 
   return (
     `<div class="film-details__new-comment">
@@ -74,9 +73,9 @@ const renderUserComment = (isEmodji) => {
     );
 }
 
-const createFilmPopap = (film) => {
+const createFilmPopap = (data) => {
 
-  const {poster, title, originalTitle, rating, director, writers, actors, reliseDate, runtime, country, genre, description, ageLimit, isWatchlist, isWatched, isFavorite, comments} = film;
+  const {poster, title, originalTitle, rating, director, writers, actors, reliseDate, runtime, country, genre, description, ageLimit, isWatchlist, isWatched, isFavorite, comments, commentUserEmodji} = data;
 
   const filmGenres = (genreArray) => {
     let total = ``;
@@ -86,7 +85,6 @@ const createFilmPopap = (film) => {
     return total;
   };
 
-  const emodji = false;
   const writersString = getStringFromArray(writers, `, `);
   const actorsString = getStringFromArray(actors, `, `);
   const genreTittle = genre.length > 1 ? `Genres` : `Genre`;
@@ -96,7 +94,7 @@ const createFilmPopap = (film) => {
   const isWatchedClassChecked = isWatched ? `checked` : ``;
   const isFavoriteClassChecked = isFavorite ? `checked` : ``;
   const commentsFilmString = renderFilmComments(comments);
-  const commentUserString = renderUserComment(emodji);
+  const commentUserString = renderUserComment(commentUserEmodji);
 
   return (
     `<section class="film-details">
@@ -191,25 +189,51 @@ const createFilmPopap = (film) => {
 export default class FilmPopap extends Abstract {
   constructor(filmPopap) {
     super();
-    this._filmPopap = filmPopap;
+    this._data = FilmPopap.parseFilmToData(filmPopap)
     this._clickHandler = this._clickHandler.bind(this);
     this._watchlistClickHandler = this._watchlistClickHandler.bind(this);
     this._watchedClickHandler = this._watchedClickHandler.bind(this);
     this._favoriteClickHandler = this._favoriteClickHandler.bind(this);
+    this._choiceEmojiComment = this._choiceEmojiComment.bind(this);
 
     this._setInnerHandlers();
   }
 
-  _setInnerHandlers() {
-    this.getElement().querySelector(`.film-details__emoji-list`).addEventListener(`change`, this._colorChangeHandler);
+  _choiceEmojiComment(evt) {
+    this.updateData({
+      commentUserEmodji: evt.target.value
+    });
   }
 
-  _colorChangeHandler(evt) {
-      console.log(evt.target.value);
-    };
-
   getTemplate() {
-    return createFilmPopap(this._filmPopap);
+    return createFilmPopap(this._data);
+  }
+
+  updateData(update) {
+    if (!update) {
+      return;
+    }
+
+    this._data = Object.assign(
+        {},
+        this._data,
+        update
+    );
+
+    this.updateElement();
+  }
+
+  updateElement() {
+    let prevElement = this.getElement();
+    const parent = prevElement.parentElement;
+    this.removeElement();
+
+    const newElement = this.getElement();
+
+    parent.replaceChild(newElement, prevElement);
+    prevElement = null;
+
+    this.restoreHandlers();
   }
 
   _clickHandler() {
@@ -249,5 +273,32 @@ export default class FilmPopap extends Abstract {
   setFavoriteClickHandler(callback) {
     this._callback.favoriteClick = callback;
     this.getElement().querySelector(`.film-details__control-label--favorite`).addEventListener(`click`,this._favoriteClickHandler);
+  }
+
+  restoreHandlers() {
+    this._setInnerHandlers();
+    this.setClickHandler(this._callback.click);
+  }
+
+  _setInnerHandlers() {
+    this.getElement().querySelector(`.film-details__emoji-list`).addEventListener(`change`, this._choiceEmojiComment);
+  }
+
+  static parseFilmToData(film) {
+    return Object.assign(
+        {},
+        film,
+        {
+          commentUserEmodji: null,
+        }
+    );
+  }
+
+  static parseDataToFilm(data) {
+    data = Object.assign({}, data);
+
+    delete data.commentUserEmodji;
+
+    return data;
   }
 }
