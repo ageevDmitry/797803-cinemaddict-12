@@ -1,5 +1,7 @@
 import Abstract from "./abstract.js";
 import {checkStringLength, isFilmFlag} from "../utils/film-create.js";
+import {formatDate} from "../utils/film-create.js";
+import moment from "moment";
 
 const createFilmCard = (film) => {
 
@@ -9,7 +11,8 @@ const createFilmCard = (film) => {
   const isWachedClassName = isFilmFlag(isWatched);
   const isFavoriteClassName = isFilmFlag(isFavorite);
   const filmCommentsCount = comments.length;
-  const filmCardReliseDate = reliseDate.toLocaleString(`en-ZA`, {year: `numeric`});
+  const filmCardReliseDate = formatDate(reliseDate, `YYYY`);
+  const b = moment(10).get(`hour`);
 
   return (
     `<article class="film-card">
@@ -17,7 +20,7 @@ const createFilmCard = (film) => {
         <p class="film-card__rating">${rating}</p>
         <p class="film-card__info">
           <span class="film-card__year">${filmCardReliseDate}</span>
-          <span class="film-card__duration">${runtime}</span>
+          <span class="film-card__duration">${b}</span>
           <span class="film-card__genre">${genre[0]}</span>
         </p>
         <img src="./images/posters/${poster}" alt="" class="film-card__poster">

@@ -104,7 +104,7 @@ export default class Film {
 
   resetView() {
     if (this._mode !== Mode.CARD) {
-      this._FilmPopapToFilmCard();
+      this._replaceFilmPopapToFilmCard();
     }
   }
 

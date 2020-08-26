@@ -16,8 +16,8 @@ export const FILM_STATISTIC_MIN = 100000;
 export const FILM_STATISTIC_MAX = 200000;
 export const FILM_COMMENTS_MIN = 0;
 export const FILM_COMMENTS_MAX = 5;
-export const COMMENT_YEAR_MIN = 2015;
-export const COMMENT_YEAR_MAX = 2020;
+export const COMMENT_YEAR_MIN = 2018;
+export const COMMENT_YEAR_MAX = 2019;
 
 export const FILM_POSTERS = [
   `made-for-each-other.png`,

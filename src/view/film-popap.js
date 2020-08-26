@@ -1,12 +1,14 @@
 import SmartView from "./smart.js";
 import {getStringFromArray} from "../utils/film-create.js";
 import {COMMENT_EMOJIS} from "../const.js";
+import {formatDate} from "../utils/film-create.js";
+import moment from "moment";
 
 const renderFilmComment = (comment) => {
 
   const {emoji, text, author, day} = comment;
 
-  const commentDayLocale = day.toLocaleString(`en-ZA`, {year: `numeric`, month: `numeric`, day: `numeric`});
+  const commentDayLocale = moment(day).fromNow();
 
   return (
     `<li class="film-details__comment">
@@ -76,7 +78,7 @@ const createFilmPopap = (data) => {
   const actorsString = getStringFromArray(actors, `, `);
   const genreTittle = genre.length > 1 ? `Genres` : `Genre`;
   const genreString = filmGenres(genre);
-  const filmPopapReliseDate = reliseDate.toLocaleString(`en-GB`, {year: `numeric`, month: `long`, day: `numeric`});
+  const filmPopapReliseDate = formatDate(reliseDate, `DD MMMM YYYY`);
   const isWatchlistChecked = isWatchlist ? `checked` : ``;
   const isWatchedClassChecked = isWatched ? `checked` : ``;
   const isFavoriteClassChecked = isFavorite ? `checked` : ``;
