@@ -1,7 +1,6 @@
 import Abstract from "./abstract.js";
 import {checkStringLength, isFilmFlag} from "../utils/film-create.js";
 import {formatDate} from "../utils/film-create.js";
-import moment from "moment";
 
 const createFilmCard = (film) => {
 
