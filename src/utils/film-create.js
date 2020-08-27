@@ -1,5 +1,6 @@
 import {FILM_DESCRIPTION_LENGTH} from "../const.js";
 import {getRandomInteger} from "../utils/common.js";
+import moment from "moment";
 
 export const getStringFromArray = (array, separ = ` `) => {
   const string = array.reduce(function (sum, current) {
@@ -89,4 +90,12 @@ export const sortFilmsRating = (filmA, filmB) => {
   }
 
   return filmB.rating - filmA.rating;
+};
+
+export const formatDate = (date, format) => {
+  if (!date) {
+    return ``;
+  }
+
+  return moment(date).format(format);
 };
