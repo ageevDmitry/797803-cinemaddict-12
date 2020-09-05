@@ -1,6 +1,7 @@
 import FilmCard from "../view/film-card.js";
 import FilmPopap from "../view/film-popap.js";
 import {render, RenderPosition, replace, remove} from "../utils/render.js";
+import {UserAction, UpdateType} from "../const.js";
 
 const Mode = {
   CARD: `CARD`,
@@ -68,6 +69,8 @@ export default class Film {
 
   _handleWatchlistClick() {
     this._changeData(
+      UserAction.UPDATE_FILM,
+      UpdateType.MINOR,
         Object.assign(
             {},
             this._film,
@@ -80,6 +83,8 @@ export default class Film {
 
   _handleWatchedClick() {
     this._changeData(
+      UserAction.UPDATE_FILM,
+      UpdateType.MINOR,
         Object.assign(
             {},
             this._film,
@@ -92,6 +97,8 @@ export default class Film {
 
   _handleFavoriteClick() {
     this._changeData(
+      UserAction.UPDATE_FILM,
+      UpdateType.MINOR,
         Object.assign(
             {},
             this._film,

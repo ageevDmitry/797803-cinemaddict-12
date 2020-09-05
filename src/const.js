@@ -159,7 +159,19 @@ export const COMMENT_AUTHORS = [
 ];
 
 export const SortType = {
-  DEFAULT: `default`,
-  DATE_DOWN: `date-down`,
-  RATING_DOWN: `rating-down`
+  DEFAULT: `DEFAULT`,
+  DATE_DOWN: `DATE-DOWN`,
+  RATING_DOWN: `RATING-DOWN`
+};
+
+export const UserAction = {
+  UPDATE_FILM: `UPDATE_FILM`,
+  ADD_COMMENT: `ADD_COMMENT`,
+  DELETE_COMMENT: `DELETE_COMMENT`
+};
+
+export const UpdateType = {
+  PATCH: `PATCH`,
+  MINOR: `MINOR`,
+  MAJOR: `MAJOR`
 };

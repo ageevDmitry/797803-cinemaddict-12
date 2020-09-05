@@ -6,10 +6,9 @@ import FilmsList from "../view/films-list.js";
 import FilmsContainer from "../view/films-container.js";
 import ButtonShowMore from "../view/button-show-more.js";
 import NoFilms from "../view/no-films.js";
-import {updateItem} from "../utils/common.js";
 import {render, RenderPosition, remove} from "../utils/render.js";
 import {sortFilmsDate, sortFilmsRating} from "../utils/film-create.js";
-import {SortType} from "../const.js";
+import {SortType, UpdateType, UserAction} from "../const.js";
 
 const CARD_FILMS_COUNT_PER_STEP = 5;
 
@@ -29,10 +28,13 @@ export default class MovieList {
     this._noFilmsComponent = new NoFilms();
     this._buttonShowMoreComponent = new ButtonShowMore();
 
-    this._handleFilmChange = this._handleFilmChange.bind(this);
+    this._handleViewAction = this._handleViewAction.bind(this);
+    this._handleModelEvent = this._handleModelEvent.bind(this);
     this._handleButtonShowMoreClick = this._handleButtonShowMoreClick.bind(this);
     this._handleSortTypeChange = this._handleSortTypeChange.bind(this);
     this._handleModeChange = this._handleModeChange.bind(this);
+
+    this._filmsModel.addObserver(this._handleModelEvent);
   }
 
   _getFilms() {
@@ -52,8 +54,20 @@ export default class MovieList {
       .forEach((presenter) => presenter.resetView());
   }
 
-  _handleFilmChange(updatedFilm) {
-    this._filmPresenter[updatedFilm.id].init(updatedFilm);
+  _handleViewAction(actionType, updateType, update) {
+    switch (actionType) {
+      case UserAction.UPDATE_FILM:
+        this._filmsModel.updateFilm(updateType, update);
+        break;
+    }
+  }
+
+  _handleModelEvent(updateType, data) {
+      switch (updateType) {
+        case UpdateType.PATCH:
+          this._filmPresenter[data.id].init(data);
+          break;
+    }
   }
 
   _clearTaskList() {
@@ -103,7 +117,7 @@ export default class MovieList {
   }
 
   _renderFilm(film) {
-    const filmPresenter = new Film(this._filmsContainerComponent, this._handleFilmChange, this._handleModeChange);
+    const filmPresenter = new Film(this._filmsContainerComponent, this._handleViewAction, this._handleModeChange);
     filmPresenter.init(film);
     this._filmPresenter[film.id] = filmPresenter;
   }
