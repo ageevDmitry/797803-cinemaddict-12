@@ -105,7 +105,7 @@ export default class MovieList {
   _renderButtonShowMore() {
     render(this._filmsSectionComponent, this._buttonShowMoreComponent, RenderPosition.BEFOREEND);
 
-    this._buttonShowMoreComponent.setClickHandler(this._handleButtonShowMoreClick);
+    this._buttonShowMoreComponent.setShowMoreClickHandler(this._handleButtonShowMoreClick);
   }
 
   _handleButtonShowMoreClick() {

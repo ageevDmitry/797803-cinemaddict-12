@@ -213,7 +213,7 @@ export default class FilmPopap extends SmartView {
 
   restoreHandlers() {
     this._setInnerHandlers();
-    this.setClickHandler(this._callback.click);
+    this.setCloseClickHandler(this._callback.click);
   }
 
   _setInnerHandlers() {
@@ -239,7 +239,7 @@ export default class FilmPopap extends SmartView {
     this._callback.favoriteClick();
   }
 
-  setClickHandler(callback) {
+  setCloseClickHandler(callback) {
     this._callback.click = callback;
     this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, this._clickHandler);
   }

@@ -67,7 +67,7 @@ export default class FilmCard extends Abstract {
     this._callback.favoriteClick();
   }
 
-  setClickHandler(callback) {
+  setOpenClickHandler(callback) {
     this._callback.click = callback;
     this.getElement().querySelector(`.film-card__title`).addEventListener(`click`, this._clickHandler);
     this.getElement().querySelector(`.film-card__poster`).addEventListener(`click`, this._clickHandler);

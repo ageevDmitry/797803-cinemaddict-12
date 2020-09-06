@@ -128,11 +128,11 @@ export default class Film {
     this._filmCardComponent = new FilmCard(film);
     this._filmPopapComponent = new FilmPopap(film);
 
-    this._filmCardComponent.setClickHandler(this._handleOpenFilmPopapClick);
+    this._filmCardComponent.setOpenClickHandler(this._handleOpenFilmPopapClick);
     this._filmCardComponent.setWatchlistClickHandler(this._handleWatchlistClick);
     this._filmCardComponent.setWatchedClickHandler(this._handleWatchedClick);
     this._filmCardComponent.setFavoriteClickHandler(this._handleFavoriteClick);
-    this._filmPopapComponent.setClickHandler(this._handleCloseFilmPopapClick);
+    this._filmPopapComponent.setCloseClickHandler(this._handleCloseFilmPopapClick);
     this._filmPopapComponent.setWatchlistClickHandler(this._handleWatchlistClick);
     this._filmPopapComponent.setWatchedClickHandler(this._handleWatchedClick);
     this._filmPopapComponent.setFavoriteClickHandler(this._handleFavoriteClick);
