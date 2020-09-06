@@ -64,7 +64,6 @@ const renderEmodjiList = (commentUserEmodji) => {
 
 const createFilmPopap = (data) => {
 
-  console.log(data);
   const {poster, title, originalTitle, rating, director, writers, actors, reliseDate, runtime, country, genre, description, ageLimit, isWatchlist, isWatched, isFavorite, comments, commentUserEmodji} = data;
 
   const filmGenres = (genreArray) => {
@@ -184,9 +183,9 @@ const createFilmPopap = (data) => {
 };
 
 export default class FilmPopap extends SmartView {
-  constructor(film, comments) {
+  constructor(film) {
     super();
-    this._data = FilmPopap.parseFilmToData(film, comments);
+    this._data = FilmPopap.parseFilmToData(film);
     this._clickHandler = this._clickHandler.bind(this);
     this._watchlistClickHandler = this._watchlistClickHandler.bind(this);
     this._watchedClickHandler = this._watchedClickHandler.bind(this);
@@ -202,9 +201,9 @@ export default class FilmPopap extends SmartView {
     });
   }
 
-  reset(film, comments) {
+  reset(film) {
     this.updateData(
-      FilmPopap.parseFilmToData(film, comments)
+      FilmPopap.parseFilmToData(film)
     );
   }
 
@@ -260,13 +259,10 @@ export default class FilmPopap extends SmartView {
     this.getElement().querySelector(`.film-details__control-label--favorite`).addEventListener(`click`, this._favoriteClickHandler);
   }
 
-  static parseFilmToData(film, comments) {
+  static parseFilmToData(film) {
     return Object.assign(
         {},
         film,
-        {
-          comments: comments
-        },
         {
           commentUserEmodji: null,
         }
@@ -277,7 +273,6 @@ export default class FilmPopap extends SmartView {
     data = Object.assign({}, data);
 
     delete data.commentUserEmodji;
-    delete data.comments;
 
     return data;
   }

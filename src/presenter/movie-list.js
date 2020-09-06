@@ -85,13 +85,13 @@ export default class MovieList {
   }
 
   _renderFilmList() {
-    const filmCount = this._getFilms().length;
-    const films = this._getFilms().slice(0, Math.min(filmCount, CARD_FILMS_COUNT_PER_STEP));
-    const comments = this._getComments().slice(0, Math.min(filmCount, CARD_FILMS_COUNT_PER_STEP));
+    const filmsCount = this._getFilms().length;
+    const films = this._getFilms().slice(0, Math.min(filmsCount, CARD_FILMS_COUNT_PER_STEP));
+    const comments = this._getComments().slice(0, Math.min(filmsCount, CARD_FILMS_COUNT_PER_STEP));
 
     this._renderFilms(films, comments);
 
-    if (filmCount > CARD_FILMS_COUNT_PER_STEP) {
+    if (filmsCount > CARD_FILMS_COUNT_PER_STEP) {
       this._renderButtonShowMore();
     }
   }
@@ -139,7 +139,15 @@ export default class MovieList {
 
   _renderFilm(film, comments) {
     const filmPresenter = new Film(this._filmsContainerComponent, this._handleViewAction, this._handleModeChange);
-    filmPresenter.init(film, comments);
+
+    const filmAndComment = Object.assign(
+      {},
+      film,
+      {
+        comments: comments
+      });
+
+    filmPresenter.init(filmAndComment);
     this._filmPresenter[film.id] = filmPresenter;
   }
 

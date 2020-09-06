@@ -8,7 +8,6 @@ const Mode = {
   POPAP: `POPAP`
 };
 
-
 export default class Film {
   constructor(filmsContainerComponent, changeData, changeMode) {
     this._filmsContainerComponent = filmsContainerComponent;
@@ -55,7 +54,7 @@ export default class Film {
     if (evt.key === `Escape` || evt.key === `Esc`) {
 
       evt.preventDefault();
-      this._filmPopapComponent.reset(this._film, this._comments);
+      this._filmPopapComponent.reset(this._film);
       this._replaceFilmPopapToFilmCard();
     }
   }
@@ -120,15 +119,14 @@ export default class Film {
     remove(this._filmPopapComponent);
   }
 
-  init(film, comments) {
+  init(film) {
     this._film = film;
-    this._comments = comments;
 
     const prevFilmCardComponent = this._filmCardComponent;
     const prevFilmPopapComponent = this._filmPopapComponent;
 
-    this._filmCardComponent = new FilmCard(film, comments);
-    this._filmPopapComponent = new FilmPopap(film, comments);
+    this._filmCardComponent = new FilmCard(film);
+    this._filmPopapComponent = new FilmPopap(film);
 
     this._filmCardComponent.setClickHandler(this._handleOpenFilmPopapClick);
     this._filmCardComponent.setWatchlistClickHandler(this._handleWatchlistClick);

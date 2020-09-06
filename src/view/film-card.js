@@ -2,9 +2,9 @@ import Abstract from "./abstract.js";
 import {checkStringLength, isFilmFlag} from "../utils/film-create.js";
 import {formatDate} from "../utils/film-create.js";
 
-const createFilmCard = (film, comments) => {
+const createFilmCard = (film) => {
 
-  const {poster, title, rating, reliseDate, runtime, genre, description, isWatchlist, isWatched, isFavorite} = film;
+  const {poster, title, rating, reliseDate, runtime, genre, description, isWatchlist, isWatched, isFavorite, comments} = film;
   const limitDescription = checkStringLength(description);
   const isWatchlistClassName = isFilmFlag(isWatchlist);
   const isWachedClassName = isFilmFlag(isWatched);
