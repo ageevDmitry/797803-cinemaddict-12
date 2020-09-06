@@ -43,6 +43,6 @@ export const generateFilm = () => {
     isWatchlist: Boolean(getRandomInteger()),
     isWatched: true,
     isFavorite: Boolean(getRandomInteger()),
-    comments: generateComments(),
+    // comments: generateComments(),
   };
 };

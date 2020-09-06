@@ -13,12 +13,13 @@ import {SortType, UpdateType, UserAction} from "../const.js";
 const CARD_FILMS_COUNT_PER_STEP = 5;
 
 export default class MovieList {
-  constructor(boardContainer, filmsModel) {
+  constructor(boardContainer, filmsModel, commentsModel) {
     this._boardContainer = boardContainer;
     this._renderedFilmCount = CARD_FILMS_COUNT_PER_STEP;
     this._currentSortType = SortType.DEFAULT;
     this._filmPresenter = {};
     this._filmsModel = filmsModel;
+    this._commentsModel = commentsModel;
 
     this._filmsSectionComponent = new FilmsSection();
     this._filmsListComponent = new FilmsList();
@@ -86,16 +87,19 @@ export default class MovieList {
   _renderFilmList() {
     const filmCount = this._getFilms().length;
     const films = this._getFilms().slice(0, Math.min(filmCount, CARD_FILMS_COUNT_PER_STEP));
+    const comments = this._getComments().slice(0, Math.min(filmCount, CARD_FILMS_COUNT_PER_STEP));
 
-    this._renderFilms(films);
+    this._renderFilms(films, comments);
 
     if (filmCount > CARD_FILMS_COUNT_PER_STEP) {
       this._renderButtonShowMore();
     }
   }
 
-  _renderFilms(films) {
-    films.forEach((film) => this._renderFilm(film));
+  _renderFilms(films, comments) {
+    for (let i = 0; i < films.length; i++) {
+      this._renderFilm(films[i], comments[i]);
+    }
   }
 
   _renderButtonShowMore() {
@@ -107,9 +111,10 @@ export default class MovieList {
   _handleButtonShowMoreClick() {
     const filmCount = this._getFilms().length;
     const newRenederedFilmCount = Math.min(filmCount, this._renderedFilmCount + CARD_FILMS_COUNT_PER_STEP);
-    const films = this._getFilms().slice(this._renderedFilmCount, newRenederedFilmCount)
+    const films = this._getFilms().slice(this._renderedFilmCount, newRenederedFilmCount);
+    const comments = this._getComments().slice(this._renderedFilmCount, newRenederedFilmCount);
 
-    this._renderFilms(films);
+    this._renderFilms(films, comments);
     this._renderedFilmCount = newRenederedFilmCount;
 
     if (this._renderedFilmCount >= filmCount) {
@@ -128,9 +133,13 @@ export default class MovieList {
     return this._filmsModel.getFilms();
   }
 
-  _renderFilm(film) {
+  _getComments() {
+    return this._commentsModel.getComments();
+  }
+
+  _renderFilm(film, comments) {
     const filmPresenter = new Film(this._filmsContainerComponent, this._handleViewAction, this._handleModeChange);
-    filmPresenter.init(film);
+    filmPresenter.init(film, comments);
     this._filmPresenter[film.id] = filmPresenter;
   }
 

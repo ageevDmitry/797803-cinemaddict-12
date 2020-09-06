@@ -55,7 +55,7 @@ export default class Film {
     if (evt.key === `Escape` || evt.key === `Esc`) {
 
       evt.preventDefault();
-      this._filmPopapComponent.reset(this._film);
+      this._filmPopapComponent.reset(this._film, this._comments);
       this._replaceFilmPopapToFilmCard();
     }
   }
@@ -120,14 +120,15 @@ export default class Film {
     remove(this._filmPopapComponent);
   }
 
-  init(film) {
+  init(film, comments) {
     this._film = film;
+    this._comments = comments;
 
     const prevFilmCardComponent = this._filmCardComponent;
     const prevFilmPopapComponent = this._filmPopapComponent;
 
-    this._filmCardComponent = new FilmCard(film);
-    this._filmPopapComponent = new FilmPopap(film);
+    this._filmCardComponent = new FilmCard(film, comments);
+    this._filmPopapComponent = new FilmPopap(film, comments);
 
     this._filmCardComponent.setClickHandler(this._handleOpenFilmPopapClick);
     this._filmCardComponent.setWatchlistClickHandler(this._handleWatchlistClick);

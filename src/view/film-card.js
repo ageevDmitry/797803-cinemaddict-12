@@ -2,9 +2,9 @@ import Abstract from "./abstract.js";
 import {checkStringLength, isFilmFlag} from "../utils/film-create.js";
 import {formatDate} from "../utils/film-create.js";
 
-const createFilmCard = (film) => {
+const createFilmCard = (film, comments) => {
 
-  const {poster, title, rating, reliseDate, runtime, genre, description, isWatchlist, isWatched, isFavorite, comments} = film;
+  const {poster, title, rating, reliseDate, runtime, genre, description, isWatchlist, isWatched, isFavorite} = film;
   const limitDescription = checkStringLength(description);
   const isWatchlistClassName = isFilmFlag(isWatchlist);
   const isWachedClassName = isFilmFlag(isWatched);
@@ -34,9 +34,10 @@ const createFilmCard = (film) => {
 };
 
 export default class FilmCard extends Abstract {
-  constructor(film) {
+  constructor(film, comments) {
     super();
     this._film = film;
+    this._comments = comments;
     this._clickHandler = this._clickHandler.bind(this);
     this._watchlistClickHandler = this._watchlistClickHandler.bind(this);
     this._watchedClickHandler = this._watchedClickHandler.bind(this);
@@ -44,7 +45,7 @@ export default class FilmCard extends Abstract {
   }
 
   getTemplate() {
-    return createFilmCard(this._film);
+    return createFilmCard(this._film, this._comments);
   }
 
   _clickHandler() {
