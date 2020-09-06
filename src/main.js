@@ -9,7 +9,7 @@ import FilmsFiltration from "./view/films-filtration.js";
 import MovieList from "./presenter/movie-list.js";
 import Films from "./model/films.js";
 
-const CARD_FILMS_COUNT = 20;
+const CARD_FILMS_COUNT = 1;
 
 const header = document.querySelector(`.header`);
 const main = document.querySelector(`.main`);
