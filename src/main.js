@@ -18,8 +18,13 @@ const main = document.querySelector(`.main`);
 const footer = document.querySelector(`.footer`);
 
 const userRank = generateUserRank();
+const commentsArray = [];
+
 const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
-const commentsArray = new Array(CARD_FILMS_COUNT).fill().map(generateComments);
+
+for (let i = 0; i < CARD_FILMS_COUNT; i++) {
+  commentsArray.push(generateComments(i));
+}
 
 const filmsModel = new Films();
 const commentsModel = new Comments();

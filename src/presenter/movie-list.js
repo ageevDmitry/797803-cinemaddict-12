@@ -80,7 +80,6 @@ export default class MovieList {
 
     const films = this._getFilms();
     const filmCount = films.length;
-    const comments = this._getComments();
 
     if (filmCount === 0) {
       this._renderNoFilms();
@@ -88,11 +87,10 @@ export default class MovieList {
     }
 
     const a = films.slice(0, Math.min(filmCount, this._renderedFilmCount));
-    const b = comments.slice(0, Math.min(filmCount, this._renderedFilmCount));
 
     render(this._filmsListComponent, this._filmsContainerComponent, RenderPosition.BEFOREEND);
 
-    this._renderFilms(a, b);
+    this._renderFilms(a);
 
     if (filmCount > CARD_FILMS_COUNT_PER_STEP) {
       this._renderButtonShowMore();
@@ -103,9 +101,9 @@ export default class MovieList {
     render(this._filmsListComponent, this._noFilmsComponent, RenderPosition.BEFOREEND);
   }
 
-  _renderFilms(films, comments) {
+  _renderFilms(films) {
     for (let i = 0; i < films.length; i++) {
-      this._renderFilm(films[i], comments[i]);
+      this._renderFilm(films[i]);
     }
   }
 
@@ -124,9 +122,8 @@ export default class MovieList {
     const filmCount = this._getFilms().length;
     const newRenederedFilmCount = Math.min(filmCount, this._renderedFilmCount + CARD_FILMS_COUNT_PER_STEP);
     const films = this._getFilms().slice(this._renderedFilmCount, newRenederedFilmCount);
-    const comments = this._getComments().slice(this._renderedFilmCount, newRenederedFilmCount);
 
-    this._renderFilms(films, comments);
+    this._renderFilms(films);
     this._renderedFilmCount = newRenederedFilmCount;
 
     if (this._renderedFilmCount >= filmCount) {
@@ -145,21 +142,32 @@ export default class MovieList {
     return this._filmsModel.getFilms();
   }
 
-  _getComments() {
-    return this._commentsModel.getComments();
+  _getComments(commentId) {
+    return this._commentsModel.getComments(commentId);
   }
 
-  _renderFilm(film, comments) {
+  _renderFilm(film) {
     const filmPresenter = new Film(this._filmsContainerComponent, this._handleViewAction, this._handleModeChange);
 
-    const filmAndComment = Object.assign(
+    const commentsId = film.comments;
+    const comments = [];
+
+    commentsId.forEach((item) => {
+      comments.push(this._getComments(item))
+    });
+
+    // for (let i = 0; i < commentsId.length; i++) {
+    //   comments.push(this._getComments(commentsId[i]));
+    // }
+
+    const filmAndComments = Object.assign(
       {},
       film,
       {
         comments: comments
       });
 
-    filmPresenter.init(filmAndComment);
+    filmPresenter.init(filmAndComments);
     this._filmPresenter[film.id] = filmPresenter;
   }
 

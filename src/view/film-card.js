@@ -34,10 +34,9 @@ const createFilmCard = (film) => {
 };
 
 export default class FilmCard extends Abstract {
-  constructor(film, comments) {
+  constructor(film) {
     super();
     this._film = film;
-    this._comments = comments;
     this._clickHandler = this._clickHandler.bind(this);
     this._watchlistClickHandler = this._watchlistClickHandler.bind(this);
     this._watchedClickHandler = this._watchedClickHandler.bind(this);
@@ -45,7 +44,7 @@ export default class FilmCard extends Abstract {
   }
 
   getTemplate() {
-    return createFilmCard(this._film, this._comments);
+    return createFilmCard(this._film);
   }
 
   _clickHandler() {

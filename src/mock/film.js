@@ -1,9 +1,6 @@
 import {getRandomInteger, getRandomFractionInteger, getRandomArray, getRandomItem} from "../utils/common.js";
 import {getStringFromArray, checkArrayPunctuation, getRandomDate} from "../utils/film-create.js";
-import {generateComments} from "../mock/comment.js";
-import {FILM_POSTERS, FILM_TITLES, FILM_DIRECTORS, FILM_WRITERS, FILM_ACTORS, COUNTRIES, AGE_LIMITS, FILM_DESCRIPTION, FILM_YEAR_MIN, FILM_YEAR_MAX, FILM_GENRES, FILM_HOUR_MIN, FILM_HOUR_MAX, FILM_MINUTES_MIN, FILM_MINUTES_MAX, FILM_RATING_MIN, FILM_RATING_MAX} from "../const.js";
-
-const generateId = () => Date.now() + parseInt(Math.random() * 10000, 10);
+import {FILM_POSTERS, FILM_TITLES, FILM_DIRECTORS, FILM_WRITERS, FILM_ACTORS, COUNTRIES, AGE_LIMITS, FILM_DESCRIPTION, FILM_YEAR_MIN, FILM_YEAR_MAX, FILM_GENRES, FILM_HOUR_MIN, FILM_HOUR_MAX, FILM_MINUTES_MIN, FILM_MINUTES_MAX, FILM_RATING_MIN, FILM_RATING_MAX, COMMENTS_ID} from "../const.js";
 
 const generateFilmRuntime = () => {
 
@@ -24,9 +21,9 @@ const generateFilmDescription = (description) => {
   return newDescription;
 };
 
-export const generateFilm = () => {
+export const generateFilm = (id) => {
   return {
-    id: generateId(),
+    id: id,
     poster: getRandomItem(FILM_POSTERS),
     title: getRandomItem(FILM_TITLES),
     originalTitle: getRandomItem(FILM_TITLES),
@@ -43,6 +40,6 @@ export const generateFilm = () => {
     isWatchlist: Boolean(getRandomInteger()),
     isWatched: true,
     isFavorite: Boolean(getRandomInteger()),
-    // comments: generateComments(),
+    comments: getRandomArray(COMMENTS_ID),
   };
 };
