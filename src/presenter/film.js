@@ -60,7 +60,7 @@ export default class Film {
   }
 
   _handleSendUserCommentKeyDown(evt) {
-    if (evt.key === `Enter`) {
+    if (evt.key === `Enter` && evt.ctrlKey) {
       evt.preventDefault();
       this._replaceFilmPopapToFilmCard();
     }

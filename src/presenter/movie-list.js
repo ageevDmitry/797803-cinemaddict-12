@@ -28,9 +28,7 @@ export default class MovieList {
     this._filmsListComponent = new FilmsList();
     this._filmsContainerComponent = new FilmsContainer();
     this._filmsFiltrationComponent = new FilmsFiltration();
-    // this._filmsSortingComponent = new FilmsSorting();
     this._noFilmsComponent = new NoFilms();
-    // this._buttonShowMoreComponent = new ButtonShowMore();
 
     this._handleViewAction = this._handleViewAction.bind(this);
     this._handleModelEvent = this._handleModelEvent.bind(this);
@@ -46,7 +44,6 @@ export default class MovieList {
 
     render(this._boardContainer, this._filmsSectionComponent, RenderPosition.BEFOREEND);
     render(this._filmsSectionComponent, this._filmsListComponent, RenderPosition.BEFOREEND);
-    render(this._filmsListComponent, this._filmsContainerComponent, RenderPosition.BEFOREEND);
 
     this._renderBoard();
   }
@@ -68,7 +65,7 @@ export default class MovieList {
 
     this._currentSortType = sortType;
     this._clearBoard({resetRenderedFilmCount: true});
-    this._renderBoard();
+    this.init();
   }
 
   _clearFilmList() {
@@ -80,6 +77,7 @@ export default class MovieList {
   }
 
   _renderBoard() {
+
     const films = this._getFilms();
     const filmCount = films.length;
     const comments = this._getComments();
@@ -89,10 +87,10 @@ export default class MovieList {
       return;
     }
 
-    // this._renderFilmList();
-
     const a = films.slice(0, Math.min(filmCount, this._renderedFilmCount));
     const b = comments.slice(0, Math.min(filmCount, this._renderedFilmCount));
+
+    render(this._filmsListComponent, this._filmsContainerComponent, RenderPosition.BEFOREEND);
 
     this._renderFilms(a, b);
 
@@ -104,18 +102,6 @@ export default class MovieList {
   _renderNoFilms() {
     render(this._filmsListComponent, this._noFilmsComponent, RenderPosition.BEFOREEND);
   }
-
-  // _renderFilmList() {
-  //   const filmsCount = this._getFilms().length;
-  //   const films = this._getFilms().slice(0, Math.min(filmsCount, CARD_FILMS_COUNT_PER_STEP));
-  //   const comments = this._getComments().slice(0, Math.min(filmsCount, CARD_FILMS_COUNT_PER_STEP));
-
-  //   this._renderFilms(films, comments);
-
-  //   if (filmsCount > CARD_FILMS_COUNT_PER_STEP) {
-  //     this._renderButtonShowMore();
-  //   }
-  // }
 
   _renderFilms(films, comments) {
     for (let i = 0; i < films.length; i++) {
@@ -214,6 +200,9 @@ export default class MovieList {
       .forEach((presenter) => presenter.destroy());
     this._filmPresenter = {};
 
+    remove(this._filmsSortingComponent);
+    remove(this._filmsSectionComponent);
+    remove(this._filmsListComponent);
     remove(this._filmsContainerComponent);
     remove(this._noFilmsComponent);
     remove(this._buttonShowMoreComponent);
