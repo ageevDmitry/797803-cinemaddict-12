@@ -11,7 +11,7 @@ import MovieList from "./presenter/movie-list.js";
 import Films from "./model/films.js";
 import Comments from "./model/comments.js";
 
-const CARD_FILMS_COUNT = 20;
+const CARD_FILMS_COUNT = 19;
 
 const header = document.querySelector(`.header`);
 const main = document.querySelector(`.main`);
@@ -25,6 +25,8 @@ const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
 for (let i = 0; i < CARD_FILMS_COUNT; i++) {
   commentsArray.push(generateComments(i));
 }
+
+console.log(commentsArray);
 
 const filmsModel = new Films();
 const commentsModel = new Comments();
