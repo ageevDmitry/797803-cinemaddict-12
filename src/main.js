@@ -11,7 +11,7 @@ import MovieList from "./presenter/movie-list.js";
 import Films from "./model/films.js";
 import Comments from "./model/comments.js";
 
-const CARD_FILMS_COUNT = 19;
+const CARD_FILMS_COUNT = 1;
 
 const header = document.querySelector(`.header`);
 const main = document.querySelector(`.main`);
