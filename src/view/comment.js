@@ -38,19 +38,11 @@ export default class Comment extends Abstract {
 
   _commentDeleteHandler(evt) {
     evt.preventDefault();
-    console.log(`Удаление комментария!`);
+    this._callback.foo(`Удаление комментария!`);
   }
 
-  // _sortTypeChangeHandler(evt) {
-  //   if (evt.target.tagName !== `A`) {
-  //     return;
-  //   }
-
-  //   evt.preventDefault();
-  //   this._callback.sortTypeChange(evt.target.dataset.sortType);
-  // }
-
   setDeleteHandler(callback) {
-    this.getElement().querySelector(`.film-details__comment-delete`).addEventListener(`click`, () => {callbaсk(`Ура!!`)});
+    this._callback.foo = callback;
+    this.getElement().querySelector(`.film-details__comment-text`).addEventListener(`click`, this._commentDeleteHandler);
   }
 }

@@ -9,12 +9,13 @@ const renderFilmComments = (comments) => {
   let filmCommentsString = ``;
 
   comments.forEach((comment) => {
-    const callback = (comment) => {
-      console.log(comment);
+
+    const foo = (callback) => {
+      console.log(callback);
     }
 
     const currentComment = new Comment(comment);
-    currentComment.setDeleteHandler(callback);
+    currentComment.setDeleteHandler(foo);
     const currentCommentString = currentComment.getTemplate();
     filmCommentsString = filmCommentsString + currentCommentString;
   });
