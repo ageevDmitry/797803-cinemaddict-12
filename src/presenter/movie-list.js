@@ -214,7 +214,7 @@ export default class MovieList {
       .forEach((presenter) => presenter.destroy());
     this._filmPresenter = {};
 
-    remove(this._filmsContainerComponent);
+    // remove(this._filmsContainerComponent);
     remove(this._noFilmsComponent);
     remove(this._buttonShowMoreComponent);
 

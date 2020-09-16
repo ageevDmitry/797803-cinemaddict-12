@@ -25,6 +25,7 @@ export default class Film {
     this._handleCloseFilmPopapClick = this._handleCloseFilmPopapClick.bind(this);
     this._handleCloseFilmPopapKeyDown = this._handleCloseFilmPopapKeyDown.bind(this);
     this._handleSendUserCommentKeyDown = this._handleSendUserCommentKeyDown.bind(this);
+    this._newCallback = this._newCallback.bind(this);
   }
 
   _replaceFilmCardToFilmPopap() {
@@ -60,7 +61,7 @@ export default class Film {
   }
 
   _handleSendUserCommentKeyDown(evt) {
-    if (evt.key === `Enter`) {
+    if (evt.key === `Enter` && evt.ctrlKey) {
       evt.preventDefault();
       this._replaceFilmPopapToFilmCard();
     }
@@ -119,6 +120,10 @@ export default class Film {
     remove(this._filmPopapComponent);
   }
 
+  _newCallback(comment) {
+    console.log(comment);
+  }
+
   init(film) {
     this._film = film;
 
@@ -136,6 +141,7 @@ export default class Film {
     this._filmPopapComponent.setWatchlistClickHandler(this._handleWatchlistClick);
     this._filmPopapComponent.setWatchedClickHandler(this._handleWatchedClick);
     this._filmPopapComponent.setFavoriteClickHandler(this._handleFavoriteClick);
+    this._filmPopapComponent.setNewClickHandler(this._newCallback);
 
     if (prevFilmCardComponent === null || prevFilmPopapComponent === null) {
       render(this._filmsContainerComponent, this._filmCardComponent, RenderPosition.BEFOREEND);

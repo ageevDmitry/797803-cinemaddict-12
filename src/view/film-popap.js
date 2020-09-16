@@ -259,6 +259,11 @@ export default class FilmPopap extends SmartView {
     this.getElement().querySelector(`.film-details__control-label--favorite`).addEventListener(`click`, this._favoriteClickHandler);
   }
 
+  setNewClickHandler(callback) {
+    const comment = `1111`;
+    this.getElement().querySelector(`.film-details__title`).addEventListener(`click`, () => {callback(comment)});
+  }
+
   static parseFilmToData(film) {
     return Object.assign(
         {},
