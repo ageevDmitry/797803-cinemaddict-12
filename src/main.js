@@ -26,8 +26,6 @@ for (let i = 0; i < CARD_FILMS_COUNT; i++) {
   commentsArray.push(generateComments(i));
 }
 
-console.log(commentsArray);
-
 const filmsModel = new Films();
 const commentsModel = new Comments();
 filmsModel.setFilms(filmsArray);

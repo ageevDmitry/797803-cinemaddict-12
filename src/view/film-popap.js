@@ -1,40 +1,23 @@
 import SmartView from "./smart.js";
+import Comment from "./comment.js";
 import {getStringFromArray} from "../utils/film-create.js";
 import {COMMENT_EMOJIS} from "../const.js";
 import {formatDate} from "../utils/film-create.js";
-import moment from "moment";
-
-const renderFilmComment = (comment) => {
-
-  const {emoji, text, author, day} = comment;
-
-  const commentDayLocale = moment(day).fromNow();
-
-  return (
-    `<li class="film-details__comment">
-      <span class="film-details__comment-emoji">
-        <img src="./images/emoji/${emoji}.png" width="55" height="55" alt="emoji-${emoji}">
-      </span>
-      <div>
-        <p class="film-details__comment-text">${text}</p>
-        <p class="film-details__comment-info">
-          <span class="film-details__comment-author">${author}</span>
-          <span class="film-details__comment-day">${commentDayLocale}</span>
-          <button class="film-details__comment-delete">Delete</button>
-        </p>
-        </div>
-    </li>`
-  );
-};
 
 const renderFilmComments = (comments) => {
 
   let filmCommentsString = ``;
 
-  for (let i = 0; i < comments.length; i++) {
-    const currentComment = renderFilmComment(comments[i]);
-    filmCommentsString = filmCommentsString + currentComment;
-  }
+  comments.forEach((comment) => {
+    const callback = (comment) => {
+      console.log(comment);
+    }
+
+    const currentComment = new Comment(comment);
+    currentComment.setDeleteHandler(callback);
+    const currentCommentString = currentComment.getTemplate();
+    filmCommentsString = filmCommentsString + currentCommentString;
+  });
 
   return filmCommentsString;
 };
