@@ -29,20 +29,20 @@ export default class Comment extends Abstract {
     super();
 
     this._comment = comment;
-    this._commentDeleteHandler = this._commentDeleteHandler.bind(this);
+    // this._commentDeleteHandler = this._commentDeleteHandler.bind(this);
   }
 
   getTemplate() {
     return createComment(this._comment);
   }
 
-  _commentDeleteHandler(evt) {
-    evt.preventDefault();
-    this._callback.foo(`Удаление комментария!`);
-  }
+  // _commentDeleteHandler(evt) {
+  //   evt.preventDefault();
+  //   this._callback.foo(`Удаление комментария!`);
+  // }
 
   setDeleteHandler(callback) {
     this._callback.foo = callback;
-    this.getElement().querySelector(`.film-details__comment-text`).addEventListener(`click`, this._commentDeleteHandler);
+    this.getElement().querySelector(`.film-details__comment-delete`).addEventListener(`click`, callback);
   }
 }

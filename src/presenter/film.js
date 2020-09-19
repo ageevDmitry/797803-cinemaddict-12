@@ -25,6 +25,7 @@ export default class Film {
     this._handleCloseFilmPopapClick = this._handleCloseFilmPopapClick.bind(this);
     this._handleCloseFilmPopapKeyDown = this._handleCloseFilmPopapKeyDown.bind(this);
     this._handleSendUserCommentKeyDown = this._handleSendUserCommentKeyDown.bind(this);
+    this._newHandler = this._newHandler.bind(this);
   }
 
   _replaceFilmCardToFilmPopap() {
@@ -108,6 +109,10 @@ export default class Film {
     );
   }
 
+  _newHandler(comment) {
+    console.log(`!!!!`, comment);
+  }
+
   resetView() {
     if (this._mode !== Mode.CARD) {
       this._replaceFilmPopapToFilmCard();
@@ -126,7 +131,7 @@ export default class Film {
     const prevFilmPopapComponent = this._filmPopapComponent;
 
     this._filmCardComponent = new FilmCard(film);
-    this._filmPopapComponent = new FilmPopap(film);
+    this._filmPopapComponent = new FilmPopap(film, this._newHandler);
 
     this._filmCardComponent.setOpenClickHandler(this._handleOpenFilmPopapClick);
     this._filmCardComponent.setWatchlistClickHandler(this._handleWatchlistClick);

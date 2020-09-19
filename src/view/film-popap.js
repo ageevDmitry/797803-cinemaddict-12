@@ -3,24 +3,39 @@ import Comment from "./comment.js";
 import {getStringFromArray} from "../utils/film-create.js";
 import {COMMENT_EMOJIS} from "../const.js";
 import {formatDate} from "../utils/film-create.js";
+import {render, RenderPosition} from "../utils/render.js";
 
-const renderFilmComments = (comments) => {
+const renderFilmComments = ({comments}, handler) => {
 
-  let filmCommentsString = ``;
+  // let filmCommentsString = ``;
 
-  comments.forEach((comment) => {
+//   comments.forEach((comment) => {
 
-    const foo = (callback) => {
-      console.log(callback);
+//     const foo = (callback) => {
+//       console.log(callback);
+//     }
+
+//     const currentComment = new Comment(comment);
+//     currentComment.setDeleteHandler(foo);
+//     // const currentCommentString = currentComment.getTemplate();
+//     // filmCommentsString = filmCommentsString + currentCommentString;
+//   });
+
+//   return currentComment;
+// };
+
+  return comments.map((comment) => {
+
+    const foo = (evt) => {
+      evt.preventDefault();
+      console.log(comment);
+      handler(comment)
     }
 
     const currentComment = new Comment(comment);
     currentComment.setDeleteHandler(foo);
-    const currentCommentString = currentComment.getTemplate();
-    filmCommentsString = filmCommentsString + currentCommentString;
+    return currentComment;
   });
-
-  return filmCommentsString;
 };
 
 const renderUserComment = (commentUserEmodji) => {
@@ -66,7 +81,6 @@ const createFilmPopap = (data) => {
   const isWatchlistChecked = isWatchlist ? `checked` : ``;
   const isWatchedClassChecked = isWatched ? `checked` : ``;
   const isFavoriteClassChecked = isFavorite ? `checked` : ``;
-  const commentsFilmString = renderFilmComments(comments);
   const commentUserString = renderUserComment(commentUserEmodji);
   const commentEmodjString = renderEmodjiList(commentUserEmodji);
 
@@ -150,7 +164,6 @@ const createFilmPopap = (data) => {
         <section class="film-details__comments-wrap">
         <h3 class="film-details__comments-title">Comments<span class="film-details__comments-count"> ${comments.length}</span></h3>
         <ul class="film-details__comments-list">
-          ${commentsFilmString}
         </ul>
 
         <div class="film-details__new-comment">
@@ -167,7 +180,7 @@ const createFilmPopap = (data) => {
 };
 
 export default class FilmPopap extends SmartView {
-  constructor(film) {
+  constructor(film, handler) {
     super();
     this._data = FilmPopap.parseFilmToData(film);
     this._clickHandler = this._clickHandler.bind(this);
@@ -177,6 +190,7 @@ export default class FilmPopap extends SmartView {
     this._choiceEmojiComment = this._choiceEmojiComment.bind(this);
 
     this._setInnerHandlers();
+    this._addComments(handler);
   }
 
   _choiceEmojiComment(evt) {
@@ -193,6 +207,12 @@ export default class FilmPopap extends SmartView {
 
   getTemplate() {
     return createFilmPopap(this._data);
+  }
+
+  _addComments(handler) {
+    const commentsFilm = renderFilmComments(this._data, handler);
+    const popup = this.getElement().querySelector(`.film-details__comments-list`);
+    render(popup, commentsFilm[0], RenderPosition.BEFOREEND);
   }
 
   restoreHandlers() {
