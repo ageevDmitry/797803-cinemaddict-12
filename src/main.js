@@ -19,7 +19,14 @@ const footer = document.querySelector(`.footer`);
 
 const userRank = generateUserRank();
 const filmsArray = new Array(CARD_FILMS_COUNT).fill().map(generateFilm);
+<<<<<<< HEAD
 const commentsArray = new Array(CARD_FILMS_COUNT).fill().map(generateComments);
+=======
+
+for (let i = 0; i < CARD_FILMS_COUNT; i++) {
+  commentsArray.push(generateComments(i));
+}
+>>>>>>> 274d71851251ca2065fa84c28a21d04364134b05
 
 const filmsModel = new Films();
 const commentsModel = new Comments();
